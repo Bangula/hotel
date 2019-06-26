@@ -1,9 +1,12 @@
 import React from "react";
 
+// Components
+import Navbar from "../navbar/Navbar";
+
 const Header = () => {
   return (
     <div>
-      <h1>Header</h1>
+      <Navbar />
     </div>
   );
 };
