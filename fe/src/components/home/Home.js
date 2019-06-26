@@ -1,7 +1,7 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
-import bgImage1 from "#assets/images/slide_1-min.jpg";
-import bgImage2 from "#assets/images/slide_2.jpg";
+import bgImage1 from "@assets/images/slide_1-min.jpg";
+import bgImage2 from "@assets/images/slide_2.jpg";
 
 const slideImages = [bgImage1, bgImage2];
 
