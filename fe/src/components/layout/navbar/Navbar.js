@@ -22,7 +22,7 @@ const Navbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            Quantox
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
