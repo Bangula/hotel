@@ -25,13 +25,13 @@ const TopHeader = () => {
           <i className="fab fa-facebook-square" />
         </a>
         <a href="#" className="mr-4">
-          <i class="fab fa-linkedin" />
+          <i className="fab fa-linkedin" />
         </a>
         <a href="#" className="mr-4">
-          <i class="fab fa-twitter-square" />
+          <i className="fab fa-twitter-square" />
         </a>
         <a href="#">
-          <i class="fab fa-instagram" />
+          <i className="fab fa-instagram" />
         </a>
       </div>
     </div>

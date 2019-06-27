@@ -10,43 +10,43 @@ const Navbar = () => {
     >
       <nav className="w-full text-center" style={{ margin: "0 auto" }}>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           HOME
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           BOOKING
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           EVENTS
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           SERVICES
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           GALLERY
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           REVIEWS
         </NavLink>
         <NavLink
-          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           CONTACT US
