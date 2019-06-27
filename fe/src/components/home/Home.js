@@ -1,6 +1,6 @@
 import React from "react";
 import { Slide } from "react-slideshow-image";
-import bgImage1 from "@assets/images/slide_1-min.jpg";
+import bgImage1 from "@assets/images/slide_1.jpg";
 import bgImage2 from "@assets/images/slide_2.jpg";
 import bgImage3 from "@assets/images/slide_3.jpg";
 
@@ -11,10 +11,7 @@ const properties = {
   transitionDuration: 500,
   infinite: true,
   indicators: true,
-  arrows: false,
-  onChange: (oldIndex, newIndex) => {
-    console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-  }
+  arrows: false
 };
 
 const Home = () => {

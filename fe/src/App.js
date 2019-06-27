@@ -14,11 +14,7 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={Home} />
-<<<<<<< HEAD
           <Route path="/rooms" component={Rooms} />
-=======
-          <Route exact path="/rooms" component={Rooms} />
->>>>>>> df89384b24de5a8aebed01bc7c0210154f47ae7e
         </Switch>
       </div>
     </BrowserRouter>
