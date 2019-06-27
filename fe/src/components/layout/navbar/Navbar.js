@@ -17,51 +17,45 @@ const Navbar = () => {
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/booking"
         >
           BOOKING
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/rooms"
         >
           ROOMS
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/events"
         >
           EVENTS
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/services"
         >
           SERVICES
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/gallery"
         >
           GALLERY
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/reviews"
         >
           REVIEWS
         </NavLink>
         <NavLink
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
-          to="/"
+          to="/contact"
         >
           CONTACT US
-        </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
-          LOGIN
-        </NavLink>
-        <NavLink className="font-semibold" to="/">
-          REGISTER
         </NavLink>
       </nav>
     </div>

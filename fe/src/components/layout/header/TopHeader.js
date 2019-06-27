@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "@assets/images/logo.png";
+import { NavLink } from "react-router-dom";
 
 const TopHeader = () => {
   return (
@@ -9,6 +10,20 @@ const TopHeader = () => {
           <i className="mr-2 fas fa-phone-alt" />
           +31 (0) 20 507 0000
         </p>
+        <div className="text-left mt-4">
+          <a href="#" className="mr-4">
+            <i className="fab fa-facebook-square" />
+          </a>
+          <a href="#" className="mr-4">
+            <i className="fab fa-linkedin" />
+          </a>
+          <a href="#" className="mr-4">
+            <i className="fab fa-twitter-square" />
+          </a>
+          <a href="#">
+            <i className="fab fa-instagram" />
+          </a>
+        </div>
       </div>
       <div className="w-2/4 text-center">
         <img
@@ -21,18 +36,15 @@ const TopHeader = () => {
         />
       </div>
       <div className="text-white w-1/4 text-right">
-        <a href="#" className="mr-4">
-          <i className="fab fa-facebook-square" />
-        </a>
-        <a href="#" className="mr-4">
-          <i className="fab fa-linkedin" />
-        </a>
-        <a href="#" className="mr-4">
-          <i className="fab fa-twitter-square" />
-        </a>
-        <a href="#">
-          <i className="fab fa-instagram" />
-        </a>
+        <NavLink
+          className="mr-4 font-semibold  hover:text-gray-300"
+          to="/login"
+        >
+          LOGIN
+        </NavLink>
+        <NavLink className="font-semibold  hover:text-gray-300" to="/register">
+          REGISTER
+        </NavLink>
       </div>
     </div>
   );

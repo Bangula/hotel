@@ -59,7 +59,7 @@ const Home = () => {
                 tranform: "translateY(-50%)"
               }}
             >
-              Slide 2
+              <Slide1 />
             </div>
           </div>
         </div>
