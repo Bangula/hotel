@@ -1,7 +1,12 @@
 import React from "react";
 
 const Reviews = () => {
-  return <div>REVIEWS</div>;
+  return (
+    <>
+      <div className="header-image" />
+      <div>REVIEWS</div>
+    </>
+  );
 };
 
 export default Reviews;
