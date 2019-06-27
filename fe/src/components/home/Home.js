@@ -4,6 +4,9 @@ import bgImage1 from "@assets/images/slide_1.jpg";
 import bgImage2 from "@assets/images/slide_2.jpg";
 import bgImage3 from "@assets/images/slide_3.jpg";
 
+// Components
+import Slide1 from "./components/Slide1";
+
 const slideImages = [bgImage1, bgImage2, bgImage3];
 
 const properties = {
@@ -24,7 +27,7 @@ const Home = () => {
             style={{ backgroundImage: `url(${slideImages[0]})` }}
           >
             <div
-              className="border border-white w-1/3"
+              className="border border-white w-2/3"
               style={{
                 position: "absolute",
                 top: "50%",
@@ -35,7 +38,7 @@ const Home = () => {
                 tranform: "translateY(-50%)"
               }}
             >
-              <h1 className="text-center">Welcome To Quantox Hotel</h1>
+              <Slide1 />
             </div>
           </div>
         </div>

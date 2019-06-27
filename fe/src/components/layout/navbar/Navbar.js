@@ -25,6 +25,12 @@ const Navbar = () => {
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
+          ROOMS
+        </NavLink>
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
+          to="/"
+        >
           EVENTS
         </NavLink>
         <NavLink
