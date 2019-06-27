@@ -2,18 +2,22 @@ import React from "react";
 import { Fade } from "react-slideshow-image";
 import bgImage1 from "@assets/images/slide_1.jpg";
 import bgImage2 from "@assets/images/slide_2.jpg";
-import bgImage3 from "@assets/images/slide_3.jpg";
 
 // Components
 import Slide1 from "./components/Slide1";
+import Slide2 from "./components/Slide2";
+import CheckBar from "./components/CheckBar";
+import UpcomingEvents from "./components/UpcomingEvents";
+import About from "./About";
+import Promotions from "./components/Promotions";
 
-const slideImages = [bgImage1, bgImage2, bgImage3];
+const slideImages = [bgImage1, bgImage2];
 
 const properties = {
   duration: 5000,
   transitionDuration: 700,
   infinite: true,
-  indicators: true,
+  indicators: false,
   arrows: false
 };
 
@@ -24,10 +28,12 @@ const Home = () => {
         <div className="each-fade">
           <div
             className="h-screen bg-no-repeat bg-cover relative"
-            style={{ backgroundImage: `url(${slideImages[0]})` }}
+            style={{
+              backgroundImage: `url(${slideImages[0]})`
+            }}
           >
             <div
-              className="border border-white w-2/3"
+              className="w-2/3"
               style={{
                 position: "absolute",
                 top: "50%",
@@ -48,9 +54,9 @@ const Home = () => {
             style={{ backgroundImage: `url(${slideImages[1]})` }}
           >
             <div
+              className="w-2/3"
               style={{
                 position: "absolute",
-                width: "500px",
                 top: "50%",
                 left: "0",
                 right: "0",
@@ -59,32 +65,15 @@ const Home = () => {
                 tranform: "translateY(-50%)"
               }}
             >
-              <Slide1 />
-            </div>
-          </div>
-        </div>
-        <div className="each-fade">
-          <div
-            className="h-screen bg-no-repeat bg-cover relative"
-            style={{ backgroundImage: `url(${slideImages[2]})` }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                width: "500px",
-                top: "50%",
-                left: "0",
-                right: "0",
-                margin: "0 auto",
-                color: "white",
-                tranform: "translateY(-50%)"
-              }}
-            >
-              Slide 3
+              <Slide2 />
             </div>
           </div>
         </div>
       </Fade>
+      <CheckBar />
+      <UpcomingEvents />
+      <Promotions />
+      <About />
     </div>
   );
 };
