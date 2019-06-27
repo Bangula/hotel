@@ -1,0 +1,67 @@
+.ring-image {
+  transition: all 0.7s ease-in;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+.services {
+  min-height: 650px;
+  overflow: hidden;
+
+  &__gym,
+  &__pool,
+  &__sport,
+  &__wellness {
+    transition: all 0.3s ease-in;
+    height: auto;
+    max-width: 480px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    -webkit-filter: brightness(100%);
+    &:hover {
+      // transform: scale(5px);
+      // -webkit-box-shadow: 1px 6px 25px -5px rgba(0, 0, 0, 0.75);
+      // -moz-box-shadow: 1px 6px 25px -5px rgba(0, 0, 0, 0.75);
+      // box-shadow: 1px 6px 25px -5px rgba(0, 0, 0, 0.75);
+      // -webkit-filter: blur(10px);
+      //-webkit-filter: brightness(50%);
+    }
+  }
+
+  &__gym {
+    background: linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)),
+      url("../../assets/images/services/service_gym.jpg");
+  }
+
+  &__pool {
+    background: linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)),
+      url("../../assets/images/services/service_pool.jpg");
+  }
+  &__sport {
+    background: linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)),
+      url("../../assets/images/services/service_sport.jpg");
+  }
+  &__wellness {
+    background: linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)),
+      url("../../assets/images/services/service_wellness.jpg");
+  }
+}
+
+.services2 {
+  min-height: 529px;
+  transition: all 0.3s ease-in;
+  &__restauraunt {
+    background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.5)),
+      url("../../assets/images/services/service_restauraunt.jpg");
+    background-color: red;
+  }
+
+  &__rent {
+    background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.6)),
+      url("../../assets/images/services/service_rent.jpg");
+  }
+}
