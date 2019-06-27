@@ -20,26 +20,56 @@ const Home = () => {
       <Slide {...properties}>
         <div className="each-slide">
           <div
-            className="h-screen bg-no-repeat bg-cover"
+            className="h-screen bg-no-repeat bg-cover relative"
             style={{ backgroundImage: `url(${slideImages[0]})` }}
           >
-            <span>Slide 1</span>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                color: "white",
+                tranform: "translateY(-50%)"
+              }}
+            >
+              Slide 1
+            </div>
           </div>
         </div>
         <div className="each-slide">
           <div
-            className="h-screen bg-no-repeat bg-cover"
+            className="h-screen bg-no-repeat bg-cover relative"
             style={{ backgroundImage: `url(${slideImages[1]})` }}
           >
-            <span>Slide 2</span>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                color: "white",
+                tranform: "translateY(-50%)"
+              }}
+            >
+              Slide 1
+            </div>
           </div>
         </div>
         <div className="each-slide">
           <div
-            className="h-screen bg-no-repeat bg-cover"
+            className="h-screen bg-no-repeat bg-cover relative"
             style={{ backgroundImage: `url(${slideImages[2]})` }}
           >
-            <span>Slide 2</span>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                color: "white",
+                tranform: "translateY(-50%)"
+              }}
+            >
+              Slide 1
+            </div>
           </div>
         </div>
       </Slide>

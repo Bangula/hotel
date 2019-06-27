@@ -9,25 +9,46 @@ const Navbar = () => {
       style={{ marginTop: "150px" }}
     >
       <nav className="w-full text-center" style={{ margin: "0 auto" }}>
-        <NavLink className="mr-4 font-semibold h-color-grey" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           HOME
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           BOOKING
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           EVENTS
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           SERVICES
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           GALLERY
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           REVIEWS
         </NavLink>
-        <NavLink className="mr-4 font-semibold" to="/">
+        <NavLink
+          className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition"
+          to="/"
+        >
           CONTACT US
         </NavLink>
         <NavLink className="mr-4 font-semibold" to="/">

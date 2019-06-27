@@ -5,7 +5,10 @@ const TopHeader = () => {
   return (
     <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8">
       <div className="text-white w-1/4 text-left">
-        <p>+31 (0) 20 507 0000</p>
+        <p>
+          <i className="mr-2 fas fa-phone-alt" />
+          +31 (0) 20 507 0000
+        </p>
       </div>
       <div className="w-2/4 text-center">
         <img
