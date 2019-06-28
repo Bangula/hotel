@@ -1,5 +1,6 @@
 import { loginUser } from "@endpoints/users";
 import jwt_decode from "jwt-decode";
+import { SET_USER, LOGOUT_USER } from "../../store/types";
 
 export const loginUser = user => {
   return async dispatch => {
@@ -10,7 +11,7 @@ export const loginUser = user => {
       console.log(data);
 
       dispatch({
-        type: "SET_USER",
+        type: SET_USER,
         payload: {
           name: decoded.name,
           id: decoded.id
