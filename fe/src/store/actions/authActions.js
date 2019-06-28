@@ -37,6 +37,7 @@ export const getProfile = () => {
     const { data, error } = await getLogedUser();
     if (data) {
       localStorage.setItem("user", JSON.stingify(data.data));
+      dispatch({ type: SAVE_USER_INFO, payload: data.data });
     } else if (error) {
       console.log(error);
     }

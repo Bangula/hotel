@@ -1,8 +1,13 @@
 import React from "react";
 import Logo from "@assets/images/logo.png";
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const TopHeader = () => {
+  const user = useSelector(state => state.user);
+  if (user) {
+    console.log(user);
+  }
   return (
     <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8">
       <div className="text-white w-1/4 text-left">
