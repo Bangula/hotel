@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
-//import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { login, getProfile } from "@actions/authActions";
 
-//import { login, getProfile } from "@actions/actions";
 import { Button, TextField, Container, Snackbar } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 const Login = props => {
   // const responseErrors = useSelector(state => state.user.responseErrors);
   // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
   const initialValues = {
     email: "",
     password: ""
@@ -63,13 +63,12 @@ const Login = props => {
 
         <Formik
           onSubmit={async values => {
-            console.log("login", values);
-            // try {
-            //   await dispatch(login(values, props.history));
-            //   await dispatch(getProfile());
-            // } catch (err) {
-            //   console.log(err);
-            // }
+            try {
+              await dispatch(login(values, props.history));
+              await dispatch(getProfile());
+            } catch (err) {
+              console.log(err);
+            }
           }}
           initialValues={initialValues}
           validationSchema={loginSchema}
