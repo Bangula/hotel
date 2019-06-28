@@ -14,6 +14,8 @@ import Reviews from "@components/reviews/Reviews";
 import ContactUs from "@components/contactUs/ContactUs";
 import Login from "@components/login/Login";
 import Register from "@components/register/Register";
+import Cart from "@components/cart/Cart";
+
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +32,7 @@ function App() {
           <Route path="/contact-us" component={ContactUs} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/cart" component={Cart} />
         </Switch>
       </div>
     </BrowserRouter>

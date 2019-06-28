@@ -48,7 +48,7 @@ const TopHeader = () => {
         >
           REGISTER
         </NavLink>
-        <NavLink className="font-semibold  hover:text-gray-300" to="/register">
+        <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
           <i className="fas fa-shopping-cart" />
         </NavLink>
       </div>
