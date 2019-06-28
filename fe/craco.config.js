@@ -8,7 +8,8 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components"),
       "@store": path.resolve(__dirname, "src/store"),
       "@actions": path.resolve(__dirname, "src/store/actions"),
-      "@helpers": path.resolve(__dirname, "src/helpers")
+      "@helpers": path.resolve(__dirname, "src/helpers"),
+      "@endpoints": path.resolve(__dirname, "src/services/http/endpoints")
     }
   }
 };

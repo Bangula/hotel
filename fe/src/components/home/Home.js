@@ -7,9 +7,9 @@ import bgImage2 from "@assets/images/slide_2.jpg";
 import Slide1 from "./components/Slide1";
 import Slide2 from "./components/Slide2";
 import CheckBar from "./components/CheckBar";
-import UpcomingEvents from "./components/UpcomingEvents";
+import UpcomingEvents from "./UpcomingEvents";
 import About from "./About";
-import Promotions from "./components/Promotions";
+import Promotions from "./Promotions";
 
 const slideImages = [bgImage1, bgImage2];
 

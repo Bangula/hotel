@@ -15,3 +15,7 @@ code {
 .navlink-transition {
   transition: all 0.2s;
 }
+
+.MuiCardMedia-root {
+  background-size: auto auto;
+}

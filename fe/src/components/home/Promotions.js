@@ -2,7 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 
 // Components
-import PromotionCard from "./PromotionCard";
+import PromotionCard from "./components/PromotionCard";
 
 const Promotions = () => {
   const settings = {
@@ -11,11 +11,13 @@ const Promotions = () => {
     speed: 800,
     slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: true
+    autoplay: false
   };
   return (
     <div className="promotionSlider w-full mt-32">
-      <h1 className="text-center text-6xl  z-50">Promotions</h1>
+      <h1 className="text-center  text-5xl text-gray-700  z-50 home-header">
+        Promotions
+      </h1>
       <div className="mt-16 ">
         <Slider {...settings}>
           <div className="">

@@ -4,7 +4,7 @@ import TextyAnim from "rc-texty";
 const Slide1 = () => {
   return (
     <div className="text-center">
-      <h1 className="text-center text-6xl">
+      <h1 className="slide1-header text-center text-6xl">
         <TextyAnim type="mask-top">Welcome to Quantox Hotel</TextyAnim>
       </h1>
       <div className="flex  justify-center">

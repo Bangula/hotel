@@ -3,7 +3,9 @@ import React from "react";
 const UpcomingEvents = () => {
   return (
     <div className="mt-32 container mx-auto">
-      <h1 className="text-center text-6xl text-gray-700">Upcoming events</h1>
+      <h1 className="text-center text-5xl text-gray-700 home-header">
+        Upcoming events
+      </h1>
       <div
         className="flex border border-black mt-32
       "

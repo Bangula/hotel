@@ -7,13 +7,22 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import Fab from "@material-ui/core/Fab";
+import Link from "@material-ui/core/Link";
 
-import bgImage from "@assets/images/about.jpg";
+import bgImage from "@assets/images/special-offer-heading.png";
 
 const useStyles = makeStyles({
   card: {},
   media: {
-    height: 140
+    height: 210,
+    backgroundSize: "90% 200px"
+  },
+  fab: {
+    left: "0",
+    right: "0",
+    margin: "0 auto",
+    bottom: "24px"
   }
 });
 
@@ -21,24 +30,39 @@ const PromotionCard = () => {
   const classes = useStyles();
 
   return (
-    <div className="w-full text-center px-4" style={{}}>
-      <Card className={classes.card}>
-        <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={bgImage}
-            title="Contemplative Reptile"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              Lizard
-            </Typography>
-            <Typography color="textSecondary" component="p">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+    <div className="w-full text-center px-2 md:px-8" style={{}}>
+      <Card
+        className={`${classes.card} hover:shadow-2xl text-center`}
+        style={{ margin: "0 auto" }}
+      >
+        <CardMedia
+          className={`${classes.media} relative bg-contain`}
+          image={bgImage}
+          title="Room 1"
+        />
+
+        <Fab
+          variant="extended"
+          aria-label="Add"
+          color="primary"
+          className={`${classes.fab} absolute mx-auto p-6`}
+        >
+          <span className="" style={{ color: "#fff" }} to="# ">
+            $70/Night
+          </span>
+        </Fab>
+
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="h2" align="center">
+            Deluxe Black Room
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            A spacious deluxe room which hspacious deluxe room which hspacious
+            deluxe room which has a double bed and a single bed. Ideal for
+            any...
+          </Typography>
+        </CardContent>
+
         <CardActions>
           <Button size="small" color="primary">
             Learn More

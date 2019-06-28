@@ -18,7 +18,7 @@ const CheckBar = () => {
       className="bg-white absolute shadow-lg p-8  w-2/3 text-center"
       style={{
         height: "100px",
-        bottom: "-50px",
+        bottom: "-70px",
         zIndex: "100",
         left: "10px",
         right: "10px",

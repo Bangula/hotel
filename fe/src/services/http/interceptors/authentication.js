@@ -2,7 +2,7 @@
 
 export function authRequest(config) {
   console.log(config);
-  const token = localStorage.getItem("access_token_name");
+  const token = localStorage.getItem("jwtToken");
   if (token) {
     config.headers.Authorization = "Bearer " + token;
   }
