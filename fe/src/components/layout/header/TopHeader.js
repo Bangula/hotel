@@ -2,12 +2,22 @@ import React from "react";
 import Logo from "@assets/images/logo.png";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    color: "#fff",
+    marginRight: "20px"
+  }
+}));
 
 const TopHeader = () => {
   const user = useSelector(state => state.user);
-  if (user) {
-    console.log(user);
-  }
+  console.log(user);
+  const dispatch = useDispatch();
+  const classes = useStyles();
+
   return (
     <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8">
       <div className="text-white w-1/4 text-left">
@@ -41,18 +51,32 @@ const TopHeader = () => {
         />
       </div>
       <div className="text-white w-1/4 text-right">
-        <NavLink
-          className="mr-4 font-semibold  hover:text-gray-300"
-          to="/login"
-        >
-          LOGIN
-        </NavLink>
-        <NavLink
-          className="font-semibold  hover:text-gray-300 mr-4"
-          to="/register"
-        >
-          REGISTER
-        </NavLink>
+        {user.isAuthenticated ? (
+          <Button
+            className={`${
+              classes.button
+            } mr-8 font-semibold text-white  hover:text-gray-300`}
+            onClick={() => dispatch({ type: "LOGOUT_USER" })}
+          >
+            LOGOUT
+          </Button>
+        ) : (
+          <>
+            <NavLink
+              className="mr-4 font-semibold  hover:text-gray-300"
+              to="/login"
+            >
+              LOGIN
+            </NavLink>
+            <NavLink
+              className="font-semibold  hover:text-gray-300 mr-4"
+              to="/register"
+            >
+              REGISTER
+            </NavLink>
+          </>
+        )}
+
         <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
           <i className="fas fa-shopping-cart" />
         </NavLink>

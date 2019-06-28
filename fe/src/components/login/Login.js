@@ -33,7 +33,7 @@ const Login = props => {
       .required(),
     password: Yup.string()
       .required("Password is required")
-      .min(6, "Password must be at least 6 characters")
+      .min(5, "Password must be at least 6 characters")
       .max(50, "Too LONG!.")
   });
   const [invalidEmail, setInvalidEmail] = useState("");
@@ -51,7 +51,6 @@ const Login = props => {
   // }, [responseErrors]);
 
   const classes = useStyles();
-  console.log("LOGIN PROPS", props);
   return (
     <>
       <div className="header-image" />
