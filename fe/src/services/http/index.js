@@ -1,7 +1,7 @@
 import axios from "axios";
 import { authRequest, authResponse } from "./interceptors/authentication";
 
-const url = "http://api.quantox-hotel.loc/v1";
+const url = "http://api.quantox-hotel.local/v1";
 
 const http = axios.create({
   baseURL: url

@@ -8,3 +8,7 @@ export const registerUser = credentials => {
 export const loginUser = credentials => {
   return toResponse(http.post("/clients/web/admin/login", credentials));
 };
+
+export const getLogedUser = () => {
+  return toResponse(http.get("/user/profile"));
+};
