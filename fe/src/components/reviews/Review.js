@@ -24,9 +24,9 @@ const useStyles = makeStyles({
 });
 const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
   const classes = useStyles();
-  console.log("REVIEW PROPS", hotel_rate, room_rate, accommodation_rate);
+  // console.log("REVIEW PROPS", hotel_rate, room_rate, accommodation_rate);
   const averageRating = (hotel_rate + room_rate + accommodation_rate) / 3;
-  console.log(averageRating);
+  //  console.log(averageRating);
   return (
     <Card className={`${classes.card} hover:shadow-2xl  mb-6`}>
       <CardContent className="flex justify-between">
