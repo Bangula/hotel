@@ -1,28 +1,29 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import clsx from "clsx";
-
-import Paper from "@material-ui/core/Paper";
-import Icon from "@material-ui/core/Icon";
-import Divider from "@material-ui/core/Divider";
-
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { deepOrange, deepPurple, grey } from "@material-ui/core/colors";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
+import Dashboard from "./Dashboard";
+import Users from "./users/Users";
+import Gallery from "./Gallery";
+import Newsletter from "./Newsletter";
+import Reviews from "./Reviews";
+
+import {
+  Avatar,
+  Collapse,
+  ListItemText,
+  ListItemIcon,
+  ListItem,
+  List,
+  Divider,
+  Icon,
+  Paper
+} from "@material-ui/core";
+
+import { Switch, Route, NavLink } from "react-router-dom";
 
 const useStyles = makeStyles({
   avatar: {},
@@ -44,18 +45,15 @@ const useStyles = makeStyles({
   submenu: { backgroundColor: grey[300] }
 });
 
-const Admin = () => {
+const Admin = props => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openProfile, setOpenProfile] = React.useState(false);
 
-  function handleClick() {
-    setOpen(!open);
-  }
   return (
     <>
       <div className="user-header" />
-      <div className="h-screen">
+      <div className="h-screen flex">
         <Paper className="w-1/6 h-full">
           <List
             component="nav"
@@ -87,55 +85,68 @@ const Admin = () => {
               </List>
             </Collapse>
             {/* ///////////////////////////////////////////////// profile */}
-            <ListItem button>
-              <ListItemIcon>
-                <Icon
-                  className={clsx(classes.icon, "fas fa-columns")}
-                  color="action"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
+
+            <NavLink to="/admin/dashboard">
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon
+                    className={clsx(classes.icon, "fas fa-columns")}
+                    color="action"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+            </NavLink>
 
             <Divider component="li" variant="middle" />
+            <NavLink to="/admin/users" activeClassName="admin-link">
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon
+                    className={clsx(classes.icon, "fas fa-users")}
+                    color="action"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Users" />
+              </ListItem>
+            </NavLink>
 
-            <ListItem button>
-              <ListItemIcon>
-                <Icon
-                  className={clsx(classes.icon, "fas fa-users")}
-                  color="action"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Users" />
-            </ListItem>
+            <NavLink to="/admin/gallery">
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon
+                    className={clsx(classes.icon, "far fa-images")}
+                    color="action"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Gallery" />
+              </ListItem>
+            </NavLink>
 
-            <ListItem button>
-              <ListItemIcon>
-                <Icon
-                  className={clsx(classes.icon, "far fa-images")}
-                  color="action"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Gallery" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <Icon
-                  className={clsx(classes.icon, "fas fa-mail-bulk")}
-                  color="action"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Newsletter" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <Icon
-                  className={clsx(classes.icon, "fas fa-star")}
-                  color="action"
-                />
-              </ListItemIcon>
-              <ListItemText primary="Reviews" />
-            </ListItem>
+            <NavLink to="/admin/newsletter">
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon
+                    className={clsx(classes.icon, "fas fa-mail-bulk")}
+                    color="action"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Newsletter" />
+              </ListItem>
+            </NavLink>
+
+            <NavLink to="/admin/reviews">
+              <ListItem button>
+                <ListItemIcon>
+                  <Icon
+                    className={clsx(classes.icon, "fas fa-star")}
+                    color="action"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Reviews" />
+              </ListItem>
+            </NavLink>
+
             <ListItem button>
               <ListItemIcon>
                 <Icon
@@ -147,6 +158,16 @@ const Admin = () => {
             </ListItem>
           </List>
         </Paper>
+
+        <div style={{ flex: 1 }}>
+          <Switch>
+            <Route path={`/admin/dashboard`} component={Dashboard} />
+            <Route path={`/admin/users`} component={Users} />
+            <Route path={`/admin/gallery`} component={Gallery} />
+            <Route path={`/admin/newsletter`} component={Newsletter} />
+            <Route path={`/admin/reviews`} component={Reviews} />
+          </Switch>
+        </div>
       </div>
     </>
   );

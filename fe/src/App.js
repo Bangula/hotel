@@ -17,6 +17,7 @@ import Login from "@components/login/Login";
 import Register from "@components/register/Register";
 import Cart from "@components/cart/Cart";
 import Admin from "@components/admin/Admin";
+import Dashboard from "@components/admin/Dashboard";
 import UserProfile from "@components/user/UserProfile";
 
 function App(props) {
@@ -37,6 +38,7 @@ function App(props) {
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
           <Route path="/admin" component={Admin} />
+
           <Route path="/user" component={UserProfile} />
         </Switch>
       </div>
