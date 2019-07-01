@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 });
 const Event = ({ event }) => {
   const classes = useStyles();
-  console.log(event);
+  // console.log(event);
   return (
     <div className="">
       <Card className={`${classes.card} hover:shadow-2xl`}>
