@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   }
 });
 
-const PromotionCard = () => {
+const PromotionCard = ({ item }) => {
   const classes = useStyles();
 
   return (
@@ -48,18 +48,16 @@ const PromotionCard = () => {
           className={`${classes.fab} absolute mx-auto p-6`}
         >
           <span className="" style={{ color: "#fff" }} to="# ">
-            $70/Night
+            {`$${item.price}`}
           </span>
         </Fab>
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align="center">
-            Deluxe Black Room
+            {item.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            A spacious deluxe room which hspacious deluxe room which hspacious
-            deluxe room which has a double bed and a single bed. Ideal for
-            any...
+            {item.description}
           </Typography>
         </CardContent>
 

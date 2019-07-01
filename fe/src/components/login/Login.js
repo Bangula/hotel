@@ -83,7 +83,6 @@ const Login = props => {
             return (
               <Form>
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="email"
                   fullWidth
@@ -108,7 +107,6 @@ const Login = props => {
                 <TextField
                   type="password"
                   name="password"
-                  variant="outlined"
                   margin="normal"
                   fullWidth
                   label="Password"

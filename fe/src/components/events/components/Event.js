@@ -22,12 +22,12 @@ const useStyles = makeStyles({
   },
   media: {
     height: "100%",
-    width: 300
+    width: 400
   }
 });
-
 const Event = ({ event }) => {
   const classes = useStyles();
+  console.log(event);
   return (
     <div className="">
       <Card className={`${classes.card} hover:shadow-2xl`}>
@@ -35,34 +35,40 @@ const Event = ({ event }) => {
           <CardMedia
             className={`${classes.media} relative `}
             image={room1}
-            title="Room 1"
+            title={event.title}
           />
         </div>
         <div>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2" align="center">
-              Title
-            </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="h2"
+              align="center"
+            />
             <Typography variant="body2" color="textSecondary" component="p">
-              Desctiption A spacious deluxe room which has a double bed and a
-              single bed. Ideal for any...
+              {event.description}
             </Typography>
             <br />
             <div className="flex w-full justify-between">
               <div>
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Starting:
+                  Starting at:
+                  <br />
+                  <span className="font-semibold">{event.started_at}</span>
+                  <br />
                 </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Location:
-                </Typography>
+                {/* <Typography variant="body2" color="textSecondary" component="p">
+                  Location: <br />
+                </Typography> */}
               </div>
               <div>
-                <Typography variant="body2" color="textSecondary" component="p">
+                {/* <Typography variant="body2" color="textSecondary" component="p">
                   Category:
-                </Typography>
+                </Typography> */}
                 <Typography variant="body2" color="textSecondary" component="p">
-                  Capacity:
+                  Capacity: <br />
+                  <span className="font-semibold">{event.capacity}</span>
                 </Typography>
               </div>
             </div>

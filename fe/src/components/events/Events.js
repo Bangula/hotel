@@ -20,7 +20,7 @@ const Events = () => {
     events.length > 0
       ? events.map((item, index) => {
           return (
-            <div key={index} className=" " style={{ width: "48%" }}>
+            <div key={index} className="md:w-9/12 mb-16">
               <Event event={item} />
             </div>
           );
@@ -35,7 +35,7 @@ const Events = () => {
         Events
       </h1>
       <div className="container mx-auto mt-32">
-        <div className="flex w-full justify-between">{eventsList}</div>
+        <div className=" w-full justify-between">{eventsList}</div>
       </div>
     </div>
   );
