@@ -1,11 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  makeStyles,
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Button
+} from "@material-ui/core";
 
+import { getUsersPerPage } from "@endpoints/users";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -35,21 +41,96 @@ const useStyles = makeStyles(theme => ({
 function Users() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [users, setUsers] = useState([]);
 
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-
+  const getUsersPerPageHandle = async page => {
+    const { data, error } = await getUsersPerPage(page);
+    if (data) {
+      console.log("users fetched", data.data);
+      setUsers(data.data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(() => {
+    getUsersPerPageHandle(currentPage);
+  }, []);
   return (
     <div>
-      <AppBar position="static">
-        <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label="Users" href="/users" />
-          <LinkTab label="Edit User" href="/edit" />
-        </Tabs>
-      </AppBar>
-      {value === 0 && <TabContainer>List of all users</TabContainer>}
-      {value === 1 && <TabContainer>Edit users credentials</TabContainer>}
+      List of all users
+      <ReactTable
+        data={users}
+        columns={[
+          {
+            Header: "Name",
+            columns: [
+              {
+                Header: "First Name",
+                accessor: "first_name"
+              },
+              {
+                Header: "Last Name",
+                accessor: "last_name"
+              }
+            ]
+          },
+          {
+            Header: "Info",
+            columns: [
+              {
+                Header: "Email",
+                accessor: "email"
+              }
+            ]
+          },
+          {
+            Header: "Actions",
+            columns: [
+              {
+                Header: "Edit",
+                id: "editUser",
+                accessor: data => (
+                  <Link to={`/admin/edit-user/${data.id}`}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                    >
+                      Edit :{data.id}
+                    </Button>
+                  </Link>
+                )
+              },
+              {
+                Header: "Delete",
+                id: "id",
+                accessor: data => (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    Delete user
+                  </Button>
+                )
+              }
+            ]
+          }
+        ]}
+        defaultSorted={[
+          {
+            id: "age",
+            desc: true
+          }
+        ]}
+        defaultPageSize={10}
+        onPageChange={page => setCurrentPage(page)}
+        className="-striped -highlight"
+      />
     </div>
   );
 }

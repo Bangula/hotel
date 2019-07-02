@@ -38,7 +38,6 @@ function App(props) {
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
           <Route path="/admin" component={Admin} />
-
           <Route path="/user" component={UserProfile} />
         </Switch>
       </div>
