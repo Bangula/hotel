@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { joinToEvent } from "../../../services/http/endpoints/events";
 import room1 from "@assets/images/rooms/room1.jpg";
+
+import Alert from "react-s-alert";
+import "react-s-alert/dist/s-alert-default.css";
+import "react-s-alert/dist/s-alert-css-effects/slide.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -22,12 +27,36 @@ const useStyles = makeStyles({
   },
   media: {
     height: "100%",
-    width: 400
+    width: "40vh"
+  },
+  content: {
+    paddin: "20px 20px"
   }
 });
-const Event = ({ event }) => {
-  const classes = useStyles();
+const Event = ({ event, join }) => {
+  const user = useSelector(state => state.user);
+
+  const joinUserToEvent = async () => {
+    const { data, error } = await joinToEvent(event.id);
+    if (data) {
+      console.log("joined to event", data);
+      handleSuccess();
+    } else if (error) {
+      console.log(error);
+    }
+  };
+
   console.log(event);
+
+  const classes = useStyles();
+
+  const handleSuccess = () => {
+    Alert.success("Joind to event!");
+  };
+  const handleError = () => {
+    Alert.error("Error!");
+  };
+
   return (
     <div className="">
       <Card className={`${classes.card} hover:shadow-2xl`}>
@@ -38,15 +67,17 @@ const Event = ({ event }) => {
             title={event.title}
           />
         </div>
-        <div>
-          <CardContent>
+        <div className={join ? "pl-16 pb-8" : null}>
+          <CardContent className={classes.content}>
+            <Typography gutterBottom variant="h5" component="h2" align="center">
+              {event.title}
+            </Typography>
             <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              align="center"
-            />
-            <Typography variant="body2" color="textSecondary" component="p">
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className="py-8"
+            >
               {event.description}
             </Typography>
             <br />
@@ -73,14 +104,20 @@ const Event = ({ event }) => {
               </div>
             </div>
           </CardContent>
-
-          <CardActions>
-            <Button variant="contained" color="primary">
-              JOIN
-            </Button>
-          </CardActions>
+          {join && user.isAuthenticated ? (
+            <CardActions>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={joinUserToEvent}
+              >
+                JOIN
+              </Button>
+            </CardActions>
+          ) : null}
         </div>
       </Card>
+      <Alert />
     </div>
   );
 };

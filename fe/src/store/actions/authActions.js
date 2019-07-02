@@ -26,7 +26,7 @@ export const register = user => {
     if (data) {
       console.log(data);
     } else if (error) {
-      console.lof(error);
+      console.log(error.response);
     }
   };
 };
