@@ -1,6 +1,7 @@
 import React from "react";
 import "./assets/styles/main.scss";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import history from "@helpers/history";
 
 // Components
 import Header from "@components/layout/header/Header";
@@ -15,10 +16,13 @@ import ContactUs from "@components/contactUs/ContactUs";
 import Login from "@components/login/Login";
 import Register from "@components/register/Register";
 import Cart from "@components/cart/Cart";
+import Admin from "@components/admin/Admin";
+import Dashboard from "@components/admin/Dashboard";
+import UserProfile from "@components/user/UserProfile";
 
-function App() {
+function App(props) {
   return (
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <div className="App">
         <Header />
         <Switch>
@@ -33,6 +37,8 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
+          <Route path="/admin" component={Admin} />
+          <Route path="/user" component={UserProfile} />
         </Switch>
       </div>
     </BrowserRouter>

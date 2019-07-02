@@ -12,3 +12,12 @@ export const loginUser = credentials => {
 export const getLogedUser = () => {
   return toResponse(http.get("/user/profile"));
 };
+
+//"http://api.quantox-hotel.local/v1/users?page=2"
+
+export const getUsers = () => {
+  return toResponse(http.get("/users"));
+};
+export const getUsersPerPage = page => {
+  return toResponse(http.get(`/users?page=${page}`));
+};

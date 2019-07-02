@@ -56,14 +56,16 @@ const Reviews = () => {
           <CircularProgress />
         )}
       </div>
-      <ThemeProvider>
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          onChange={currentPage => setCurrentPage(currentPage)}
-        />
-      </ThemeProvider>
-      ;
+
+      {Object.keys(reviews).length ? (
+        <ThemeProvider>
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            onChange={currentPage => setCurrentPage(currentPage)}
+          />
+        </ThemeProvider>
+      ) : null}
     </>
   );
 };
