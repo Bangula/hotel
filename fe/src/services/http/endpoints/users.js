@@ -27,3 +27,6 @@ export const updateUserInfo = (credentials, id) => {
   console.log("from http", credentials, id);
   return toResponse(http.put(`/users/${id}`, credentials));
 };
+export const deleteUser = userId => {
+  return toResponse(http.delete(`/users/${userId}`));
+};
