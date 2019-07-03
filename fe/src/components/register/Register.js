@@ -122,7 +122,6 @@ const Register = props => {
             return (
               <Form>
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="text"
                   fullWidth
@@ -147,7 +146,6 @@ const Register = props => {
                 ) : null}
 
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="text"
                   fullWidth
@@ -170,7 +168,6 @@ const Register = props => {
                 ) : null}
 
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="email"
                   fullWidth
@@ -193,7 +190,6 @@ const Register = props => {
                 ) : null}
 
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="text"
                   fullWidth
@@ -218,7 +214,6 @@ const Register = props => {
                 ) : null}
 
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="text"
                   fullWidth
@@ -239,7 +234,6 @@ const Register = props => {
                 ) : null}
 
                 <TextField
-                  variant="outlined"
                   margin="normal"
                   type="text"
                   fullWidth
@@ -264,7 +258,6 @@ const Register = props => {
                 <TextField
                   type="password"
                   name="password"
-                  variant="outlined"
                   margin="normal"
                   fullWidth
                   label="Password"
@@ -287,7 +280,6 @@ const Register = props => {
                 <TextField
                   type="password"
                   name="password2"
-                  variant="outlined"
                   margin="normal"
                   fullWidth
                   label="Confirm Password"

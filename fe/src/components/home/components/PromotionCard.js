@@ -13,10 +13,12 @@ import Link from "@material-ui/core/Link";
 import bgImage from "@assets/images/special-offer-heading.png";
 
 const useStyles = makeStyles({
-  card: {},
+  card: {
+    paddingBottom: "20px"
+  },
   media: {
-    height: 210,
-    backgroundSize: "90% 200px"
+    height: 140,
+    backgroundSize: "60% 120px"
   },
   fab: {
     left: "0",
@@ -26,11 +28,14 @@ const useStyles = makeStyles({
   }
 });
 
-const PromotionCard = ({ item }) => {
+const PromotionCard = ({ item, openModal }) => {
   const classes = useStyles();
 
   return (
-    <div className="w-full text-center px-2 md:px-8" style={{}}>
+    <div
+      className="w-full text-center px-2 md:px-8"
+      style={{ height: "400px" }}
+    >
       <Card
         className={`${classes.card} hover:shadow-2xl text-center`}
         style={{ margin: "0 auto" }}
@@ -57,13 +62,18 @@ const PromotionCard = ({ item }) => {
             {item.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {item.description}
+            {item.description.slice(0, 100) + "..."}
           </Typography>
         </CardContent>
 
         <CardActions>
-          <Button size="small" color="primary">
-            Learn More
+          <Button
+            size="small"
+            color="primary"
+            variant="contained"
+            onClick={() => openModal(item.id)}
+          >
+            More details
           </Button>
         </CardActions>
       </Card>

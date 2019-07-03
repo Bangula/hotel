@@ -38,7 +38,9 @@ const CheckBar = () => {
               label="Check Out"
               onChange={value => setState({ ...state, checkOut: value })}
             />
-            <Button type="submit">Search</Button>
+            <Button type="submit" variant="contained">
+              Search
+            </Button>
           </div>
         </MuiPickersUtilsProvider>
       </form>

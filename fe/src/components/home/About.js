@@ -11,7 +11,7 @@ const About = () => {
         className="absolute w-full h-full left-0 top-0 bg-contain z-10 pt-16"
         style={{ background: "rgba(0, 0, 0, 0.5)" }}
       >
-        <h1 className="home-header text-center text-5xl text-white z-50">
+        <h1 className="home-header text-center text-5xl text-white z-50 italic">
           About Us
         </h1>
         <div className="container mx-auto">

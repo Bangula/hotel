@@ -2,6 +2,8 @@ import React from "react";
 import { getAllEvents } from "../../services/http/endpoints/events";
 import { Link } from "react-router-dom";
 
+import bgImage from "../../assets/images/events-bg.jpg";
+
 // Components
 import Event from "../events/components/Event";
 
@@ -27,24 +29,39 @@ const UpcomingEvents = () => {
       ? events.map((item, index) => {
           return (
             <div key={index} className="md:w-8/12 mb-16">
-              <Event event={item} />
+              <Event event={item} join={false} />
             </div>
           );
         })
       : null;
   return (
-    <div className="mt-32 container mx-auto">
-      <h1 className="text-center text-5xl text-gray-700 home-header">
-        Upcoming events
-      </h1>
-      <div className="mt-24">{newList}</div>
-      <div className="w-full text-center">
-        <Link
-          to="/events"
-          className="font-semibold italic text-center  opacity-50 hover:text-red-800 border border-gray-600 p-2 rounded-lg shadow-md hover:shadow-xl"
-        >
-          View all events...
-        </Link>
+    <div
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundPositionX: "500px",
+        backgroundPositionY: "250px",
+        paddingBottom: "160px",
+        marginTop: "100px"
+      }}
+      className="bg-no-repeat"
+    >
+      <div className="mt-32 container mx-auto">
+        <h1 className="text-center text-5xl text-gray-700 home-header italic">
+          Upcoming events
+        </h1>
+        <div className="mt-24">{newList}</div>
+        <div className="w-full text-left">
+          <Link
+            to="/events"
+            style={{
+              transition: "all 0.3s",
+              border: "0.5px solid rgba(0,0,0,0.5)"
+            }}
+            className="font-semibold italic text-center  opacity-50 hover:text-red-800 border  p-2 rounded-lg shadow-md hover:shadow-xl"
+          >
+            View all events...
+          </Link>
+        </div>
       </div>
     </div>
   );
