@@ -112,6 +112,7 @@ const Admin = props => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const [openProfile, setOpenProfile] = React.useState(false);
+  const [openUsers, setOpenUsers] = React.useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -170,6 +171,8 @@ const Admin = props => {
             </IconButton>
           </div>
           <Divider />
+
+          {/* odavde krece lista nav menija  */}
           <List
             component="nav"
             aria-labelledby="nested-list-subheader"
@@ -212,6 +215,7 @@ const Admin = props => {
                 <ListItemText primary="Dashboard" />
               </ListItem>
             </NavLink>
+            {/* //////////////////////////// end dashboard ///////////////////////////// */}
 
             <Divider component="li" variant="middle" />
             <NavLink to="/admin/users" activeClassName="admin-link">
@@ -225,6 +229,37 @@ const Admin = props => {
                 <ListItemText primary="Users" />
               </ListItem>
             </NavLink>
+
+            <Divider />
+
+            <ListItem button onClick={() => setOpenUsers(!openUsers)}>
+              <ListItemIcon>
+                <Avatar className={classes.purpleAvatar}>OP</Avatar>
+              </ListItemIcon>
+              <ListItemText primary="Users Name " />
+              {openProfile ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Divider component="li" variant="middle" />
+
+            <Collapse
+              in={openProfile}
+              timeout="auto"
+              unmountOnExit
+              className={classes.nested}
+            >
+              <List component="div" className={classes.submenu}>
+                <NavLink to="/admin/users" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="My Profile" />
+                  </ListItem>
+                </NavLink>
+                <ListItem button>
+                  <ListItemText primary="Edit Profile" />
+                </ListItem>
+              </List>
+            </Collapse>
+
+            {/* end users  */}
 
             <NavLink to="/admin/gallery">
               <ListItem button>
