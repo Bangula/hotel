@@ -33,7 +33,6 @@ const useStyles = makeStyles({
     paddin: "20px 20px"
   }
 });
-<<<<<<< HEAD
 const Event = ({ event, join }) => {
   const user = useSelector(state => state.user);
 
@@ -58,11 +57,6 @@ const Event = ({ event, join }) => {
     Alert.error("Error!");
   };
 
-=======
-const Event = ({ event }) => {
-  const classes = useStyles();
-  // console.log(event);
->>>>>>> e155923664056b50671c9e419ae0eb6aceb2b62a
   return (
     <div className="">
       <Card className={`${classes.card} hover:shadow-2xl`}>

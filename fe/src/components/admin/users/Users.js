@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { makeStyles, Button } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
+import {
+  makeStyles,
+  Button,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+  CircularProgress
+} from "@material-ui/core";
 
-import { getUsersPerPage } from "@endpoints/users";
-import ReactTable from "react-table";
-import "react-table/react-table.css";
+import { getUsersPerPage, deleteUser } from "@endpoints/users";
+
 import "@zendeskgarden/react-pagination/dist/styles.css";
-
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
-
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,11 +42,28 @@ function Users() {
       console.log(error.response);
     }
   };
+
+  const deleteSingleUser = async userId => {
+    const { data, error } = await deleteUser(userId);
+    if (data) {
+      console.log("user deleted", data.data);
+      getUsersPerPageHandle(currentPage);
+      // setUsers(data.data.data);
+      // setTotalPages(data.data.meta.pagination.total_pages);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+
+  //Kada se menja strana paginacije
   useEffect(() => {
-    getUsersPerPageHandle(currentPage);
+    if (users.length) getUsersPerPageHandle(currentPage);
   }, [currentPage]);
 
-  console.log("users", users);
+  //Inicijalno ucitavanje
+  useEffect(() => {
+    if (!users.length) getUsersPerPageHandle(currentPage);
+  }, []);
 
   return (
     <div className="text-center">
@@ -89,6 +106,7 @@ function Users() {
                     <TableCell align="left">
                       {" "}
                       <Button
+                        onClick={() => deleteSingleUser(user.id)}
                         variant="contained"
                         color="secondary"
                         className={classes.button}

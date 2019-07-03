@@ -219,30 +219,22 @@ const Admin = props => {
 
             <Divider component="li" variant="middle" />
             <NavLink to="/admin/users" activeClassName="admin-link">
-              <ListItem button>
+              <ListItem button onClick={() => setOpenUsers(!openUsers)}>
                 <ListItemIcon>
                   <Icon
                     className={clsx(classes.icon, "fas fa-users")}
                     color="action"
                   />
                 </ListItemIcon>
-                <ListItemText primary="Users" />
+                <ListItemText primary="Users " />
+                {openUsers ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
             </NavLink>
 
-            <Divider />
-
-            <ListItem button onClick={() => setOpenUsers(!openUsers)}>
-              <ListItemIcon>
-                <Avatar className={classes.purpleAvatar}>OP</Avatar>
-              </ListItemIcon>
-              <ListItemText primary="Users Name " />
-              {openProfile ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
             <Divider component="li" variant="middle" />
 
             <Collapse
-              in={openProfile}
+              in={openUsers}
               timeout="auto"
               unmountOnExit
               className={classes.nested}
@@ -250,11 +242,11 @@ const Admin = props => {
               <List component="div" className={classes.submenu}>
                 <NavLink to="/admin/users" activeClassName="admin-link">
                   <ListItem button>
-                    <ListItemText primary="My Profile" />
+                    <ListItemText primary="Users" />
                   </ListItem>
                 </NavLink>
                 <ListItem button>
-                  <ListItemText primary="Edit Profile" />
+                  <ListItemText primary="Edit User" />
                 </ListItem>
               </List>
             </Collapse>

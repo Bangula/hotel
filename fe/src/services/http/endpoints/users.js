@@ -21,3 +21,7 @@ export const getUsers = () => {
 export const getUsersPerPage = page => {
   return toResponse(http.get(`/users?page=${page}`));
 };
+
+export const deleteUser = userId => {
+  return toResponse(http.delete(`/users/${userId}`));
+};
