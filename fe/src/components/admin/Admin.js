@@ -3,7 +3,7 @@ import Button from "@material-ui/core/Button";
 import clsx from "clsx";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple, grey } from "@material-ui/core/colors";
 import Dashboard from "./Dashboard";
 import Users from "./users/Users";
@@ -20,12 +20,24 @@ import {
   List,
   Divider,
   Icon,
-  Paper
+  Paper,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography,
+  Drawer
 } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 
 import { Switch, Route, NavLink } from "react-router-dom";
-
-const useStyles = makeStyles({
+const drawerWidth = 240;
+const useStyles = makeStyles(theme => ({
   avatar: {},
   orangeAvatar: {
     margin: 0,
@@ -42,19 +54,125 @@ const useStyles = makeStyles({
     paddingLeft: 20,
     backgroundColor: grey[400]
   },
-  submenu: { backgroundColor: grey[300] }
-});
+  submenu: { backgroundColor: grey[300] },
+  appBar: {
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(["margin", "width"], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginRight: theme.spacing(2)
+  },
+  hide: {
+    display: "none"
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0
+  },
+  drawerPaper: {
+    width: drawerWidth
+  },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: "0 8px",
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end"
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    marginLeft: -drawerWidth
+  },
+  contentShift: {
+    transition: theme.transitions.create("margin", {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    }),
+    marginLeft: 0
+  }
+}));
 
 const Admin = props => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
   const [openProfile, setOpenProfile] = React.useState(false);
+  const [openUsers, setOpenUsers] = React.useState(false);
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
 
   return (
     <>
       <div className="user-header" />
       <div className="h-screen flex">
-        <Paper className="w-1/6 h-full">
+        {/* <CssBaseline /> */}
+        <AppBar
+          // position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open
+          })}
+        >
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            <ListItem button>
+              <ListItemIcon>
+                <Avatar className={classes.purpleAvatar}>OP</Avatar>
+              </ListItemIcon>
+              <ListItemText primary="Users Name " />
+            </ListItem>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "ltr" ? (
+                <ChevronLeftIcon />
+              ) : (
+                <ChevronRightIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
+
+          {/* odavde krece lista nav menija  */}
           <List
             component="nav"
             aria-labelledby="nested-list-subheader"
@@ -97,19 +215,43 @@ const Admin = props => {
                 <ListItemText primary="Dashboard" />
               </ListItem>
             </NavLink>
+            {/* //////////////////////////// end dashboard ///////////////////////////// */}
 
             <Divider component="li" variant="middle" />
             <NavLink to="/admin/users" activeClassName="admin-link">
-              <ListItem button>
+              <ListItem button onClick={() => setOpenUsers(!openUsers)}>
                 <ListItemIcon>
                   <Icon
                     className={clsx(classes.icon, "fas fa-users")}
                     color="action"
                   />
                 </ListItemIcon>
-                <ListItemText primary="Users" />
+                <ListItemText primary="Users " />
+                {openUsers ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
             </NavLink>
+
+            <Divider component="li" variant="middle" />
+
+            <Collapse
+              in={openUsers}
+              timeout="auto"
+              unmountOnExit
+              className={classes.nested}
+            >
+              <List component="div" className={classes.submenu}>
+                <NavLink to="/admin/users" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="Users" />
+                  </ListItem>
+                </NavLink>
+                <ListItem button>
+                  <ListItemText primary="Edit User" />
+                </ListItem>
+              </List>
+            </Collapse>
+
+            {/* end users  */}
 
             <NavLink to="/admin/gallery">
               <ListItem button>
@@ -157,17 +299,24 @@ const Admin = props => {
               <ListItemText primary="Logout" />
             </ListItem>
           </List>
-        </Paper>
-
-        <div style={{ flex: 1 }}>
-          <Switch>
-            <Route path={`/admin/dashboard`} component={Dashboard} />
-            <Route path={`/admin/users`} component={Users} />
-            <Route path={`/admin/gallery`} component={Gallery} />
-            <Route path={`/admin/newsletter`} component={Newsletter} />
-            <Route path={`/admin/reviews`} component={Reviews} />
-          </Switch>
-        </div>
+          <Divider />
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: open
+          })}
+        >
+          <div style={{ flex: 1 }}>
+            <Switch>
+              <Route path={`/admin/dashboard`} component={Dashboard} />
+              <Route path={`/admin/users`} component={Users} />
+              {/* <Route path={`/admin/users/edit`} component={EditUsers} /> */}
+              <Route path={`/admin/gallery`} component={Gallery} />
+              <Route path={`/admin/newsletter`} component={Newsletter} />
+              <Route path={`/admin/reviews`} component={Reviews} />
+            </Switch>
+          </div>
+        </main>
       </div>
     </>
   );
