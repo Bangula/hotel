@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -52,14 +53,20 @@ const TopHeader = () => {
       </div>
       <div className="text-white w-1/4 text-right">
         {user.isAuthenticated ? (
-          <Button
-            className={`${
-              classes.button
-            } mr-8 font-semibold text-white  hover:text-gray-300`}
-            onClick={() => dispatch({ type: "LOGOUT_USER" })}
-          >
-            LOGOUT
-          </Button>
+          <>
+            <Link to="/user">
+              <i className="fas fa-user mr-4" />
+            </Link>
+
+            <Button
+              className={`${
+                classes.button
+              } mr-8 font-semibold text-white  hover:text-gray-300`}
+              onClick={() => dispatch({ type: "LOGOUT_USER" })}
+            >
+              LOGOUT
+            </Button>
+          </>
         ) : (
           <>
             <NavLink

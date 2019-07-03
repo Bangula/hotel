@@ -12,7 +12,7 @@ export const login = (user, history) => {
     if (data) {
       let token = data.data.access_token;
       let jwtToken = `${data.data.token_type} ${data.data.access_token}`;
-      await localStorage.setItem("jwtToken", jwtToken);
+      localStorage.setItem("jwtToken", jwtToken);
       history.push("/");
     } else if (error) {
       console.log(error);
@@ -36,6 +36,7 @@ export const getProfile = () => {
     const { data, error } = await getLogedUser();
     if (data) {
       localStorage.setItem("user", JSON.stringify(data.data));
+      console.log(data.data);
       dispatch({ type: SAVE_USER_INFO, payload: data.data });
     } else if (error) {
       console.log(error);

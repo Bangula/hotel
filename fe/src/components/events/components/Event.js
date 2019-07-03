@@ -46,8 +46,6 @@ const Event = ({ event, join }) => {
     }
   };
 
-  console.log(event);
-
   const classes = useStyles();
 
   const handleSuccess = () => {

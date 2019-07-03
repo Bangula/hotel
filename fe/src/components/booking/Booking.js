@@ -12,6 +12,9 @@ import { Button } from "@material-ui/core";
 
 import { getAllRooms } from "../../services/http/endpoints/rooms";
 
+// Components
+import RoomList from "./components/RommList";
+
 const Booking = () => {
   const [checkIn, setCheckIn] = useState(new Date());
   const [checkOut, setCheckOut] = useState(new Date());
@@ -49,7 +52,7 @@ const Booking = () => {
           Booking
         </h1>
         <div className="filter container mx-auto mt-16">
-          <h1 className="text-gray-600 italic py-16">Filter:</h1>
+          <h1 className="text-gray-600 italic py-8 font-semibold">Filter:</h1>
           <div className="">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <div className="flex flex-wrap">
@@ -171,6 +174,10 @@ const Booking = () => {
               </div>
             </MuiPickersUtilsProvider>
           </div>
+        </div>
+        <div className="container mx-auto mt-16">
+          <h1 className="py-16 italic text-gray-600">Available rooms</h1>
+          <RoomList data={roomList} />
         </div>
       </div>
     </>

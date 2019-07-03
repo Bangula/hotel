@@ -26,7 +26,7 @@ export const authReducer = (state = initialState, action) => {
       };
 
     case SAVE_USER_INFO:
-      return { ...state, info: action.payload };
+      return { ...state, info: action.payload, isAuthenticated: true };
     default:
       return state;
   }
