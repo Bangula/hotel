@@ -18,6 +18,12 @@ export const getLogedUser = () => {
 export const getUsers = () => {
   return toResponse(http.get("/users"));
 };
+
 export const getUsersPerPage = page => {
   return toResponse(http.get(`/users?page=${page}`));
+};
+
+export const updateUserInfo = (credentials, id) => {
+  console.log("from http", credentials, id);
+  return toResponse(http.put(`users/${id}`, credentials));
 };
