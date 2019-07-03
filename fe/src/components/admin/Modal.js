@@ -1,55 +1,63 @@
-// import React from "react";
+import React from "react";
 
-// import {
-//   Button,
-//   useTheme,
-//   Dialog,
-//   DialogActions,
-//   DialogContent,
-//   DialogContentText,
-//   DialogTitle,
-//   useMediaQuery
-// } from "@material-ui/core";
+import {
+  Button,
+  useTheme,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  useMediaQuery
+} from "@material-ui/core";
 
-// export default function AdminModal(props) {
-//   // const [open, setOpen] = React.useState(false);
-//   const theme = useTheme();
-//   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+export default function AdminModal(props) {
+  // const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-//   // function handleClickOpen() {
-//   //   setOpen(true);
-//   // }
+  // function handleClickOpen() {
+  //   setOpen(true);
+  // }
 
-//   // function handleClose() {
-//   //   setOpen(false);
-//   // }
+  // function handleClose() {
+  //   setOpen(false);
+  // }
 
-//   return (
-//     <div>
-//       <Dialog
-//         fullScreen={fullScreen}
-//         open={open}
-//         onClose={handleClose}
-//         aria-labelledby="responsive-dialog-title"
-//       >
-//         <DialogTitle id="responsive-dialog-title">
-//           {"Use Google's location service?"}
-//         </DialogTitle>
-//         <DialogContent>
-//           <DialogContentText>
-//             Let Google help apps determine location. This means sending
-//             anonymous location data to Google, even when no apps are running.
-//           </DialogContentText>
-//         </DialogContent>
-//         <DialogActions>
-//           <Button onClick={handleClose} color="primary">
-//             Disagree
-//           </Button>
-//           <Button onClick={handleClose} color="primary" autoFocus>
-//             Agree
-//           </Button>
-//         </DialogActions>
-//       </Dialog>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <Dialog
+        fullScreen={fullScreen}
+        open={props.open}
+        onClose={props.handleClose}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogTitle id="responsive-dialog-title">
+          {props.modalHeader}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>{props.modalText}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              props.userAction();
+              props.handleClose();
+            }}
+            color="secondary"
+            variant="outlined"
+          >
+            Agree
+          </Button>
+          <Button
+            onClick={props.handleClose}
+            color="primary"
+            variant="outlined"
+          >
+            Disagree
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  );
+}

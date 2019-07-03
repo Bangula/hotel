@@ -7,9 +7,10 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple, grey } from "@material-ui/core/colors";
 import Dashboard from "./Dashboard";
 import Users from "./users/Users";
-import Gallery from "./Gallery";
+import Gallery from "./gallery/Gallery";
 import Newsletter from "./Newsletter";
 import Reviews from "./Reviews";
+import EditUser from "./users/EditUser";
 
 import {
   Avatar,
@@ -113,6 +114,7 @@ const Admin = props => {
   const [open, setOpen] = React.useState(true);
   const [openProfile, setOpenProfile] = React.useState(false);
   const [openUsers, setOpenUsers] = React.useState(false);
+  const [openGallery, setOpenGallery] = React.useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -218,18 +220,17 @@ const Admin = props => {
             {/* //////////////////////////// end dashboard ///////////////////////////// */}
 
             <Divider component="li" variant="middle" />
-            <NavLink to="/admin/users" activeClassName="admin-link">
-              <ListItem button onClick={() => setOpenUsers(!openUsers)}>
-                <ListItemIcon>
-                  <Icon
-                    className={clsx(classes.icon, "fas fa-users")}
-                    color="action"
-                  />
-                </ListItemIcon>
-                <ListItemText primary="Users " />
-                {openUsers ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-            </NavLink>
+
+            <ListItem button onClick={() => setOpenUsers(!openUsers)}>
+              <ListItemIcon>
+                <Icon
+                  className={clsx(classes.icon, "fas fa-users")}
+                  color="action"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Users " />
+              {openUsers ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
 
             <Divider component="li" variant="middle" />
 
@@ -245,16 +246,18 @@ const Admin = props => {
                     <ListItemText primary="Users" />
                   </ListItem>
                 </NavLink>
-                <ListItem button>
-                  <ListItemText primary="Edit User" />
-                </ListItem>
+                <NavLink to="/admin/users/edit" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="Edit User" />
+                  </ListItem>
+                </NavLink>
               </List>
             </Collapse>
 
             {/* end users  */}
 
             <NavLink to="/admin/gallery">
-              <ListItem button>
+              <ListItem button onClick={() => setOpenGallery(!openGallery)}>
                 <ListItemIcon>
                   <Icon
                     className={clsx(classes.icon, "far fa-images")}
@@ -262,8 +265,33 @@ const Admin = props => {
                   />
                 </ListItemIcon>
                 <ListItemText primary="Gallery" />
+                {openGallery ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
             </NavLink>
+
+            <Divider component="li" variant="middle" />
+
+            <Divider component="li" variant="middle" />
+
+            <Collapse
+              in={openGallery}
+              timeout="auto"
+              unmountOnExit
+              className={classes.nested}
+            >
+              <List component="div" className={classes.submenu}>
+                <NavLink to="#" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="All galleries" />
+                  </ListItem>
+                </NavLink>
+                <ListItem button>
+                  <ListItemText primary="Edit Gallery" />
+                </ListItem>
+              </List>
+            </Collapse>
+
+            {/* ////////////////////// end gallery ///////// */}
 
             <NavLink to="/admin/newsletter">
               <ListItem button>
@@ -306,14 +334,22 @@ const Admin = props => {
             [classes.contentShift]: open
           })}
         >
-          <div style={{ flex: 1 }}>
+          <div
+            style={{ flex: 1, flexDirection: "column", textAlign: "center" }}
+          >
             <Switch>
-              <Route path={`/admin/dashboard`} component={Dashboard} />
-              <Route path={`/admin/users`} component={Users} />
-              {/* <Route path={`/admin/users/edit`} component={EditUsers} /> */}
-              <Route path={`/admin/gallery`} component={Gallery} />
-              <Route path={`/admin/newsletter`} component={Newsletter} />
-              <Route path={`/admin/reviews`} component={Reviews} />
+              <Route exact path={`/admin/dashboard`} component={Dashboard} />
+              <Route exact path={`/admin/users`} component={Users} />
+              <Route exact path={`/admin/users/edit`} component={EditUser} />
+              <Route
+                exact
+                path={`/admin/users/edit/:userId`}
+                component={EditUser}
+              />
+
+              <Route exact path={`/admin/gallery`} component={Gallery} />
+              <Route exact path={`/admin/newsletter`} component={Newsletter} />
+              <Route exact path={`/admin/reviews`} component={Reviews} />
             </Switch>
           </div>
         </main>
