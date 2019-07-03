@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
+  useTheme,
   Button,
   Table,
   TableBody,
@@ -9,7 +10,13 @@ import {
   TableHead,
   TableRow,
   Paper,
-  CircularProgress
+  CircularProgress,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  useMediaQuery
 } from "@material-ui/core";
 
 import { getUsersPerPage, deleteUser } from "@endpoints/users";
@@ -18,6 +25,8 @@ import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 
+import Modal from "../Modal";
+
 const useStyles = makeStyles(theme => ({
   root: {
     backgroundColor: theme.palette.background.paper
@@ -25,6 +34,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function Users() {
+  const [openModal, setOpenModal] = React.useState(false);
+  function handleClickOpenModal() {
+    setOpenModal(true);
+  }
+
+  function handleCloseModal() {
+    setOpenModal(false);
+  }
+
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -46,10 +64,7 @@ function Users() {
   const deleteSingleUser = async userId => {
     const { data, error } = await deleteUser(userId);
     if (data) {
-      console.log("user deleted", data.data);
       getUsersPerPageHandle(currentPage);
-      // setUsers(data.data.data);
-      // setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
       console.log(error.response);
     }
@@ -106,7 +121,8 @@ function Users() {
                     <TableCell align="left">
                       {" "}
                       <Button
-                        onClick={() => deleteSingleUser(user.id)}
+                        // onClick={() => deleteSingleUser(user.id)}
+                        onClick={handleClickOpenModal}
                         variant="contained"
                         color="secondary"
                         className={classes.button}
