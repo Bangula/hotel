@@ -11,6 +11,7 @@ import Gallery from "./gallery/Gallery";
 import Newsletter from "./Newsletter";
 import Reviews from "./Reviews";
 import EditUser from "./users/EditUser";
+import RoomTypes from "./rooms/RoomTypes";
 
 import {
   Avatar,
@@ -21,8 +22,6 @@ import {
   List,
   Divider,
   Icon,
-  Paper,
-  CssBaseline,
   AppBar,
   Toolbar,
   Typography,
@@ -115,6 +114,7 @@ const Admin = props => {
   const [openProfile, setOpenProfile] = React.useState(false);
   const [openUsers, setOpenUsers] = React.useState(false);
   const [openGallery, setOpenGallery] = React.useState(false);
+  const [openRooms, setOpenRooms] = React.useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -256,6 +256,38 @@ const Admin = props => {
 
             {/* end users  */}
 
+            <ListItem button onClick={() => setOpenRooms(!openRooms)}>
+              <ListItemIcon>
+                <Icon
+                  className={clsx(classes.icon, "far fa-building")}
+                  color="action"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Rooms" />
+              {openRooms ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Divider component="li" variant="middle" />
+            <Collapse
+              in={openRooms}
+              timeout="auto"
+              unmountOnExit
+              className={classes.nested}
+            >
+              <List component="div" className={classes.submenu}>
+                <NavLink to="/admin/rooms" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="All Rooms" />
+                  </ListItem>
+                </NavLink>
+                <NavLink to="/admin/rooms/types" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="Room Types" />
+                  </ListItem>
+                </NavLink>
+              </List>
+            </Collapse>
+            {/* ////////////////////// end ROOMS ///////////////////////////*/}
+
             <NavLink to="/admin/gallery">
               <ListItem button onClick={() => setOpenGallery(!openGallery)}>
                 <ListItemIcon>
@@ -268,8 +300,6 @@ const Admin = props => {
                 {openGallery ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
             </NavLink>
-
-            <Divider component="li" variant="middle" />
 
             <Divider component="li" variant="middle" />
 
@@ -347,6 +377,7 @@ const Admin = props => {
                 component={EditUser}
               />
 
+              <Route exact path={`/admin/rooms/types`} component={RoomTypes} />
               <Route exact path={`/admin/gallery`} component={Gallery} />
               <Route exact path={`/admin/newsletter`} component={Newsletter} />
               <Route exact path={`/admin/reviews`} component={Reviews} />
