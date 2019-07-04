@@ -15,7 +15,7 @@ const Cart = () => {
         Cart
       </h1>
 
-      <div />
+      <div>CART</div>
     </>
   );
 };
