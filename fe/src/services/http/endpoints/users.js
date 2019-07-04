@@ -14,6 +14,11 @@ export const getLogedUser = () => {
 };
 
 //"http://api.quantox-hotel.local/v1/users?page=2"
+//"http://api.quantox-hotel.loc/v1/users/:id"
+
+export const getUser = userId => {
+  return toResponse(http.get(`/users/${userId}`));
+};
 
 export const getUsers = () => {
   return toResponse(http.get("/users"));

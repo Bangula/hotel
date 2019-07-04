@@ -10,13 +10,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  useMediaQuery
+  CircularProgress
 } from "@material-ui/core";
 
 import { getUsersPerPage, deleteUser } from "@endpoints/users";
@@ -35,16 +29,17 @@ const useStyles = makeStyles(theme => ({
 
 function Users() {
   const [openModal, setOpenModal] = React.useState(false);
-  function handleClickOpenModal() {
+  const [modalUser, setModalUser] = React.useState("");
+
+  function handleClickOpenModal(userId) {
+    setModalUser(userId);
     setOpenModal(true);
   }
 
   function handleCloseModal() {
     setOpenModal(false);
   }
-
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
 
   const [currentPage, setCurrentPage] = useState(1); //for api
   const [totalPages, setTotalPages] = useState(1);
@@ -65,6 +60,7 @@ function Users() {
     const { data, error } = await deleteUser(userId);
     if (data) {
       getUsersPerPageHandle(currentPage);
+      handleCloseModal();
     } else if (error) {
       console.log(error.response);
     }
@@ -82,6 +78,14 @@ function Users() {
 
   return (
     <div className="text-center">
+      <Modal
+        open={openModal}
+        handleClose={handleCloseModal}
+        userAction={() => deleteSingleUser(modalUser)}
+        modalHeader={"Delete User"}
+        modalText={"Are you shure you want to delete this user?"}
+      />
+      ;
       {users.length ? (
         <>
           <Paper className={classes.root}>
@@ -107,7 +111,7 @@ function Users() {
                     <TableCell align="left">{user.email}</TableCell>
                     <TableCell align="left">
                       {" "}
-                      <Link to={`/admin/edit-user/${user.id}`}>
+                      <Link to={`/admin/users/edit/${user.id}`}>
                         <Button
                           variant="contained"
                           color="primary"
@@ -121,8 +125,7 @@ function Users() {
                     <TableCell align="left">
                       {" "}
                       <Button
-                        // onClick={() => deleteSingleUser(user.id)}
-                        onClick={handleClickOpenModal}
+                        onClick={() => handleClickOpenModal(user.id)}
                         variant="contained"
                         color="secondary"
                         className={classes.button}

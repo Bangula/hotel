@@ -19,6 +19,7 @@
     "rc-texty": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-dropzone": "^10.1.5",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-s-alert": "^1.4.1",
