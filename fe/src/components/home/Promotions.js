@@ -1,5 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
+import Alert from "react-s-alert";
 
 import { getPromotions } from "../../services/http/endpoints/promotions";
 
@@ -39,7 +40,7 @@ const Promotions = () => {
     speed: 800,
     slidesToShow: 3,
     slidesToScroll: 3,
-    autoplay: false,
+    autoplay: true,
     appendDots: dots => (
       <div
         style={{
@@ -61,6 +62,7 @@ const Promotions = () => {
       : null;
   return (
     <div className="promotionSlider w-full mt-32">
+      <Alert />
       <h1 className="text-center  text-5xl text-gray-700  z-50 home-header italic">
         Promotions
       </h1>
@@ -72,6 +74,7 @@ const Promotions = () => {
           modalIsOpen={modalIsOpen}
           handleCloseModal={handleCloseModal}
           modalId={modalId}
+          Alert={Alert}
         />
       ) : null}
     </div>

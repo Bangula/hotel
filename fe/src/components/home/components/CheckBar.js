@@ -2,6 +2,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { Link } from "react-router-dom";
 
 const CheckBar = () => {
   const [state, setState] = React.useState({
@@ -15,7 +16,7 @@ const CheckBar = () => {
 
   return (
     <div
-      className="bg-white absolute shadow-lg p-8  w-2/3 text-center"
+      className="bg-white absolute shadow-lg py-6  w-2/3 text-center"
       style={{
         height: "100px",
         bottom: "-70px",
@@ -25,7 +26,7 @@ const CheckBar = () => {
         margin: "0 auto"
       }}
     >
-      <form onSubmit={handleSubmit}>
+      <form className="" onSubmit={handleSubmit}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <div className="flex justify-around">
             <DatePicker
@@ -38,9 +39,18 @@ const CheckBar = () => {
               label="Check Out"
               onChange={value => setState({ ...state, checkOut: value })}
             />
-            <Button type="submit" variant="contained">
-              Search
-            </Button>
+            <Link
+              to={{
+                pathname: "/booking",
+                state
+              }}
+              className="self-center px-4 py-2 border border-gray-400 rounded-lg"
+              style={{
+                lineHeight: "18px"
+              }}
+            >
+              SEARCH
+            </Link>
           </div>
         </MuiPickersUtilsProvider>
       </form>

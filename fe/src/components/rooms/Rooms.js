@@ -1,111 +1,44 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { getAllRooms } from "../../services/http/endpoints/rooms";
 
-import room1 from "@assets/images/rooms/room1.jpg";
-
-import { makeStyles } from "@material-ui/core/styles";
-
-import {
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  Fab
-} from "@material-ui/core";
-
-const useStyles = makeStyles({
-  card: {
-    maxWidth: 370
-  },
-  media: {
-    height: 210
-  },
-  fab: {
-    left: "50%",
-    transform: "translate(-50%,-50%)"
-  }
-});
+// Components
+import Room from "./components/Room";
 
 const Rooms = () => {
-  const classes = useStyles();
+  const [allRooms, setAllRooms] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    const { data, error } = await getAllRooms();
+
+    if (data) {
+      setAllRooms(data.data.data);
+    } else if (error) {
+      console.log(error);
+    }
+  }
+
+  const roomList =
+    allRooms.length > 0
+      ? allRooms.map(item => {
+          return <Room data={item} key={item.id} />;
+        })
+      : null;
+
   return (
     <>
       <div className="header-image" />
+      <h1 className="home-header text-center text-5xl text-gray-600 z-50">
+        <i className="fas fa-bed text-2xl" />
+        <br />
+        Rooms
+      </h1>
 
-      <div className="container mx-auto flex flex-wrap">
-        <div className="w-2/3 flex flex-wrap justify-around">
-          <Card className={`${classes.card} hover:shadow-2xl`}>
-            <CardMedia
-              className={`${classes.media} relative `}
-              image={room1}
-              title="Room 1"
-            />
-
-            <Fab
-              variant="extended"
-              aria-label="Add"
-              color="primary"
-              className={`${classes.fab} absolute mx-auto p-6`}
-            >
-              <Link to="# "> $70/Night</Link>
-            </Fab>
-
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                align="center"
-              >
-                Deluxe Black Room
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                A spacious deluxe room which has a double bed and a single bed.
-                Ideal for any...
-              </Typography>
-            </CardContent>
-
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-
-          <Card className={classes.card}>
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image={room1}
-                title="Room 1"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  Lizard
-                </Typography>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Lizards are a widespread group of squamate reptiles, with over
-                  6,000 species, ranging across all continents except Antarctica
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary">
-                Share
-              </Button>
-              <Button size="small" color="primary">
-                Learn More
-              </Button>
-            </CardActions>
-          </Card>
-        </div>
-        <div className="w-1/3">2</div>
+      <div className="container mx-auto lg:flex flex-wrap mt-16 pb-32">
+        {roomList}
       </div>
     </>
   );

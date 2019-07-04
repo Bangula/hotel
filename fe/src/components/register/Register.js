@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
 const Register = props => {
   // const responseErrors = useSelector(state => state.user.responseErrors);
   const dispatch = useDispatch();
+  const errors = useSelector(state => state.user.serverErrors);
 
   const initialValues = {
     first_name: "",
@@ -102,11 +103,14 @@ const Register = props => {
         <p className="lead">
           <i className="fas fa-user" /> Sign into Your Account
         </p>
+        {errors.register ? (
+          <h1 className="py-4 text-red-800 text-center">{errors.register}</h1>
+        ) : null}
 
         <Formik
           onSubmit={async values => {
             console.log("Register", values);
-            dispatch(register(values));
+            dispatch(register(values, props.history));
           }}
           initialValues={initialValues}
           validationSchema={registerSchema}

@@ -15,7 +15,7 @@ import { getAllRooms } from "../../services/http/endpoints/rooms";
 // Components
 import RoomList from "./components/RommList";
 
-const Booking = () => {
+const Booking = props => {
   const [checkIn, setCheckIn] = useState(new Date());
   const [checkOut, setCheckOut] = useState(new Date());
   const [roomType, setRoomType] = useState(1);
@@ -71,9 +71,7 @@ const Booking = () => {
 
                 <div>
                   <FormControl>
-                    <InputLabel htmlFor="age-simple">
-                      Number of rooms
-                    </InputLabel>
+                    <InputLabel htmlFor="age-simple">Number of beds</InputLabel>
                     <Select
                       style={{ width: "200px" }}
                       value={roomType}
@@ -83,9 +81,9 @@ const Booking = () => {
                         id: "age-simple"
                       }}
                     >
-                      <MenuItem value={1}>One Room</MenuItem>
-                      <MenuItem value={2}>Two Rooms</MenuItem>
-                      <MenuItem value={3}>Three Rooms</MenuItem>
+                      <MenuItem value={1}>One bed</MenuItem>
+                      <MenuItem value={2}>Two beds</MenuItem>
+                      <MenuItem value={3}>Three beds</MenuItem>
                     </Select>
                   </FormControl>
                 </div>

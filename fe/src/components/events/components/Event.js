@@ -49,7 +49,10 @@ const Event = ({ event, join }) => {
   const classes = useStyles();
 
   const handleSuccess = () => {
-    Alert.success("Joind to event!");
+    Alert.success(<i className="fas fa-check" />, {
+      effect: "slide",
+      timeout: 2000
+    });
   };
   const handleError = () => {
     Alert.error("Error!");

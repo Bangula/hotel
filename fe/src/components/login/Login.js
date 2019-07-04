@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
 const Login = props => {
   // const responseErrors = useSelector(state => state.user.responseErrors);
   // const dispatch = useDispatch();
+
+  const errors = useSelector(state => state.user.serverErrors);
+
   const dispatch = useDispatch();
   const initialValues = {
     email: "",
@@ -37,7 +40,7 @@ const Login = props => {
       .max(50, "Too LONG!.")
   });
   const [invalidEmail, setInvalidEmail] = useState("");
-  const [invalidPassword, setInvalidPassword] = useState("");
+  const [invalidPassword, setInvalidPassword] = useState();
 
   // useEffect(() => {
   //   if (Object.keys(responseErrors).length) {
@@ -59,6 +62,9 @@ const Login = props => {
         <p className="lead">
           <i className="fas fa-user" /> Sign into Your Account
         </p>
+        {errors.login ? (
+          <h1 className="py-4 text-red-800 text-center">{errors.login}</h1>
+        ) : null}
 
         <Formik
           onSubmit={async values => {
@@ -66,7 +72,7 @@ const Login = props => {
               await dispatch(login(values, props.history));
               await dispatch(getProfile());
             } catch (err) {
-              console.log(err);
+              console.log(err.response);
             }
           }}
           initialValues={initialValues}

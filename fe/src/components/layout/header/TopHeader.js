@@ -6,6 +6,24 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
+import IconButton from "@material-ui/core/IconButton";
+import Badge from "@material-ui/core/Badge";
+import { withStyles } from "@material-ui/core/styles";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+
+const StyledBadge = withStyles(theme => ({
+  badge: {
+    top: "50%",
+    right: -3,
+    // The border color match the background color.
+    border: `2px solid ${
+      theme.palette.type === "light"
+        ? theme.palette.grey[200]
+        : theme.palette.grey[900]
+    }`
+  }
+}))(Badge);
+
 const useStyles = makeStyles(theme => ({
   button: {
     color: "#fff",
@@ -15,7 +33,13 @@ const useStyles = makeStyles(theme => ({
 
 const TopHeader = () => {
   const user = useSelector(state => state.user);
-  console.log(user);
+
+  const promotions = useSelector(state => state.cart.promotions);
+  const rooms = useSelector(state => state.cart.rooms);
+
+  let cartItems = promotions.length + rooms.length;
+  console.log(cartItems);
+
   const dispatch = useDispatch();
   const classes = useStyles();
 
@@ -85,7 +109,15 @@ const TopHeader = () => {
         )}
 
         <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
-          <i className="fas fa-shopping-cart" />
+          <IconButton
+            aria-label="Cart"
+            className="text-white"
+            style={{ color: "#fff" }}
+          >
+            <StyledBadge badgeContent={cartItems} color="primary">
+              <ShoppingCartIcon />
+            </StyledBadge>
+          </IconButton>
         </NavLink>
       </div>
     </div>
