@@ -19,6 +19,7 @@ import Cart from "@components/cart/Cart";
 import Admin from "@components/admin/Admin";
 import Dashboard from "@components/admin/Dashboard";
 import UserProfile from "@components/user/UserProfile";
+import Footer from "./components/layout/footer/Footer";
 
 function App(props) {
   return (
@@ -40,6 +41,7 @@ function App(props) {
           <Route path="/admin" component={Admin} />
           <Route path="/user" component={UserProfile} />
         </Switch>
+        <Footer />
       </div>
     </BrowserRouter>
   );
