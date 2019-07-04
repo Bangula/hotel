@@ -43,6 +43,7 @@ export default function AdminModal(props) {
             onClick={() => {
               props.userAction();
               props.handleClose();
+              if (props.additionAction) props.additionAction();
             }}
             color="secondary"
             variant="outlined"

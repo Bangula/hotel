@@ -53,6 +53,7 @@ function RoomTypes() {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalType, setModalType] = React.useState(""); //stores data of current type id for modal
   const [openList, setOpenList] = React.useState(false);
+  const [typeForEdit, setTypeForEdit] = React.useState({});
 
   function handleClickOpenModal(id) {
     setModalType(id);
@@ -122,7 +123,11 @@ function RoomTypes() {
         </ListItem>
         <Collapse in={openList} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <EditRoomType type={types[0]} />
+            <EditRoomType
+              type={typeForEdit}
+              setTypeForEdit={setTypeForEdit}
+              getAllRoomTypes={() => getAllRoomTypes(currentPage)}
+            />
           </List>
         </Collapse>
       </List>
@@ -135,6 +140,7 @@ function RoomTypes() {
                 <TableRow>
                   <TableCell>Type Name</TableCell>
                   <TableCell align="left">Bed Count</TableCell>
+                  <TableCell align="left">Maximum Persons</TableCell>
                   <TableCell align="left">Price Adult</TableCell>
                   <TableCell align="left">Price Child</TableCell>
                   <TableCell size="small" align="left">
@@ -148,12 +154,17 @@ function RoomTypes() {
                   <TableRow key={type.id}>
                     <TableCell align="left">{type.name}</TableCell>
                     <TableCell align="left">{type.bed_count}</TableCell>
+                    <TableCell align="left">{type.max_persons}</TableCell>
                     <TableCell align="left">{type.price_adult}</TableCell>
                     <TableCell align="left">{type.price_child}</TableCell>
                     <TableCell align="left">
                       {" "}
                       <Link to="#">
                         <Button
+                          onClick={() => {
+                            setOpenList(true);
+                            setTypeForEdit(type);
+                          }}
                           variant="contained"
                           color="primary"
                           className={classes.button}

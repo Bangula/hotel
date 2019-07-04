@@ -7,7 +7,10 @@ export const getAllRooms = () => {
 
 // ROOM TYPES
 export const createRoomType = credentials => {
-  return toResponse(http.get(`/roomtypes/${credentials}`));
+  return toResponse(http.post(`/roomtypes`, credentials));
+};
+export const updateRoomType = (credentials, id) => {
+  return toResponse(http.patch(`/roomtypes/${id}`, credentials));
 };
 export const getRoomTypes = roomTypePage => {
   return toResponse(http.get(`/roomtypes?page=${roomTypePage}`));

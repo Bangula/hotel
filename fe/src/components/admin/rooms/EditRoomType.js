@@ -11,30 +11,31 @@ import {
 } from "@material-ui/core";
 import { getUser } from "@endpoints/users";
 import { useSelector, useDispatch } from "react-redux";
+import { createRoomType, updateRoomType } from "@endpoints/rooms";
+
 import Modal from "../Modal";
 //initial values formik
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 const editUserSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "Minimum number of characters is 2")
-    .max(50)
+    .max(5000)
     .required("Name is required"),
   bed_count: Yup.number()
     .min(1, "Minimum number of characters is 1")
-    .max(50)
+    .max(5000)
     .required("Bed count is required"),
   max_persons: Yup.number()
     .min(1, "Minimum number of characters is 1")
-    .max(50)
+    .max(5000)
     .required("Maximum number of persons is required"),
   price_adult: Yup.number()
     .min(1, "Minimum number of characters is 1")
-    .max(50)
+    .max(5000)
     .required("Price for Adults is required"),
   price_child: Yup.number()
     .min(1, "Minimum number of characters is 1")
-    .max(50)
+    .max(5000)
     .required("Price for Children is required")
 });
 const useStyles = makeStyles(theme => ({
@@ -44,18 +45,19 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const EditRoomType = props => {
+const EditRoomType = ({ type, ...props }) => {
   const dispatch = useDispatch();
-  const [type, setType] = useState({});
-  const [invalidEmail, setInvalidEmail] = useState("");
-  const [invalidFirstName, setInvalidFirstName] = useState("");
-  const [invalidLastName, setInvalidLastName] = useState("");
-  const [invalidPhone, setInvalidPhone] = useState("");
-  const [invalidCity, setInvalidCity] = useState("");
-  const [invalidAddress, setInvalidAddress] = useState("");
+  //   const [type, setType] = useState({});
+
+  const [invalidName, setInvalidName] = useState("");
+  const [invalidBedCount, setInvalidBedCount] = useState("");
+  const [invalidMaxPersons, setInvalidMaxPersons] = useState("");
+  const [invalidPriceAdult, setInvalidPriceAdult] = useState("");
+  const [invalidPriceChild, setInvalidPriceChild] = useState("");
 
   const [openModal, setOpenModal] = React.useState(false);
-  const [modalUser, setModalUser] = React.useState({});
+  const [modalInfo1, setModalInfo1] = React.useState();
+  const [modalInfo2, setModalInfo2] = React.useState();
 
   function handleClickOpenModal(userId) {
     setOpenModal(true);
@@ -65,7 +67,33 @@ const EditRoomType = props => {
     setOpenModal(false);
   }
 
+  const createType = async credentials => {
+    const { data, error } = await createRoomType(credentials);
+    if (data) {
+      props.getAllRoomTypes();
+      console.log("type created", data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  const updateType = async (credentials, id) => {
+    const { data, error } = await updateRoomType(credentials, id);
+    if (data) {
+      props.getAllRoomTypes();
+      console.log("type updated", data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+
   //component only recives props
+  const resetValues = {
+    name: "",
+    bed_count: "",
+    max_persons: "",
+    price_adult: "",
+    price_child: ""
+  };
 
   const initialValues = {
     name: type.name ? type.name : "",
@@ -75,35 +103,26 @@ const EditRoomType = props => {
     price_child: type.price_child ? type.price_child : ""
   };
 
-  //   const getUserById = async userId => {
-  //     const { data, error } = await getUser(userId);
-  //     if (data) {
-  //       console.log("single user fetched", data.data.data);
-  //       setUser(data.data.data);
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     //props.match.params.userId
-  //     if (Object.keys(props.match.params).length && props.match.params.userId)
-  //       getUserById(props.match.params.userId);
-  //   }, []);
+  console.log("edit types props", type);
 
   return (
     <>
-      {Object.keys(props.type).length ? (
+      {Object.keys(type).length || true ? (
         <Container maxWidth="md">
-          <h1 className="large text-primary">Edit Your Profile</h1>
+          <h1 className="large text-primary">Add or edit room type</h1>
           <Formik
             enableReinitialize
-            onSubmit={async values => {
-              console.log("Edit user", values);
-              if (Object.keys(values).length) {
+            onSubmit={(values, actions) => {
+              console.log("Edit or create type", values);
+
+              if (Object.keys(type).length && type.id) {
                 handleClickOpenModal();
-                setModalUser(values);
+                setModalInfo1(values);
+                setModalInfo2(type.id);
+              } else {
+                createType(values);
+                actions.resetForm();
               }
-              console.log(typeof values);
-              // dispatch(register(values));
             }}
             initialValues={initialValues}
             validationSchema={editUserSchema}
@@ -115,6 +134,7 @@ const EditRoomType = props => {
               errors,
               touched,
               handleSubmit,
+              resetForm,
               ...formProps
             }) => {
               return (
@@ -122,78 +142,35 @@ const EditRoomType = props => {
                   <Modal
                     open={openModal}
                     handleClose={handleCloseModal}
-                    userAction={() => console.log("user iz modala ", modalUser)}
-                    modalHeader={"Update user"}
-                    modalText={
-                      "Are you shure you want to update this user's info?"
-                    }
+                    // props.setTypeForEdit();
+                    userAction={() => {
+                      return Object.keys(type).length && type.id
+                        ? updateType(modalInfo1, modalInfo2)
+                        : null;
+                    }}
+                    additionAction={() => props.setTypeForEdit({})} //da resetuje formu
+                    modalHeader={"Update type"}
+                    modalText={"Are you shure you want to update this type?"}
                   />
                   <TextField
                     margin="normal"
                     type="text"
                     fullWidth
-                    label="First Name"
-                    name="first_name"
+                    label=" Name"
+                    name="name"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.first_name}
+                    value={values.name}
                     error={
-                      (errors.first_name && touched.first_name) ||
-                      invalidFirstName
+                      (errors.name && touched.name) || invalidName
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.first_name && touched.first_name) ||
-                  invalidFirstName ? (
+                  {(errors.name && touched.name) || invalidName ? (
                     <span className="text-danger">
-                      {errors.first_name || invalidFirstName}
-                    </span>
-                  ) : null}
-
-                  <TextField
-                    margin="normal"
-                    type="text"
-                    fullWidth
-                    label="Last Name"
-                    name="last_name"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.last_name}
-                    error={
-                      (errors.last_name && touched.last_name) || invalidLastName
-                        ? true
-                        : false
-                    }
-                  />
-
-                  {(errors.last_name && touched.last_name) ||
-                  invalidLastName ? (
-                    <span className="text-danger">
-                      {errors.last_name || invalidLastName}
-                    </span>
-                  ) : null}
-
-                  <TextField
-                    margin="normal"
-                    type="email"
-                    fullWidth
-                    label="Email Address"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    error={
-                      (errors.email && touched.email) || invalidEmail
-                        ? true
-                        : false
-                    }
-                  />
-
-                  {(errors.email && touched.email) || invalidEmail ? (
-                    <span className="text-danger">
-                      {errors.email || invalidEmail}
+                      {errors.name || invalidName}
                     </span>
                   ) : null}
 
@@ -201,23 +178,22 @@ const EditRoomType = props => {
                     margin="normal"
                     type="text"
                     fullWidth
-                    label="Phone Number"
-                    name="phone_number"
+                    label="Bed Count"
+                    name="bed_count"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.phone_number}
+                    value={values.bed_count}
                     error={
-                      (errors.phone_number && touched.phone_number) ||
-                      invalidPhone
+                      (errors.bed_count && touched.bed_count) || invalidBedCount
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.phone_number && touched.phone_number) ||
-                  invalidPhone ? (
+                  {(errors.bed_count && touched.bed_count) ||
+                  invalidBedCount ? (
                     <span className="text-danger">
-                      {errors.phone_number || invalidPhone}
+                      {errors.bed_count || invalidBedCount}
                     </span>
                   ) : null}
 
@@ -225,21 +201,23 @@ const EditRoomType = props => {
                     margin="normal"
                     type="text"
                     fullWidth
-                    label="City"
-                    name="city"
+                    label="Maximum Persons"
+                    name="max_persons"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.city}
+                    value={values.max_persons}
                     error={
-                      (errors.city && touched.city) || invalidCity
+                      (errors.max_persons && touched.max_persons) ||
+                      invalidMaxPersons
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.city && touched.city) || invalidCity ? (
+                  {(errors.max_persons && touched.max_persons) ||
+                  invalidMaxPersons ? (
                     <span className="text-danger">
-                      {errors.city || invalidCity}
+                      {errors.max_persons || invalidMaxPersons}
                     </span>
                   ) : null}
 
@@ -247,23 +225,50 @@ const EditRoomType = props => {
                     margin="normal"
                     type="text"
                     fullWidth
-                    label="Address"
-                    name="address"
+                    label="Price for Adults"
+                    name="price_adult"
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.address}
+                    value={values.price_adult}
                     error={
-                      (errors.address && touched.address) || invalidAddress
+                      (errors.price_adult && touched.price_adult) ||
+                      invalidPriceAdult
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.address && touched.address) || invalidAddress ? (
+                  {(errors.price_adult && touched.price_adult) ||
+                  invalidPriceAdult ? (
                     <span className="text-danger">
-                      {errors.address || invalidAddress}
+                      {errors.price_adult || invalidPriceAdult}
                     </span>
                   ) : null}
+
+                  <TextField
+                    margin="normal"
+                    type="text"
+                    fullWidth
+                    label="Price for Children"
+                    name="price_child"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.price_child}
+                    error={
+                      (errors.price_child && touched.price_child) ||
+                      invalidPriceChild
+                        ? true
+                        : false
+                    }
+                  />
+
+                  {(errors.price_child && touched.price_child) ||
+                  invalidPriceChild ? (
+                    <span className="text-danger">
+                      {errors.price_child || invalidPriceChild}
+                    </span>
+                  ) : null}
+
                   {/* OVDE MODAL */}
                   <Button
                     type="submit"
