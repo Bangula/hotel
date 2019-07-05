@@ -13,7 +13,7 @@ const ContactUs = () => {
       <div className="header-image" />
       <div>
         <h1 className="home-header text-center text-5xl text-gray-600 z-50">
-          <i className="fas fa-signature" />
+          <i className="fas fa-envelope" />
           <br />
           Contact Us
         </h1>

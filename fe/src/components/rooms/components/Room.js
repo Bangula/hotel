@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Room = ({ data }) => {
+const Room = ({ data, fullWidth, close }) => {
   const [wifi, setWifi] = useState(true);
   const [tv, setTv] = useState(true);
   const [ac, setAc] = useState(false);
@@ -82,10 +82,15 @@ const Room = ({ data }) => {
       timeout: 2000
     });
     console.log(room);
+    if (close) close();
   };
 
   return (
-    <div className="room-item w-full md:w-6/12 justify-between px-4 mt-16">
+    <div
+      className={`${
+        fullWidth ? "w-full" : "md:w-6/12"
+      } room-item w-full  justify-between px-4 mt-16`}
+    >
       <Card className={`${classes.card} hover:shadow-2xl`}>
         <CardMedia
           className={`${classes.media} relative `}
@@ -104,7 +109,7 @@ const Room = ({ data }) => {
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2" align="center">
-            Deluxe Black Room
+            {data.room_number}
           </Typography>
           <div>
             <p className="text-center italic mt-4 text-gray-600 text-xl">
@@ -275,14 +280,34 @@ const Room = ({ data }) => {
             </div>
           </div>
           <div className="mt-8">
-            <Button
-              variant="contained"
-              color="primary"
-              fullWidth
-              onClick={handleSubmit}
-            >
-              ADD TO CART
-            </Button>
+            {close ? (
+              <div className="flex flex-end">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={close}
+                  style={{ marginRight: "10px" }}
+                >
+                  CLOSE
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                >
+                  ADD TO CART
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleSubmit}
+              >
+                ADD TO CART
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>
