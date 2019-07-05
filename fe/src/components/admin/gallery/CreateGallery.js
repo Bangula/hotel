@@ -51,7 +51,7 @@ const Gallery = props => {
       <div
         {...getRootProps({
           className:
-            "h-24 bg-gray-400 mb-8 border border-red-900 border-dashed rounded"
+            "h-24 bg-gray-200 mb-8 border-4 border-gray-400 border-dashed rounded "
         })}
       >
         <input {...getInputProps()} className="" />

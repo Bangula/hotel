@@ -17,6 +17,9 @@ import RoomTypes from "./rooms/RoomTypes";
 import CreateOrEditRoom from "./rooms/CreateOrEditRoom";
 import Facilities from "./rooms/Facilities";
 
+import Promotions from "./promotions/Promotions";
+import CreatePromotions from "./promotions/CreatePromotions";
+
 import {
   Avatar,
   Collapse,
@@ -116,6 +119,7 @@ const Admin = props => {
   const [openUsers, setOpenUsers] = React.useState(false);
   const [openGallery, setOpenGallery] = React.useState(false);
   const [openRooms, setOpenRooms] = React.useState(false);
+  const [openPromotions, setOpenPromotions] = React.useState(false);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -302,18 +306,60 @@ const Admin = props => {
             </Collapse>
             {/* ////////////////////// end ROOMS ///////////////////////////*/}
 
-            <NavLink to="/admin/gallery">
-              <ListItem button onClick={() => setOpenGallery(!openGallery)}>
-                <ListItemIcon>
-                  <Icon
-                    className={clsx(classes.icon, "far fa-images")}
-                    color="action"
-                  />
-                </ListItemIcon>
-                <ListItemText primary="Gallery" />
-                {openGallery ? <ExpandLess /> : <ExpandMore />}
-              </ListItem>
-            </NavLink>
+            <ListItem button onClick={() => setOpenPromotions(!openPromotions)}>
+              <ListItemIcon>
+                <Icon
+                  className={clsx(classes.icon, "far fa-building")}
+                  color="action"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Promotions" />
+              {openRooms ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
+            <Divider component="li" variant="middle" />
+            <Collapse
+              in={openPromotions}
+              timeout="auto"
+              unmountOnExit
+              className={classes.nested}
+            >
+              <List component="div" className={classes.submenu}>
+                <NavLink to="/admin/promotions" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="Promotions" />
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to="/admin/promotions/create"
+                  activeClassName="admin-link"
+                >
+                  <ListItem button>
+                    <ListItemText primary="Create Room" />
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to="/admin/promotions/edit"
+                  activeClassName="admin-link"
+                >
+                  <ListItem button>
+                    <ListItemText primary="Edit Promotions" />
+                  </ListItem>
+                </NavLink>
+              </List>
+            </Collapse>
+
+            {/* //////////////////////// END PROMOTIONS//////////////////// */}
+
+            <ListItem button onClick={() => setOpenGallery(!openGallery)}>
+              <ListItemIcon>
+                <Icon
+                  className={clsx(classes.icon, "far fa-images")}
+                  color="action"
+                />
+              </ListItemIcon>
+              <ListItemText primary="Gallery" />
+              {openGallery ? <ExpandLess /> : <ExpandMore />}
+            </ListItem>
 
             <Divider component="li" variant="middle" />
 
@@ -324,11 +370,12 @@ const Admin = props => {
               className={classes.nested}
             >
               <List component="div" className={classes.submenu}>
-                <NavLink to="#" activeClassName="admin-link">
+                <NavLink to="/admin/gallery" activeClassName="admin-link">
                   <ListItem button>
                     <ListItemText primary="All galleries" />
                   </ListItem>
                 </NavLink>
+
                 <NavLink
                   to="/admin/gallery/create"
                   activeClassName="admin-link"
@@ -337,6 +384,7 @@ const Admin = props => {
                     <ListItemText primary="Create Gallery" />
                   </ListItem>
                 </NavLink>
+
                 <ListItem button>
                   <ListItemText primary="Edit Gallery" />
                 </ListItem>
@@ -368,7 +416,7 @@ const Admin = props => {
                 <ListItemText primary="Reviews" />
               </ListItem>
             </NavLink>
-
+            {/*  */}
             <ListItem button>
               <ListItemIcon>
                 <Icon
@@ -419,6 +467,18 @@ const Admin = props => {
               />
               <Route exact path={`/admin/newsletter`} component={Newsletter} />
               <Route exact path={`/admin/reviews`} component={Reviews} />
+
+              <Route exact path={`/admin/promotions`} component={Promotions} />
+              <Route
+                exact
+                path={`/admin/promotions/create`}
+                component={Promotions}
+              />
+              <Route
+                exact
+                path={`/admin/promotions/edit`}
+                component={Promotions}
+              />
             </Switch>
           </div>
         </main>
