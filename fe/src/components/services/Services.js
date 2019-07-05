@@ -8,7 +8,12 @@ const Services = () => {
   return (
     <>
       <div className="header-image" />
-      <div className="container mx-auto flex flex-wrap ">
+      <h1 className="home-header text-center text-5xl text-gray-600 z-50">
+        <i className="fas fa-concierge-bell" />
+        <br />
+        Services
+      </h1>
+      <div className="container mx-auto flex flex-wrap mt-16 ">
         <div className="w-1/2 ring-image">
           <img src={ringImg} alt="ring image" className="m-auto pt-6 " />
         </div>

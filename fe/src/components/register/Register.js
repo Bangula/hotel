@@ -98,11 +98,11 @@ const Register = props => {
   return (
     <>
       <div className="header-image" />
+      <h1 className="home-header text-center text-2xl text-gray-600 z-50 mb-16">
+        <i className="fas fa-user mr-4" />
+        Create new account
+      </h1>
       <Container maxWidth="md">
-        <h1 className="large text-primary">Sign In</h1>
-        <p className="lead">
-          <i className="fas fa-user" /> Sign into Your Account
-        </p>
         {errors.register ? (
           <h1 className="py-4 text-red-800 text-center">{errors.register}</h1>
         ) : null}
@@ -328,6 +328,7 @@ const Register = props => {
           </Link>
         </p>
       </Container>
+      <div className="w-full h-32" />
     </>
   );
 };

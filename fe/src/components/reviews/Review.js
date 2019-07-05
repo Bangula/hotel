@@ -96,7 +96,7 @@ const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
 
       <CardContent className="flex justify-between">
         <Typography variant="h5" component="h2" align="left">
-          Review Text :
+          Comment :
         </Typography>
         <Typography
           variant="body2"

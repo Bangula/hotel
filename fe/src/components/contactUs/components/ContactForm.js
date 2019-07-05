@@ -36,14 +36,16 @@ const ContactForm = () => {
           className={classes.textField}
           margin="normal"
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          className="mt-4"
-        >
-          Send
-        </Button>
+        <div className="mt-4 flex justify-end">
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            className="mt-4"
+          >
+            Send
+          </Button>
+        </div>
       </form>
     </div>
   );
