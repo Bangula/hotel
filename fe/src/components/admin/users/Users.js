@@ -138,16 +138,18 @@ function Users() {
               </TableBody>
             </Table>
           </Paper>
-          <ThemeProvider>
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onChange={currentPage => {
-                console.log("current page", currentPage);
-                return setCurrentPage(currentPage);
-              }}
-            />
-          </ThemeProvider>{" "}
+          {totalPages > 1 ? (
+            <ThemeProvider>
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onChange={currentPage => {
+                  console.log("current page", currentPage);
+                  return setCurrentPage(currentPage);
+                }}
+              />
+            </ThemeProvider>
+          ) : null}
         </>
       ) : (
         <CircularProgress />

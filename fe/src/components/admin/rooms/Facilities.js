@@ -18,7 +18,11 @@ import {
   List
 } from "@material-ui/core";
 
-import { getRoomTypes, deleteRoomType, getAllRooms } from "@endpoints/rooms";
+import {
+  getFacilities,
+  deleteFacilitiy,
+  createRoomType
+} from "@endpoints/rooms";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
@@ -34,7 +38,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StarBorder from "@material-ui/icons/StarBorder";
-import EditRoomType from "./EditRoomType";
+import CreateOrEditFacilities from "./CreateOrEditFacilities";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,19 +48,20 @@ const useStyles = makeStyles(theme => ({
 
 //DISABLE ON CLICK RIPPLE
 
-function Rooms() {
+function Facilities() {
   const classes = useStyles();
 
   const [currentPage, setCurrentPage] = useState(1); //for api
   const [totalPages, setTotalPages] = useState(1);
-  const [types, setTypes] = useState([]);
+
+  const [facilities, setFacilities] = useState([]);
   const [openModal, setOpenModal] = React.useState(false);
-  const [modalType, setModalType] = React.useState(""); //stores data of current type id for modal
+  const [modalFacility, setModalFacility] = React.useState(""); //stores data of current facility id for modal
   const [openList, setOpenList] = React.useState(false);
-  const [typeForEdit, setTypeForEdit] = React.useState({});
+  const [facilityForEdit, setFacilityForEdit] = React.useState({});
 
   function handleClickOpenModal(id) {
-    setModalType(id);
+    setModalFacility(id);
     setOpenModal(true);
   }
 
@@ -68,22 +73,22 @@ function Rooms() {
   function handleClickList() {
     setOpenList(!openList);
   }
-  const getAllRoomTypes = async page => {
-    const { data, error } = await getRoomTypes(page);
+  const getAllFacilities = async page => {
+    const { data, error } = await getFacilities(page);
     if (data) {
       console.log("types fetched", data.data);
-      setTypes(data.data.data);
+      setFacilities(data.data.data);
       setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
       console.log(error.response);
     }
   };
 
-  const deleteSingleRoomType = async typeId => {
-    const { data, error } = await deleteRoomType(typeId);
+  const deleteSingleFacility = async facilityId => {
+    const { data, error } = await deleteFacilitiy(facilityId);
     if (data) {
-      Alert.success("Room Type Deleted!");
-      getAllRoomTypes(currentPage);
+      Alert.success("Facility Deleted!");
+      getAllFacilities(currentPage);
       handleCloseModal();
     } else if (error) {
       console.log(error.response);
@@ -92,12 +97,12 @@ function Rooms() {
 
   //Kada se menja strana paginacije
   useEffect(() => {
-    if (types.length) getAllRoomTypes(currentPage);
+    if (facilities.length) getAllFacilities(currentPage);
   }, [currentPage]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
-    if (!types.length) getAllRoomTypes(currentPage);
+    if (!facilities.length) getAllFacilities(currentPage);
   }, []);
 
   return (
@@ -106,9 +111,9 @@ function Rooms() {
       <Modal
         open={openModal}
         handleClose={handleCloseModal}
-        userAction={() => deleteSingleRoomType(modalType)}
-        modalHeader={"Delete Room Type"}
-        modalText={"Are you shure you want to delete this room type?"}
+        userAction={() => deleteSingleFacility(modalFacility)}
+        modalHeader={"Delete Room Facility"}
+        modalText={"Are you shure you want to delete this room facility?"}
       />
       {/* //////////////////// Add new room Type //////////////////////////// */}
       <List
@@ -118,30 +123,28 @@ function Rooms() {
       >
         <ListItem button onClick={handleClickList}>
           <ListItemIcon>{/* icon  */}</ListItemIcon>
-          <ListItemText primary="Add New Type" />
+          <ListItemText primary="Add new Facility" />
           {openList ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={openList} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <EditRoomType
-              type={typeForEdit}
-              setTypeForEdit={setTypeForEdit}
-              getAllRoomTypes={() => getAllRoomTypes(currentPage)}
+            <CreateOrEditFacilities
+              facility={facilityForEdit}
+              setFacilityForEdit={setFacilityForEdit}
+              getAllFacilities={() => getAllFacilities(currentPage)}
             />
           </List>
         </Collapse>
       </List>
 
-      {types.length ? (
+      {facilities.length ? (
         <>
           <Paper className={classes.root}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
                   <TableCell>Type Name</TableCell>
-                  <TableCell align="left">Bed Count</TableCell>
-                  <TableCell align="left">Maximum Persons</TableCell>
-                  <TableCell align="left">Price Adult</TableCell>
+
                   <TableCell align="left">Price Child</TableCell>
                   <TableCell size="small" align="left">
                     Edit Room Type
@@ -150,26 +153,24 @@ function Rooms() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {types.map(type => (
-                  <TableRow key={type.id}>
-                    <TableCell align="left">{type.name}</TableCell>
-                    <TableCell align="left">{type.bed_count}</TableCell>
-                    <TableCell align="left">{type.max_persons}</TableCell>
-                    <TableCell align="left">{type.price_adult}</TableCell>
-                    <TableCell align="left">{type.price_child}</TableCell>
+                {facilities.map(facility => (
+                  <TableRow key={facility.id}>
+                    <TableCell align="left">{facility.name}</TableCell>
+
+                    <TableCell align="left">{facility.price}</TableCell>
                     <TableCell align="left">
                       {" "}
                       <Link to="#">
                         <Button
                           onClick={() => {
                             setOpenList(true);
-                            setTypeForEdit(type);
+                            setFacilityForEdit(facility);
                           }}
                           variant="contained"
                           color="primary"
                           className={classes.button}
                         >
-                          Edit Room Type
+                          Edit Room Facility
                         </Button>
                       </Link>
                     </TableCell>
@@ -177,12 +178,13 @@ function Rooms() {
                     <TableCell align="left">
                       {" "}
                       <Button
-                        onClick={() => handleClickOpenModal(type.id)}
+                        // onClick={() => handleClickOpenModal(facility.id)}
+                        onClick={() => deleteSingleFacility(facility.id)}
                         variant="contained"
                         color="secondary"
                         className={classes.button}
                       >
-                        Delete Room Type
+                        Delete Room Facility
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -190,16 +192,18 @@ function Rooms() {
               </TableBody>
             </Table>
           </Paper>
-          <ThemeProvider>
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onChange={currentPage => {
-                console.log("current page", currentPage);
-                return setCurrentPage(currentPage);
-              }}
-            />
-          </ThemeProvider>{" "}
+          {totalPages > 1 ? (
+            <ThemeProvider>
+              <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onChange={currentPage => {
+                  console.log("current page", currentPage);
+                  return setCurrentPage(currentPage);
+                }}
+              />
+            </ThemeProvider>
+          ) : null}
         </>
       ) : (
         <CircularProgress />
@@ -208,4 +212,4 @@ function Rooms() {
   );
 }
 
-export default Rooms;
+export default Facilities;

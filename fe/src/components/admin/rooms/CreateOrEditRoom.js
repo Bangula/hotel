@@ -87,13 +87,6 @@ const EditRoomType = ({ type, ...props }) => {
   };
 
   //component only recives props
-  const resetValues = {
-    name: "",
-    bed_count: "",
-    max_persons: "",
-    price_adult: "",
-    price_child: ""
-  };
 
   const initialValues = {
     name: type.name ? type.name : "",
