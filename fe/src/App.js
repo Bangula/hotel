@@ -38,8 +38,8 @@ function App(props) {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/cart" component={Cart} />
-          <Route path="/admin" component={Admin} />
           <Route path="/user" component={UserProfile} />
+          <Route path="/admin" component={Admin} />
         </Switch>
         <Footer />
       </div>

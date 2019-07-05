@@ -8,10 +8,14 @@ import { deepOrange, deepPurple, grey } from "@material-ui/core/colors";
 import Dashboard from "./Dashboard";
 import Users from "./users/Users";
 import Gallery from "./gallery/Gallery";
+import CreateGallery from "./gallery/CreateGallery";
 import Newsletter from "./Newsletter";
 import Reviews from "./Reviews";
 import EditUser from "./users/EditUser";
+import Rooms from "./rooms/Rooms";
 import RoomTypes from "./rooms/RoomTypes";
+import CreateOrEditRoom from "./rooms/CreateOrEditRoom";
+import Facilities from "./rooms/Facilities";
 
 import {
   Avatar,
@@ -31,9 +35,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 
 import { Switch, Route, NavLink } from "react-router-dom";
 const drawerWidth = 240;
@@ -279,9 +280,22 @@ const Admin = props => {
                     <ListItemText primary="All Rooms" />
                   </ListItem>
                 </NavLink>
+                <NavLink to="/admin/rooms/create" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemText primary="Create Room" />
+                  </ListItem>
+                </NavLink>
                 <NavLink to="/admin/rooms/types" activeClassName="admin-link">
                   <ListItem button>
                     <ListItemText primary="Room Types" />
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to="/admin/rooms/facilities"
+                  activeClassName="admin-link"
+                >
+                  <ListItem button>
+                    <ListItemText primary="Room Facilities" />
                   </ListItem>
                 </NavLink>
               </List>
@@ -313,6 +327,14 @@ const Admin = props => {
                 <NavLink to="#" activeClassName="admin-link">
                   <ListItem button>
                     <ListItemText primary="All galleries" />
+                  </ListItem>
+                </NavLink>
+                <NavLink
+                  to="/admin/gallery/create"
+                  activeClassName="admin-link"
+                >
+                  <ListItem button>
+                    <ListItemText primary="Create Gallery" />
                   </ListItem>
                 </NavLink>
                 <ListItem button>
@@ -377,8 +399,24 @@ const Admin = props => {
                 component={EditUser}
               />
 
+              <Route exact path={`/admin/rooms`} component={Rooms} />
+              <Route
+                exact
+                path={`/admin/rooms/create`}
+                component={CreateOrEditRoom}
+              />
               <Route exact path={`/admin/rooms/types`} component={RoomTypes} />
+              <Route
+                exact
+                path={`/admin/rooms/facilities`}
+                component={Facilities}
+              />
               <Route exact path={`/admin/gallery`} component={Gallery} />
+              <Route
+                exact
+                path={`/admin/gallery/create`}
+                component={CreateGallery}
+              />
               <Route exact path={`/admin/newsletter`} component={Newsletter} />
               <Route exact path={`/admin/reviews`} component={Reviews} />
             </Switch>
