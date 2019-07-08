@@ -1,14 +1,21 @@
-import { SET_USER, LOGOUT_USER, SAVE_USER_INFO } from "../../store/types";
-import { get } from "https";
+import {
+  SET_USER,
+  LOGOUT_USER,
+  SAVE_USER_INFO,
+  HIDE_LAYOUT,
+  SHOW_LAYOUT
+} from "../../store/types";
 export const getToken = () => localStorage["jwtToken"];
 
 const initialState = {
   isAuthenticated: !!getToken(),
+  isAdmin: true,
   info: JSON.parse(localStorage.getItem("user")) || {},
   serverErrors: {
     login: "",
     register: ""
-  }
+  },
+  hideLayout: false
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -45,6 +52,16 @@ export const authReducer = (state = initialState, action) => {
 
     case SAVE_USER_INFO:
       return { ...state, info: action.payload, isAuthenticated: true };
+    case HIDE_LAYOUT:
+      return {
+        ...state,
+        hideLayout: true
+      };
+    case SHOW_LAYOUT:
+      return {
+        ...state,
+        hideLayout: false
+      };
     default:
       return state;
   }

@@ -49,6 +49,21 @@
     background: linear-gradient(rgba(20, 20, 20, 0.3), rgba(20, 20, 20, 0.3)),
       url("../../assets/images/services/service_wellness.jpg");
   }
+  i {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding-top: 34px;
+    background: #fff;
+    opacity: 0.6;
+  }
 }
 
 .services2 {
@@ -63,5 +78,20 @@
   &__rent {
     background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.6)),
       url("../../assets/images/services/service_rent.jpg");
+  }
+  i {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 5rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border: 1px solid #fff;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    padding-top: 34px;
+    background: #fff;
+    opacity: 0.6;
   }
 }

@@ -10,7 +10,6 @@ export const login = (user, history) => {
   return async dispatch => {
     const { data, error } = await loginUser(user);
     if (data) {
-      let token = data.data.access_token;
       let jwtToken = `${data.data.token_type} ${data.data.access_token}`;
       localStorage.setItem("jwtToken", jwtToken);
       history.push("/");

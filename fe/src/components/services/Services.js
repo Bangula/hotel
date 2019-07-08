@@ -4,6 +4,7 @@ import serviceGym from "@assets/images/services/service_gym.jpg";
 import servicePool from "@assets/images/services/service_pool.jpg";
 import serviceRestauraunt from "@assets/images/services/service_restauraunt.jpg";
 import serviceWellness from "@assets/images/services/service_wellness.jpg";
+
 const Services = () => {
   return (
     <>
@@ -54,30 +55,30 @@ const Services = () => {
       </div>
       <section className="mt-10 max-h-full  text-4xl">
         <div className="services flex max-h-full text-center">
-          <div className="services__gym ">
-            <i className="fas fa-dumbbell text-orange-600 " />
+          <div className="services__gym relative">
+            <i className="fas fa-dumbbell text-orange-600 absolute" />
           </div>
 
-          <div className="services__pool">
-            <i className="fas fa-swimmer text-orange-600" />
+          <div className="services__pool relative">
+            <i className="fas fa-swimmer text-orange-600 absolute" />
           </div>
 
-          <div className="services__sport">
-            <i className="fas fa-basketball-ball text-orange-600" />
+          <div className="services__sport relative">
+            <i className="fas fa-basketball-ball text-orange-600 absolute" />
           </div>
 
-          <div className="services__wellness">
-            <i className="fas fa-spa text-orange-600" />{" "}
+          <div className="services__wellness relative">
+            <i className="fas fa-spa text-orange-600 absolute" />{" "}
           </div>
         </div>
 
         <div className="services2 flex max-h-full text-center">
-          <div className="services2__restauraunt w-1/2">
-            <i className="fas fa-utensils text-orange-600" />
+          <div className="services2__restauraunt w-1/2 relative">
+            <i className="fas fa-utensils text-orange-600 absolute" />
           </div>
 
-          <div className="services2__rent w-1/2">
-            <i className="fas fa-car text-orange-600" />
+          <div className="services2__rent w-1/2 relative">
+            <i className="fas fa-car text-orange-600 absolute" />
           </div>
         </div>
       </section>

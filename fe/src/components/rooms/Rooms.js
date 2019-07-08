@@ -4,10 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Room from "./components/Room";
 
+import { useSelector } from "react-redux";
+
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
-import { userInfo } from "os";
+
+// Components
 
 const useStyles = makeStyles(theme => ({
   progress: {
@@ -29,6 +32,7 @@ const Rooms = () => {
   const [totalPages, setTotalPages] = useState(1);
 
   const classes = useStyles();
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
 
   useEffect(() => {
     getData(currentPage);
@@ -67,7 +71,9 @@ const Rooms = () => {
       <div className="container mx-auto lg:flex flex-wrap mt-8 pb-32">
         {allRooms.length > 0
           ? allRooms.map(item => {
-              return <Room data={item} key={item.id} />;
+              return (
+                <Room data={item} key={item.id} isAuth={isAuthenticated} />
+              );
             })
           : null}
 
@@ -85,6 +91,9 @@ const Rooms = () => {
           </div>
         ) : null}
       </div>
+      {/* <Modal open={modalIsOpen} close={setModalIsOpen}>
+        <ModalContent close={() => setModalIsOpen(false)} />
+      </Modal> */}
     </>
   );
 };

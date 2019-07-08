@@ -89,6 +89,7 @@ const Reviews = () => {
           />
         </ThemeProvider>
       ) : null}
+      <div className="h-32 w-full" />
     </>
   );
 };

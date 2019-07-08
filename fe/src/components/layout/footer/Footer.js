@@ -10,6 +10,9 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 
+import { Field, Formik, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
 import Logo from "@assets/images/logo.png";
 
 const useStyles = makeStyles({
@@ -36,6 +39,16 @@ const Footer = () => {
   const [email, setEmail] = React.useState("");
 
   const classes = useStyles();
+
+  const Schema = Yup.object().shape({
+    name: Yup.string()
+      .email("Must be valid email.")
+      .required("Name is required")
+  });
+
+  const initialValues = {
+    email: ""
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -155,3 +168,13 @@ const Footer = () => {
 };
 
 export default Footer;
+
+{
+  /* <InputBase
+className={classes.input}
+value={email}
+placeholder="Your Email"
+inputProps={{ "aria-label": "Search Google Maps" }}
+onChange={e => setEmail(e.target.value)}
+/> */
+}

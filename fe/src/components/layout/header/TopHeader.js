@@ -77,20 +77,36 @@ const TopHeader = () => {
       </div>
       <div className="text-white w-1/4 text-right">
         {user.isAuthenticated ? (
-          <>
-            <Link to="/user">
-              <i className="fas fa-user mr-4" />
-            </Link>
+          <div>
+            <div>
+              <Link to="/user">
+                <i className="fas fa-user mr-4" />
+              </Link>
 
-            <Button
-              className={`${
-                classes.button
-              } mr-8 font-semibold text-white  hover:text-gray-300`}
-              onClick={() => dispatch({ type: "LOGOUT_USER" })}
-            >
-              LOGOUT
-            </Button>
-          </>
+              <Button
+                className={`${
+                  classes.button
+                } mr-8 font-semibold text-white  hover:text-gray-300`}
+                onClick={() => dispatch({ type: "LOGOUT_USER" })}
+              >
+                LOGOUT
+              </Button>
+              <NavLink
+                className="font-semibold  hover:text-gray-300"
+                to="/cart"
+              >
+                <IconButton
+                  aria-label="Cart"
+                  className="text-white"
+                  style={{ color: "#fff" }}
+                >
+                  <StyledBadge badgeContent={cartItems} color="primary">
+                    <ShoppingCartIcon />
+                  </StyledBadge>
+                </IconButton>
+              </NavLink>
+            </div>
+          </div>
         ) : (
           <>
             <NavLink
@@ -105,20 +121,19 @@ const TopHeader = () => {
             >
               REGISTER
             </NavLink>
+            <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
+              <IconButton
+                aria-label="Cart"
+                className="text-white"
+                style={{ color: "#fff" }}
+              >
+                <StyledBadge badgeContent={cartItems} color="primary">
+                  <ShoppingCartIcon />
+                </StyledBadge>
+              </IconButton>
+            </NavLink>
           </>
         )}
-
-        <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
-          <IconButton
-            aria-label="Cart"
-            className="text-white"
-            style={{ color: "#fff" }}
-          >
-            <StyledBadge badgeContent={cartItems} color="primary">
-              <ShoppingCartIcon />
-            </StyledBadge>
-          </IconButton>
-        </NavLink>
       </div>
     </div>
   );
