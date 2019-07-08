@@ -276,6 +276,7 @@ const EditUser = props => {
                       {errors.address || invalidAddress}
                     </span>
                   ) : null}
+
                   {/* OVDE MODAL */}
                   <Button
                     type="submit"
