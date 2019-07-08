@@ -69,6 +69,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
+
     marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
@@ -152,7 +153,7 @@ const Admin = props => {
           <div className="h-screen flex">
             {/* <CssBaseline /> */}
             <AppBar
-              // position="fixed"
+              position="fixed"
               className={clsx(classes.appBar, {
                 [classes.appBarShift]: open
               })}
