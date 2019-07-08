@@ -13,9 +13,6 @@ export const getLogedUser = () => {
   return toResponse(http.get("/user/profile"));
 };
 
-//"http://api.quantox-hotel.local/v1/users?page=2"
-//"http://api.quantox-hotel.loc/v1/users/:id"
-
 export const getUser = userId => {
   return toResponse(http.get(`/users/${userId}`));
 };
@@ -34,4 +31,9 @@ export const updateUserInfo = (credentials, id) => {
 };
 export const deleteUser = userId => {
   return toResponse(http.delete(`/users/${userId}`));
+};
+
+//User roles
+export const getRoles = () => {
+  return toResponse(http.get("/roles"));
 };
