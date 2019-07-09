@@ -143,7 +143,7 @@ function Subscribers() {
   };
 
   return (
-    <div className={classes.root2} style={{ marginTop: "100px" }}>
+    <div className={classes.root2} style={{ marginTop: "42px" }}>
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>

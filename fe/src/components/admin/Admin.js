@@ -283,14 +283,14 @@ const Admin = props => {
                         <ListItemText primary="Users" />
                       </ListItem>
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                       to="/admin/users/edit"
                       activeClassName="admin-link"
                     >
                       <ListItem button>
                         <ListItemText primary="Edit User" />
                       </ListItem>
-                    </NavLink>
+                    </NavLink> */}
                   </List>
                 </Collapse>
 
@@ -306,6 +306,7 @@ const Admin = props => {
                   <ListItemText primary="Rooms" />
                   {openRooms ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
+
                 <Divider component="li" variant="middle" />
                 <Collapse
                   in={openRooms}
@@ -314,7 +315,11 @@ const Admin = props => {
                   className={classes.nested}
                 >
                   <List component="div" className={classes.submenu}>
-                    <NavLink to="/admin/rooms" activeClassName="admin-link">
+                    <NavLink
+                      exact
+                      to="/admin/rooms"
+                      activeClassName="admin-link"
+                    >
                       <ListItem button>
                         <ListItemText primary="All Rooms" />
                       </ListItem>
@@ -353,12 +358,12 @@ const Admin = props => {
                 >
                   <ListItemIcon>
                     <Icon
-                      className={clsx(classes.icon, "far fa-building")}
+                      className={clsx(classes.icon, "fas fa-ad")}
                       color="action"
                     />
                   </ListItemIcon>
                   <ListItemText primary="Promotions" />
-                  {openRooms ? <ExpandLess /> : <ExpandMore />}
+                  {openPromotions ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Divider component="li" variant="middle" />
                 <Collapse
@@ -369,6 +374,7 @@ const Admin = props => {
                 >
                   <List component="div" className={classes.submenu}>
                     <NavLink
+                      exact
                       to="/admin/promotions"
                       activeClassName="admin-link"
                     >
@@ -417,7 +423,11 @@ const Admin = props => {
                   className={classes.nested}
                 >
                   <List component="div" className={classes.submenu}>
-                    <NavLink to="/admin/gallery" activeClassName="admin-link">
+                    <NavLink
+                      exact
+                      to="/admin/gallery"
+                      activeClassName="admin-link"
+                    >
                       <ListItem button>
                         <ListItemText primary="All galleries" />
                       </ListItem>
@@ -440,7 +450,11 @@ const Admin = props => {
 
                 {/* ////////////////////// end gallery ///////// */}
 
-                <NavLink to="/admin/newsletter">
+                <NavLink
+                  exact
+                  to="/admin/newsletter"
+                  activeClassName="admin-link"
+                >
                   <ListItem button>
                     <ListItemIcon>
                       <Icon
@@ -451,20 +465,25 @@ const Admin = props => {
                     <ListItemText primary="Newsletter" />
                   </ListItem>
                 </NavLink>
-
-                <NavLink to="/admin/subscribers">
+                {/* END NEWSLETTER */}
+                <NavLink
+                  exact
+                  to="/admin/subscribers"
+                  activeClassName="admin-link"
+                >
                   <ListItem button>
                     <ListItemIcon>
                       <Icon
-                        className={clsx(classes.icon, "fas fa-mail-bulk")}
+                        className={clsx(classes.icon, "fas fa-rss")}
                         color="action"
                       />
                     </ListItemIcon>
                     <ListItemText primary="Subscribers" />
                   </ListItem>
                 </NavLink>
+                {/* END SUBSCRIBERS */}
 
-                <NavLink to="/admin/reviews">
+                <NavLink exact to="/admin/reviews" activeClassName="admin-link">
                   <ListItem button>
                     <ListItemIcon>
                       <Icon
@@ -475,7 +494,19 @@ const Admin = props => {
                     <ListItemText primary="Reviews" />
                   </ListItem>
                 </NavLink>
-                {/*  */}
+                {/* END REVIEWS  */}
+                <NavLink exact to="/admin/songs" activeClassName="admin-link">
+                  <ListItem button>
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-music")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Songs" />
+                  </ListItem>
+                </NavLink>
+                {/* END SONGS  */}
                 <ListItem button>
                   <ListItemIcon>
                     <Icon
