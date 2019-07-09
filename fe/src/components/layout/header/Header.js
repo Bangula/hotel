@@ -23,11 +23,7 @@ const Header = () => {
             borderBottomLeftRadius: "10px"
           }}
         >
-          <Link
-            to="/admin
-          "
-            className="text-xs font-semibold"
-          >
+          <Link to="/admin" className="text-xs font-semibold">
             SHOW ADMIN PANEL
           </Link>
         </div>

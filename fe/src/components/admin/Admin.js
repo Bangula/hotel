@@ -126,6 +126,7 @@ const Admin = props => {
   const [openGallery, setOpenGallery] = React.useState(false);
   const [openRooms, setOpenRooms] = React.useState(false);
   const [openPromotions, setOpenPromotions] = React.useState(false);
+
   const dispatch = useDispatch();
   const hideLayout = useSelector(state => state.user.hideLayout);
   const isAdmin = useSelector(state => state.user.isAdmin);
