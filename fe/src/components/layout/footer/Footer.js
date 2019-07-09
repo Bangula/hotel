@@ -102,7 +102,7 @@ const Footer = () => {
             <p className="text-sm text-gray-400 mt-2">quantox@contact.com</p>
           </div>
           <div className="subscribe  md:w-3/12 text-left px-2">
-            <h1 className="text-gray-200 text-xl italic">Say in touch</h1>
+            <h1 className="text-gray-200 text-xl italic">Stay in touch</h1>
             <br />
             <form onSubmit={handleSubmit}>
               <Paper className={classes.root}>
