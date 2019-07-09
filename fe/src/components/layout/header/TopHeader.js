@@ -11,6 +11,8 @@ import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
+import jwtDecode from "jwt-decode";
+
 const StyledBadge = withStyles(theme => ({
   badge: {
     top: "50%",
@@ -37,11 +39,10 @@ const TopHeader = () => {
   const promotions = useSelector(state => state.cart.promotions);
   const rooms = useSelector(state => state.cart.rooms);
 
-  let cartItems = promotions.length + rooms.length;
-  console.log(cartItems);
-
   const dispatch = useDispatch();
   const classes = useStyles();
+
+  let cartItems = promotions.length + rooms.length;
 
   return (
     <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8">

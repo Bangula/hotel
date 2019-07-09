@@ -16,6 +16,9 @@ import Rooms from "./rooms/Rooms";
 import RoomTypes from "./rooms/RoomTypes";
 import CreateOrEditRoom from "./rooms/CreateOrEditRoom";
 import Facilities from "./rooms/Facilities";
+import Profile from "./myProfile/Profile";
+import Subscribers from "./subscribers/Subscribers";
+import Songs from "./songs/Songs";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -218,6 +221,7 @@ const Admin = props => {
                   <ListItemText primary={userName} />
                   {openProfile ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
+
                 <Divider component="li" variant="middle" />
 
                 <Collapse
@@ -226,14 +230,13 @@ const Admin = props => {
                   unmountOnExit
                   className={classes.nested}
                 >
-                  <List component="div" className={classes.submenu}>
-                    <ListItem button>
-                      <ListItemText primary="My Profile" />
-                    </ListItem>
-                    <ListItem button>
-                      <ListItemText primary="Edit Profile" />
-                    </ListItem>
-                  </List>
+                  <NavLink to="/admin/myprofile">
+                    <List component="div" className={classes.submenu}>
+                      <ListItem button>
+                        <ListItemText primary="My Profile" />
+                      </ListItem>
+                    </List>
+                  </NavLink>
                 </Collapse>
                 {/* ///////////////////////////////////////////////// profile */}
 
@@ -446,6 +449,18 @@ const Admin = props => {
                   </ListItem>
                 </NavLink>
 
+                <NavLink to="/admin/subscribers">
+                  <ListItem button>
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-mail-bulk")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Subscribers" />
+                  </ListItem>
+                </NavLink>
+
                 <NavLink to="/admin/reviews">
                   <ListItem button>
                     <ListItemIcon>
@@ -483,6 +498,7 @@ const Admin = props => {
                 }}
               >
                 <Switch>
+                  <Route exact path={`/admin/myprofile`} component={Profile} />
                   <Route
                     exact
                     path={`/admin/dashboard`}
@@ -544,6 +560,12 @@ const Admin = props => {
                     path={`/admin/promotions/edit`}
                     component={Promotions}
                   />
+                  <Route
+                    exact
+                    path={`/admin/subscribers`}
+                    component={Subscribers}
+                  />
+                  <Route exact path={`/admin/songs`} component={Songs} />
                 </Switch>
               </div>
             </main>

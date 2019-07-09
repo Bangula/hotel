@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const UserProfile = () => {
+const UserProfile = ({ adminPanel }) => {
   const user = useSelector(state => state.user.info.data);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [value, setValue] = useState(0);
@@ -64,16 +64,18 @@ const UserProfile = () => {
     <>
       {user ? (
         <>
-          <div className="user-header" />
+          {adminPanel ? null : <div className="user-header" />}
           <div className="container mx-auto mt-16 px-4 pb-32">
-            <h1 className="">
-              <span className="text-4xl text-gray-600 font-semibold mr-6">
-                DASHBOARD
-              </span>
-              <br />
-              <i className="fas fa-user mr-4" />
-              <span>{user.first_name}</span>
-            </h1>
+            {adminPanel ? null : (
+              <h1 className="">
+                <span className="text-4xl text-gray-600 font-semibold mr-6">
+                  DASHBOARD
+                </span>
+                <br />
+                <i className="fas fa-user mr-4" />
+                <span>{user.first_name}</span>
+              </h1>
+            )}
             <div className="mt-16 w-12/12 md:w-8/12 mx-auto">
               <h1 className="text-center italic text-gray-600 my-8">
                 Update Your Profile
