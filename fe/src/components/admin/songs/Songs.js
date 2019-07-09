@@ -15,7 +15,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import TabContainer from "../subscribers/components/TabContainer";
 import LinkTab from "../subscribers/components/LinkTab";
-// import NewCampaign from "./components/NewCampaign";
+import CreateSong from "./components/CreateSong";
 
 import {
   Button,
@@ -27,12 +27,6 @@ import {
   Paper,
   CircularProgress
 } from "@material-ui/core";
-
-import {
-  getAllSubscribers,
-  deleteSubscriber,
-  subscribeUser
-} from "@endpoints/subscribe";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
@@ -65,99 +59,64 @@ const useStyles = makeStyles(theme => ({
 
 const Songs = () => {
   const [openModal, setOpenModal] = React.useState(false);
-  const [email, setEmail] = React.useState("");
   const [value, setValue] = React.useState(0);
+  const [currentPage, setCurrentPage] = useState(1); //for api
+  const [totalPages, setTotalPages] = useState(1);
 
-  function handleChange(event, newValue) {
-    setValue(newValue);
-  }
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const { data, error } = await subscribeUser({ email });
-    console.log(email);
+  const [songs, setSongs] = useState([]);
+  const [songId, setSongId] = useState("");
+  const [editId, setEditid] = useState("");
 
+  useEffect(() => {
+    getData(currentPage);
+  }, []);
+
+  async function getData(page) {
+    const { data, error } = await getAllSongs(page);
     if (data) {
-      console.log(data);
-      Alert.success(<i className="fas fa-check" />, {
-        effect: "slide",
-        timeout: 2000
-      });
-      getAllSubscribers(currentPage);
+      console.log(data.data);
+      setSongs(data.data.data);
+      setTotalPages(data.data.meta.pagination.total_pages);
+    } else if (error) {
+      console.log(error.response);
+    }
+  }
+
+  const deleteSongById = async id => {
+    const { data, error } = await deleteSong(id);
+    if (data) {
+      console.log(data.data);
+      getData(currentPage);
     } else if (error) {
       console.log(error.response);
     }
   };
 
-  function handleClickOpenModal(email) {
-    setEmail(email);
+  function handleChange(event, newValue) {
+    setValue(newValue);
+  }
+
+  function handleClickOpenModal(id) {
+    setSongId(id);
     setOpenModal(true);
   }
 
   function handleCloseModal() {
     setOpenModal(false);
   }
+  const handleEdit = id => {
+    setValue(1);
+    setEditid(id);
+  };
   const classes = useStyles();
-
-  const [currentPage, setCurrentPage] = useState(1); //for api
-  const [totalPages, setTotalPages] = useState(1);
-  const [subscribers, setSubscribers] = useState([]);
-
-  const [newEmail, setNewEmail] = useState("");
-
-  const getSubscribers = async page => {
-    const { data, error } = await getAllSubscribers(page);
-    if (data) {
-      console.log(" fetched", data.data);
-      setSubscribers(data.data.data);
-      setTotalPages(data.data.meta.pagination.total_pages);
-    } else if (error) {
-      console.log(error.response);
-    }
-  };
-
-  const deleteSubscriberById = async email => {
-    const { data, error } = await deleteSubscriber(email);
-    if (data) {
-      handleCloseModal();
-      getSubscribers(currentPage);
-    } else if (error) {
-      console.log(error.response);
-    }
-  };
-
-  useEffect(() => {
-    if (subscribers.length) getSubscribers(currentPage);
-  }, [currentPage]);
-
-  useEffect(() => {
-    if (!subscribers.length) getSubscribers(currentPage);
-  }, []);
-
-  const handleSubscribe = async e => {
-    e.preventDefault();
-    const { data, error } = await subscribeUser({ email: newEmail });
-    console.log(newEmail);
-    if (data) {
-      console.log(data.data);
-      getAllSubscribers(currentPage);
-      Alert.success(<i className="fas fa-check" />, {
-        effect: "slide",
-        timeout: 2000,
-        position: "bottom-right"
-      });
-    } else if (error) {
-      console.log(error.response);
-    }
-  };
 
   return (
     <div className={classes.root2} style={{ marginTop: "100px" }}>
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label="All subscribers" href="/drafts" />
-          <LinkTab label="Create new Subscriber" href="/trash" />
-          <LinkTab label="Create new campaign" href="/spam" />
+          <LinkTab label="All songs" href="/drafts" />
+          <LinkTab label="Create new song" href="/trash" />
         </Tabs>
       </AppBar>
       {value === 0 && (
@@ -166,28 +125,29 @@ const Songs = () => {
             <Modal
               open={openModal}
               handleClose={handleCloseModal}
-              userAction={() => deleteSubscriberById(email)}
+              userAction={() => deleteSongById(songId)}
               modalHeader={"Remove subscriber"}
               modalText={"Are you shure you want to delete this subscriber?"}
             />
 
-            {subscribers.length ? (
+            {songs.length ? (
               <>
                 <Paper className={classes.root}>
                   <Table className={classes.table}>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Id</TableCell>
-                        <TableCell align="left">Email</TableCell>
+                        <TableCell>Song name</TableCell>
+                        <TableCell align="left">Artist</TableCell>
 
-                        <TableCell align="right" />
+                        <TableCell align="right">Edit</TableCell>
+                        <TableCell align="right">Delete</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {subscribers.map(user => (
-                        <TableRow key={user.id}>
+                      {songs.map(song => (
+                        <TableRow key={song.id}>
                           <TableCell component="th" scope="row">
-                            {user.real_id}
+                            {song.name}
                           </TableCell>
                           <TableCell
                             align="left"
@@ -197,18 +157,28 @@ const Songs = () => {
                               fontStyle: "italic"
                             }}
                           >
-                            {user.email}
+                            {song.artist}
                           </TableCell>
 
                           <TableCell align="right">
-                            {" "}
                             <Button
-                              onClick={() => handleClickOpenModal(user.email)}
+                              onClick={() => handleEdit(song.id)}
+                              variant="contained"
+                              color="primary"
+                              className={classes.button}
+                            >
+                              EDIT
+                            </Button>
+                          </TableCell>
+
+                          <TableCell align="right">
+                            <Button
+                              onClick={() => handleClickOpenModal(song.id)}
                               variant="contained"
                               color="secondary"
                               className={classes.button}
                             >
-                              REMOVE SUBSCRIBER
+                              DELETE
                             </Button>
                           </TableCell>
                         </TableRow>
@@ -239,39 +209,8 @@ const Songs = () => {
       )}
       {value === 1 && (
         <TabContainer>
-          <div className="shadow-lg mb-16 border   py-8">
-            <h1 className="text-center text-gray-600 italic">
-              Create new subscriber
-            </h1>
-            <div className="flex justify-center mx-auto mt-8">
-              <form
-                onSubmit={handleSubscribe}
-                style={{ margin: 0, padding: 0 }}
-              >
-                <TextField
-                  id="standard-name"
-                  label="Email"
-                  className=""
-                  onChange={e => setNewEmail(e.target.value)}
-                />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  style={{
-                    marginTop: "10px",
-                    marginLeft: "20px"
-                  }}
-                >
-                  Submit
-                </Button>
-              </form>
-            </div>
-          </div>
+          <CreateSong id={editId} />
         </TabContainer>
-      )}
-      {value === 2 && (
-        <TabContainer>{/* <NewCampaign Alert={Alert} /> */}</TabContainer>
       )}
     </div>
   );
