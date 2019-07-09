@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Fade } from "react-slideshow-image";
 import bgImage1 from "@assets/images/slide_1.jpg";
 import bgImage2 from "@assets/images/slide_2.jpg";

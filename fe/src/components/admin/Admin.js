@@ -126,18 +126,10 @@ const Admin = props => {
   const [openGallery, setOpenGallery] = React.useState(false);
   const [openRooms, setOpenRooms] = React.useState(false);
   const [openPromotions, setOpenPromotions] = React.useState(false);
-
-  function handleDrawerOpen() {
-    setOpen(true);
-  }
-
-  function handleDrawerClose() {
-    setOpen(false);
-  }
-  const isAdmin = useSelector(state => state.user.isAdmin);
-  const hideLayout = useSelector(state => state.user.hideLayout);
-  const userName = useSelector(state => state.user.info.data.first_name);
   const dispatch = useDispatch();
+  const hideLayout = useSelector(state => state.user.hideLayout);
+  const isAdmin = useSelector(state => state.user.isAdmin);
+  const userName = useSelector(state => state.user.info.data.first_name);
 
   useEffect(() => {
     dispatch({
@@ -148,7 +140,16 @@ const Admin = props => {
         type: "SHOW_LAYOUT"
       });
     };
-  }, [hideLayout]);
+  }, []);
+
+  function handleDrawerOpen() {
+    setOpen(true);
+  }
+
+  function handleDrawerClose() {
+    setOpen(false);
+  }
+
   return (
     <>
       {isAdmin ? (
