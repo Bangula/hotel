@@ -153,7 +153,7 @@ const Admin = props => {
           <div className="h-screen flex">
             {/* <CssBaseline /> */}
             <AppBar
-              position="fixed"
+              // position="fixed"
               className={clsx(classes.appBar, {
                 [classes.appBarShift]: open
               })}
@@ -505,6 +505,11 @@ const Admin = props => {
                   <Route
                     exact
                     path={`/admin/rooms/create`}
+                    component={CreateOrEditRoom}
+                  />
+                  <Route
+                    exact
+                    path={`/admin/rooms/edit/:roomId`}
                     component={CreateOrEditRoom}
                   />
                   <Route

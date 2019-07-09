@@ -18,7 +18,7 @@ import {
   List
 } from "@material-ui/core";
 
-import { getRoomTypes, deleteRoomType, getAllRooms } from "@endpoints/rooms";
+import { getAllRooms, deleteRoom } from "@endpoints/rooms";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
@@ -49,14 +49,14 @@ function Rooms() {
 
   const [currentPage, setCurrentPage] = useState(1); //for api
   const [totalPages, setTotalPages] = useState(1);
-  const [types, setTypes] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [openModal, setOpenModal] = React.useState(false);
-  const [modalType, setModalType] = React.useState(""); //stores data of current type id for modal
-  const [openList, setOpenList] = React.useState(false);
+  const [modalRoom, setModalRoom] = React.useState(""); //stores data of current room id for modal
+
   const [typeForEdit, setTypeForEdit] = React.useState({});
 
   function handleClickOpenModal(id) {
-    setModalType(id);
+    setModalRoom(id);
     setOpenModal(true);
   }
 
@@ -64,26 +64,22 @@ function Rooms() {
     setOpenModal(false);
   }
 
-  //Toggle list
-  function handleClickList() {
-    setOpenList(!openList);
-  }
-  const getAllRoomTypes = async page => {
-    const { data, error } = await getRoomTypes(page);
+  const getRooms = async page => {
+    const { data, error } = await getAllRooms(page);
     if (data) {
-      console.log("types fetched", data.data);
-      setTypes(data.data.data);
+      console.log("Rooms fetched", data.data);
+      setRooms(data.data.data);
       setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
       console.log(error.response);
     }
   };
 
-  const deleteSingleRoomType = async typeId => {
-    const { data, error } = await deleteRoomType(typeId);
+  const deleteSingleRoom = async roomId => {
+    const { data, error } = await deleteRoom(roomId);
     if (data) {
-      Alert.success("Room Type Deleted!");
-      getAllRoomTypes(currentPage);
+      Alert.success("Room  Deleted!");
+      getRooms(currentPage);
       handleCloseModal();
     } else if (error) {
       console.log(error.response);
@@ -92,84 +88,62 @@ function Rooms() {
 
   //Kada se menja strana paginacije
   useEffect(() => {
-    if (types.length) getAllRoomTypes(currentPage);
+    if (rooms.length) getRooms(currentPage);
   }, [currentPage]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
-    if (!types.length) getAllRoomTypes(currentPage);
+    if (!rooms.length) getRooms(currentPage);
   }, []);
 
+  console.log("room id", modalRoom);
   return (
     <div className="text-center">
       <Alert />
       <Modal
         open={openModal}
         handleClose={handleCloseModal}
-        userAction={() => deleteSingleRoomType(modalType)}
+        userAction={() => deleteSingleRoom(modalRoom)}
         modalHeader={"Delete Room Type"}
         modalText={"Are you shure you want to delete this room type?"}
       />
-      {/* //////////////////// Add new room Type //////////////////////////// */}
-      <List
-        component="nav"
-        aria-labelledby="nested-list-subheader"
-        className="bg-gray-400 mb-4"
-      >
-        <ListItem button onClick={handleClickList}>
-          <ListItemIcon>{/* icon  */}</ListItemIcon>
-          <ListItemText primary="Add New Type" />
-          {openList ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={openList} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <EditRoomType
-              type={typeForEdit}
-              setTypeForEdit={setTypeForEdit}
-              getAllRoomTypes={() => getAllRoomTypes(currentPage)}
-            />
-          </List>
-        </Collapse>
-      </List>
+      <div className="from-top" />
 
-      {types.length ? (
+      {rooms.length ? (
         <>
           <Paper className={classes.root}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Type Name</TableCell>
-                  <TableCell align="left">Bed Count</TableCell>
-                  <TableCell align="left">Maximum Persons</TableCell>
-                  <TableCell align="left">Price Adult</TableCell>
-                  <TableCell align="left">Price Child</TableCell>
+                  <TableCell align="left">Room Number</TableCell>
+                  <TableCell align="left">Room Usable</TableCell>
+
                   <TableCell size="small" align="left">
-                    Edit Room Type
+                    Edit Room
                   </TableCell>
-                  <TableCell align="left">Delete Type</TableCell>
+                  <TableCell align="left">Delete Room</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {types.map(type => (
-                  <TableRow key={type.id}>
-                    <TableCell align="left">{type.name}</TableCell>
-                    <TableCell align="left">{type.bed_count}</TableCell>
-                    <TableCell align="left">{type.max_persons}</TableCell>
-                    <TableCell align="left">{type.price_adult}</TableCell>
-                    <TableCell align="left">{type.price_child}</TableCell>
+                {rooms.map(room => (
+                  <TableRow key={room.id}>
+                    <TableCell align="left">{room.room_number}</TableCell>
+                    <TableCell align="left">
+                      {room.usable ? "true" : "false"}
+                    </TableCell>
+
                     <TableCell align="left">
                       {" "}
-                      <Link to="#">
+                      <Link to={`/admin/rooms/edit/${room.id}`}>
                         <Button
                           onClick={() => {
-                            setOpenList(true);
-                            setTypeForEdit(type);
+                            // setTypeForEdit(type);
                           }}
                           variant="contained"
                           color="primary"
                           className={classes.button}
                         >
-                          Edit Room Type
+                          Edit Room
                         </Button>
                       </Link>
                     </TableCell>
@@ -177,12 +151,12 @@ function Rooms() {
                     <TableCell align="left">
                       {" "}
                       <Button
-                        onClick={() => handleClickOpenModal(type.id)}
+                        onClick={() => handleClickOpenModal(room.id)}
                         variant="contained"
                         color="secondary"
                         className={classes.button}
                       >
-                        Delete Room Type
+                        Delete Room
                       </Button>
                     </TableCell>
                   </TableRow>
