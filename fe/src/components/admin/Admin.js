@@ -72,6 +72,7 @@ const useStyles = makeStyles(theme => ({
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
+
     marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
@@ -520,6 +521,11 @@ const Admin = props => {
                   <Route
                     exact
                     path={`/admin/rooms/create`}
+                    component={CreateOrEditRoom}
+                  />
+                  <Route
+                    exact
+                    path={`/admin/rooms/edit/:roomId`}
                     component={CreateOrEditRoom}
                   />
                   <Route

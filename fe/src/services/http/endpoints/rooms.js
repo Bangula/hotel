@@ -12,14 +12,14 @@ export const createRoom = credentials => {
   return toResponse(http.post("/rooms", credentials));
 };
 
-export const deleteRoom = (credentials, roomId) => {
-  return toResponse(http.delete(`/rooms/${roomId}`, credentials));
+export const deleteRoom = roomId => {
+  return toResponse(http.delete(`/rooms/${roomId}`));
 };
 
-export const getSingleRoom = roomId => {
+export const getRoom = roomId => {
   return toResponse(http.get(`/rooms/${roomId}`));
 };
-export const updateRoom = (roomId, credentials) => {
+export const updateRoom = (credentials, roomId) => {
   return toResponse(http.patch(`/rooms/${roomId}`, credentials));
 };
 
