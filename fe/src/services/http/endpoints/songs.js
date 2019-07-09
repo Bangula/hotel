@@ -1,8 +1,8 @@
 import http from "../index";
 import toResponse from "@helpers/toResponse";
 
-export const getAllSongs = () => {
-  return toResponse(http.get("/songs"));
+export const getAllSongs = page => {
+  return toResponse(http.get(`/songs?page=${page}`));
 };
 
 export const createSong = song => {
@@ -10,7 +10,7 @@ export const createSong = song => {
 };
 
 export const deleteSong = id => {
-  return toResponse(http.delete(`/songs${id}`));
+  return toResponse(http.delete(`/songs/${id}`));
 };
 
 export const updateSong = (song, id) => {
