@@ -101,7 +101,7 @@ function RoomTypes() {
   }, []);
 
   return (
-    <div className="text-center">
+    <div className="text-center" style={{ marginTop: "50px" }}>
       <Alert />
       <Modal
         open={openModal}

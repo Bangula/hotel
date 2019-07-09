@@ -89,7 +89,8 @@ const Gallery = props => {
   });
 
   return (
-    <section className="">
+    <section style={{ marginTop: "30px" }}>
+      <div className="from-top" />
       <Formik
         enableReinitialize
         onSubmit={values => {

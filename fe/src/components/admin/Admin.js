@@ -387,7 +387,7 @@ const Admin = props => {
                       activeClassName="admin-link"
                     >
                       <ListItem button>
-                        <ListItemText primary="Create Room" />
+                        <ListItemText primary="Create Promotion" />
                       </ListItem>
                     </NavLink>
                     <NavLink
@@ -507,7 +507,13 @@ const Admin = props => {
                   </ListItem>
                 </NavLink>
                 {/* END SONGS  */}
-                <ListItem button>
+                <ListItem
+                  button
+                  onClick={() => {
+                    dispatch({ type: "LOGOUT_USER" });
+                    props.history.replace("/");
+                  }}
+                >
                   <ListItemIcon>
                     <Icon
                       className={clsx(classes.icon, "fas fa-sign-out-alt")}

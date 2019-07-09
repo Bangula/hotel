@@ -174,8 +174,8 @@ const CreateOrEditRoom = props => {
   console.log("edit room props", props);
   return (
     <>
-      <div className="from-top" />
-      <Container maxWidth="md">
+      <div style={{ marginTop: "60px" }} />
+      <Container maxWidth="md" style={{ marginTop: "42px" }}>
         <h1 className="large text-primary">Add or edit room </h1>
         <Formik
           enableReinitialize
