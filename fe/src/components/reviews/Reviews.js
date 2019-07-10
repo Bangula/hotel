@@ -76,6 +76,7 @@ const schema = Yup.object().shape({
 });
 
 const Reviews = () => {
+  const [isSubmited, setIsSubmited] = useState(false);
   const [reviews, setReviews] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -140,6 +141,7 @@ const Reviews = () => {
   };
   const createSingleReview = async credentials => {
     const { data, error } = await createReview(credentials);
+
     if (data) {
       console.log("review created", data.data);
       getAllReviews();
@@ -185,7 +187,7 @@ const Reviews = () => {
         >
           <ListItem button onClick={handleClickList} className="p-6">
             <ListItemIcon>{/* icon  */}</ListItemIcon>
-            <ListItemText primary="Give us new comment" />
+            <ListItemText primary="Give us new review" />
             {openList ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openList} timeout="auto" unmountOnExit>
@@ -194,8 +196,12 @@ const Reviews = () => {
                 enableReinitialize
                 onSubmit={(values, actions) => {
                   console.log("Create review", values);
+                  setIsSubmited(true);
                   createSingleReview(values);
-                  actions.resetForm();
+
+                  setSelectedHotelRate("1");
+                  setSelectedRoomRate("1");
+                  setSelectedAccomodationRate("1");
                 }}
                 initialValues={initialValues}
                 validationSchema={schema}
@@ -210,12 +216,18 @@ const Reviews = () => {
                   resetForm,
                   ...formProps
                 }) => {
-                  if (values.comment !== "") {
-                    setComment(values.comment);
+                  if (isSubmited) {
+                    setComment("");
+                    setRoomId("");
+                  } else {
+                    if (values.comment) {
+                      setComment(values.comment);
+                    }
+                    if (values.room_id !== "") {
+                      setRoomId(values.room_id);
+                    }
                   }
-                  if (values.room_id !== "") {
-                    setRoomId(values.room_id);
-                  }
+
                   return (
                     <Form className="p-8">
                       <TextField

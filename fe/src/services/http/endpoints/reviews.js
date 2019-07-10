@@ -10,3 +10,9 @@ export const getPage = pageNum => {
 export const createReview = credentials => {
   return toResponse(http.post(`/reviews`, credentials));
 };
+export const getReviewsOnHold = () => {
+  return toResponse(http.get("/reviews?search=status:hold"));
+};
+export const getReviewsApproved = () => {
+  return toResponse(http.get("/reviews?search=status:approve"));
+};
