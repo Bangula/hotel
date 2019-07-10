@@ -1,42 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { getAllGenres } from "@endpoints/genres";
-import { getSongById, createSong, updateSong } from "@endpoints/songs";
+
+import { getEventById, updateEvent, createEvent } from "@endpoints/events";
 
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 
-const CreateSong = ({ id, setValue }) => {
+const CreateEvent = ({ id, setValue }) => {
   const [genres, setGenres] = useState([]);
-  const [songData, setSongData] = useState({});
+  const [eventData, setEventData] = useState({});
 
   useEffect(() => {
-    getGenres();
-  }, []);
-
-  useEffect(() => {
-    getSongData(id);
+    getEventData(id);
   }, [id]);
 
-  async function getGenres() {
-    const { data, error } = await getAllGenres();
-    if (data) {
-      console.log(data.data);
-      setGenres(data.data.data);
-    } else if (error) {
-      console.log(error.response);
-    }
-  }
-
-  async function getSongData(id) {
+  async function getEventData(id) {
     if (id.length) {
-      const { data, error } = await getSongById(id);
+      const { data, error } = await getEventById(id);
       if (data) {
         console.log(data.data.data);
-        setSongData(data.data.data);
+        setEventData(data.data.data);
       } else if (error) {
         console.log(error.response);
       }
@@ -44,56 +30,55 @@ const CreateSong = ({ id, setValue }) => {
   }
 
   const Schema = Yup.object().shape({
-    name: Yup.string()
-      .min(2, "Name is to short")
-      .max(30, "Too LONG!.")
-      .required("Song name is required field"),
-    artist: Yup.string()
+    title: Yup.string()
+      .min(2, "Title is to short")
+      .max(100, "Too LONG!.")
+      .required("Title is required field"),
+
+    description: Yup.string()
+      .min(2, "Description is to short")
+      .max(100, "Too LONG!.")
+      .required("Description is required field"),
+
+    capacity: Yup.number()
       .min(2, "To short")
-      .max(30, "Too LONG!.")
-      .required("Artist is required field"),
-    link: Yup.string()
-      .required("Link is required")
-      .min(5, "To short")
-      .max(200, "Too LONG!."),
-    duration: Yup.number()
-      .required("Duration is required")
-      .min(1, "To short")
-      .max(200, "Too LONG!."),
-    genre_id: Yup.string()
-      .required("Genre is required")
-      .min(1, "To short")
-      .max(20, "Too LONG!.")
+      .max(500, "Too LONG!.")
+      .required("Capacity is required field"),
+
+    location_id: Yup.string()
+      .min(2, "To short")
+      .max(100, "Too LONG!.")
+      .required("Location is required field")
   });
 
   const initialValues = {
-    name: Object.keys(songData).length > 0 ? songData.name : "",
-    artist: Object.keys(songData).length > 0 ? songData.artist : "",
-    link: Object.keys(songData).length > 0 ? songData.link : "",
-    duration: Object.keys(songData).length > 0 ? songData.duration : "",
-    genre_id: Object.keys(songData).length > 0 ? "" : "Rock"
+    name: Object.keys(eventData).length > 0 ? eventData.name : "",
+    artist: Object.keys(eventData).length > 0 ? eventData.artist : "",
+    link: Object.keys(eventData).length > 0 ? eventData.link : "",
+    duration: Object.keys(eventData).length > 0 ? eventData.duration : "",
+    genre_id: Object.keys(eventData).length > 0 ? "" : "Rock"
   };
 
-  if (Object.keys(songData).length > 0) console.log(songData.name);
+  if (Object.keys(eventData).length > 0) console.log(eventData.name);
 
   const handleCreateSubmit = async values => {
-    const genreId = genres.filter(item => {
-      return item.name === values.genre_id;
-    })[0].id;
-    const newSong = {
-      name: values.name,
-      artist: values.artist,
-      duration: values.duration,
-      link: values.link,
-      genre_id: genreId
-    };
-    const { data, error } = await createSong(newSong);
-    if (data) {
-      console.log(data.data);
-      setValue();
-    } else if (error) {
-      console.log(error.response);
-    }
+    // const genreId = genres.filter(item => {
+    //   return item.name === values.genre_id;
+    // })[0].id;
+    // const newSong = {
+    //   name: values.name,
+    //   artist: values.artist,
+    //   duration: values.duration,
+    //   link: values.link,
+    //   genre_id: genreId
+    // };
+    // const { data, error } = await createSong(newSong);
+    // if (data) {
+    //   console.log(data.data);
+    //   setValue();
+    // } else if (error) {
+    //   console.log(error.response);
+    // }
   };
 
   const handleEditSubmit = async values => {
@@ -107,7 +92,7 @@ const CreateSong = ({ id, setValue }) => {
       link: values.link,
       genre_id: genreId
     };
-    const { data, error } = await updateSong(newSong, id);
+    const { data, error } = await updateEvent(newSong, id);
     if (data) {
       console.log(data.data);
       setValue();
@@ -120,14 +105,14 @@ const CreateSong = ({ id, setValue }) => {
     <div>
       <div style={{ width: "100%", maxWidth: "600px" }} className="mx-auto">
         <h1 className="text-center italic text-gray-600 mt-8">
-          {Object.keys(songData).length > 0 ? "Edit song" : "Create new song"}
+          {Object.keys(eventData).length > 0 ? "Edit song" : "Create new song"}
         </h1>
         <Formik
           enableReinitialize
           initialValues={initialValues}
           validationSchema={Schema}
           onSubmit={values => {
-            if (Object.keys(songData).length > 0) handleEditSubmit(values);
+            if (Object.keys(eventData).length > 0) handleEditSubmit(values);
             else handleCreateSubmit(values);
           }}
           render={props => (
@@ -232,7 +217,7 @@ const CreateSong = ({ id, setValue }) => {
               <br />
               <div className="w-full flex justify-end">
                 <Button variant="contained" color="primary" type="submit">
-                  {Object.keys(songData).length > 0 ? "Edit" : "Create"}
+                  {Object.keys(eventData).length > 0 ? "Edit" : "Create"}
                 </Button>
               </div>
             </Form>
@@ -243,4 +228,4 @@ const CreateSong = ({ id, setValue }) => {
   );
 };
 
-export default CreateSong;
+export default CreateEvent;

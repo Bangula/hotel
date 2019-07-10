@@ -94,6 +94,8 @@ function Subscribers() {
   const [totalPages, setTotalPages] = useState(1);
   const [subscribers, setSubscribers] = useState([]);
 
+  const [subscribeError, setSubscribeError] = useState("");
+
   const [newEmail, setNewEmail] = useState("");
 
   const getSubscribers = async page => {
@@ -131,6 +133,7 @@ function Subscribers() {
     console.log(newEmail);
     if (data) {
       console.log(data.data);
+      setSubscribeError("");
       getAllSubscribers(currentPage);
       Alert.success(<i className="fas fa-check" />, {
         effect: "slide",
@@ -139,6 +142,8 @@ function Subscribers() {
       });
     } else if (error) {
       console.log(error.response);
+      if (error.response.data.message)
+        setSubscribeError(error.response.data.message);
     }
   };
 
@@ -259,6 +264,9 @@ function Subscribers() {
                 </Button>
               </form>
             </div>
+            <h1 className="text-red-600 italic text-center mt-8">
+              {subscribeError ? subscribeError : ""}
+            </h1>
           </div>
         </TabContainer>
       )}

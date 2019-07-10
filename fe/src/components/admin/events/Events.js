@@ -8,6 +8,8 @@ import {
   getSongById
 } from "@endpoints/songs";
 
+import { getAllEvents, deleteEvent } from "@endpoints/events";
+
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -15,7 +17,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import TabContainer from "../subscribers/components/TabContainer";
 import LinkTab from "../subscribers/components/LinkTab";
-import CreateSong from "./components/CreateSong";
+import CreateEvent from "./components/CreateEvent";
 
 import {
   Button,
@@ -57,14 +59,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Songs = () => {
+const Events = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const [currentPage, setCurrentPage] = useState(1); //for api
   const [totalPages, setTotalPages] = useState(1);
 
-  const [songs, setSongs] = useState([]);
-  const [songId, setSongId] = useState("");
+  const [events, setEvents] = useState([]);
+  const [eventId, setEventId] = useState("");
   const [editId, setEditid] = useState("");
 
   useEffect(() => {
@@ -73,18 +75,18 @@ const Songs = () => {
   }, [value]);
 
   async function getData(page) {
-    const { data, error } = await getAllSongs(page);
+    const { data, error } = await getAllEvents(page);
     if (data) {
       console.log(data.data);
-      setSongs(data.data.data);
+      setEvents(data.data.data);
       setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
       console.log(error.response);
     }
   }
 
-  const deleteSongById = async id => {
-    const { data, error } = await deleteSong(id);
+  const deleteEventById = async id => {
+    const { data, error } = await deleteEvent(id);
     if (data) {
       console.log(data.data);
       getData(currentPage);
@@ -98,7 +100,7 @@ const Songs = () => {
   }
 
   function handleClickOpenModal(id) {
-    setSongId(id);
+    setEventId(id);
     setOpenModal(true);
   }
 
@@ -116,8 +118,8 @@ const Songs = () => {
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label="All songs" href="/drafts" />
-          <LinkTab label="Create new song" href="/trash" />
+          <LinkTab label="All events" href="/drafts" />
+          <LinkTab label="Create new event" href="/trash" />
         </Tabs>
       </AppBar>
       {value === 0 && (
@@ -126,44 +128,35 @@ const Songs = () => {
             <Modal
               open={openModal}
               handleClose={handleCloseModal}
-              userAction={() => deleteSongById(songId)}
-              modalHeader={"Remove subscriber"}
-              modalText={"Are you shure you want to delete this subscriber?"}
+              userAction={() => deleteEventById(eventId)}
+              modalHeader={"Remove event"}
+              modalText={"Are you shure you want to delete this event?"}
             />
 
-            {songs.length ? (
+            {events.length ? (
               <>
                 <Paper className={classes.root}>
                   <Table className={classes.table}>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Song name</TableCell>
-                        <TableCell align="left">Artist</TableCell>
+                        <TableCell>Title</TableCell>
 
-                        <TableCell align="right">Edit</TableCell>
-                        <TableCell align="right">Delete</TableCell>
+                        <TableCell align="right" />
+                        <TableCell align="right" />
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {songs.map(song => (
-                        <TableRow key={song.id}>
+                      {events.map(event => (
+                        <TableRow key={event.id}>
                           <TableCell component="th" scope="row">
-                            {song.name}
-                          </TableCell>
-                          <TableCell
-                            align="left"
-                            style={{
-                              fontWeight: "bold",
-                              fontSize: "1rem",
-                              fontStyle: "italic"
-                            }}
-                          >
-                            {song.artist}
+                            <span className="italic font-semibold text-gray-600 text-lg">
+                              {event.title}
+                            </span>
                           </TableCell>
 
                           <TableCell align="right">
                             <Button
-                              onClick={() => handleEdit(song.id)}
+                              onClick={() => handleEdit(event.id)}
                               variant="contained"
                               color="primary"
                               className={classes.button}
@@ -174,7 +167,7 @@ const Songs = () => {
 
                           <TableCell align="right">
                             <Button
-                              onClick={() => handleClickOpenModal(song.id)}
+                              onClick={() => handleClickOpenModal(event.id)}
                               variant="contained"
                               color="secondary"
                               className={classes.button}
@@ -210,11 +203,11 @@ const Songs = () => {
       )}
       {value === 1 && (
         <TabContainer>
-          <CreateSong id={editId} setValue={() => setValue(0)} />
+          <CreateEvent id={editId} setValue={() => setValue(0)} />
         </TabContainer>
       )}
     </div>
   );
 };
 
-export default Songs;
+export default Events;

@@ -19,6 +19,7 @@ import Facilities from "./rooms/Facilities";
 import Profile from "./myProfile/Profile";
 import Subscribers from "./subscribers/Subscribers";
 import Songs from "./songs/Songs";
+import Events from "./events/Events";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -176,7 +177,9 @@ const Admin = props => {
 
                 <ListItem button>
                   <ListItemIcon>
-                    <Avatar className={classes.purpleAvatar}>OP</Avatar>
+                    <Avatar className={classes.purpleAvatar}>
+                      <i className="fas fa-user" />
+                    </Avatar>
                   </ListItemIcon>
                   <ListItemText primary={userName} />
                 </ListItem>
@@ -219,7 +222,9 @@ const Admin = props => {
               >
                 <ListItem button onClick={() => setOpenProfile(!openProfile)}>
                   <ListItemIcon>
-                    <Avatar className={classes.purpleAvatar}>OP</Avatar>
+                    <Avatar className={classes.purpleAvatar}>
+                      <i className="fas fa-user" />
+                    </Avatar>
                   </ListItemIcon>
                   <ListItemText primary={userName} />
                   {openProfile ? <ExpandLess /> : <ExpandMore />}
@@ -450,6 +455,18 @@ const Admin = props => {
 
                 {/* ////////////////////// end gallery ///////// */}
 
+                <NavLink to="/admin/events">
+                  <ListItem button>
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-columns")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Events" />
+                  </ListItem>
+                </NavLink>
+
                 <NavLink
                   exact
                   to="/admin/newsletter"
@@ -604,6 +621,7 @@ const Admin = props => {
                     path={`/admin/subscribers`}
                     component={Subscribers}
                   />
+                  <Route exact path={`/admin/events`} component={Events} />
                   <Route exact path={`/admin/songs`} component={Songs} />
                 </Switch>
               </div>

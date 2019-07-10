@@ -114,31 +114,6 @@ const ContactForm = () => {
           </Form>
         )}
       />
-      {/* <form onSubmit={handleSubmit}>
-        <TextField
-          id="standard-textarea"
-          label="Your Name"
-          className={classes.textField}
-          margin="normal"
-        />
-        <TextField
-          id="standard-textarea"
-          label="Message..."
-          multiline
-          className={classes.textField}
-          margin="normal"
-        />
-        <div className="mt-4 flex justify-end">
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            className="mt-4"
-          >
-            Send
-          </Button>
-        </div>
-      </form> */}
     </div>
   );
 };
