@@ -116,7 +116,7 @@ function Facilities() {
         modalText={"Are you shure you want to delete this room facility?"}
       />
       {/* //////////////////// Add new room Type //////////////////////////// */}
-      <div className="from-top" />
+      <div style={{ marginTop: "50px" }} />
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"

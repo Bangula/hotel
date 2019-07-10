@@ -98,7 +98,7 @@ function Rooms() {
 
   console.log("room id", modalRoom);
   return (
-    <div className="text-center">
+    <div className="text-center" style={{ marginTop: "42px" }}>
       <Alert />
       <Modal
         open={openModal}

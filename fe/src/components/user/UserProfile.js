@@ -77,9 +77,11 @@ const UserProfile = ({ adminPanel }) => {
               </h1>
             )}
             <div className="mt-16 w-12/12 md:w-8/12 mx-auto">
-              <h1 className="text-center italic text-gray-600 my-8">
-                Update Your Profile
-              </h1>
+              {adminPanel ? null : (
+                <h1 className="text-center italic text-gray-600 my-8">
+                  Update Your Profile
+                </h1>
+              )}
               <div />
             </div>
             <div>
