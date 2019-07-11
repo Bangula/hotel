@@ -24,3 +24,7 @@ export const getEventById = id => {
 export const updateEvent = (obj, id) => {
   return toResponse(http.patch(`/events/${id}`, obj));
 };
+
+export const getAllEventTypes = page => {
+  return toResponse(http.get(`/event-types?page=${page}`));
+};
