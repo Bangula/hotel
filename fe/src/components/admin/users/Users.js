@@ -14,10 +14,15 @@ import {
 } from "@material-ui/core";
 
 import { getUsersPerPage, deleteUser } from "@endpoints/users";
+import { getAllRoles, assignRoleToUser } from "@endpoints/roles";
+import RoleModal from "../../common/modal";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
+
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import Modal from "../Modal";
 
@@ -30,6 +35,37 @@ const useStyles = makeStyles(theme => ({
 function Users() {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalUser, setModalUser] = React.useState("");
+  const [currentPage, setCurrentPage] = useState(1); //for api
+  const [totalPages, setTotalPages] = useState(1);
+  const [users, setUsers] = useState([]);
+
+  const [userRoleId, setUserRoleId] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
+  const [allRoles, setAllRoles] = useState([]);
+  const [roleModalStatus, setRoleModalStatus] = useState(false);
+
+  useEffect(() => {
+    getRoles();
+  }, []);
+
+  async function getRoles() {
+    const { data, error } = await getAllRoles();
+    if (data) {
+      console.log(data);
+      setAllRoles(data.data.data);
+    } else if (error) {
+      console.log(error);
+    }
+  }
+  const roleList = allRoles.length
+    ? allRoles.map(item => {
+        return (
+          <MenuItem value={item.id} key={item.id}>
+            {item.name}
+          </MenuItem>
+        );
+      })
+    : null;
 
   function handleClickOpenModal(userId) {
     setModalUser(userId);
@@ -40,10 +76,6 @@ function Users() {
     setOpenModal(false);
   }
   const classes = useStyles();
-
-  const [currentPage, setCurrentPage] = useState(1); //for api
-  const [totalPages, setTotalPages] = useState(1);
-  const [users, setUsers] = useState([]);
 
   const getUsersPerPageHandle = async page => {
     const { data, error } = await getUsersPerPage(page);
@@ -76,6 +108,25 @@ function Users() {
     if (!users.length) getUsersPerPageHandle(currentPage);
   }, []);
 
+  const handleRoleChange = id => {
+    setRoleModalStatus(true);
+    setUserRoleId(id);
+    console.log(id);
+  };
+  const handleRoleAdd = async () => {
+    setRoleModalStatus(false);
+    const { data, error } = await assignRoleToUser({
+      user_id: userRoleId,
+      roles_ids: selectedRole
+    });
+    if (data) {
+      console.log(data);
+    } else if (error) {
+      console.log(error.response);
+    }
+    console.log(userRoleId);
+  };
+
   return (
     <div className="text-center">
       <Modal
@@ -85,6 +136,39 @@ function Users() {
         modalHeader={"Delete User"}
         modalText={"Are you shure you want to delete this user?"}
       />
+      <RoleModal open={roleModalStatus}>
+        <div className="px-8 py-4">
+          <h1 className="text-center text-gray-600 italic py-4 text-lg">
+            Assign role to user
+          </h1>
+          <div className="flex justify-start">
+            <p className="text-center text-gray-600 italic mr-4">Select role</p>
+            <Select
+              value={selectedRole}
+              onChange={e => setSelectedRole(e.target.value)}
+            >
+              {roleList}
+            </Select>
+          </div>
+          <div className="flex justify-end">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => setRoleModalStatus(false)}
+            >
+              Close
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleRoleAdd}
+              style={{ marginLeft: "10px" }}
+            >
+              Add role
+            </Button>
+          </div>
+        </div>
+      </RoleModal>
       ;
       {users.length ? (
         <>
@@ -96,6 +180,9 @@ function Users() {
                   <TableCell>Name</TableCell>
                   <TableCell align="left">Lastname</TableCell>
                   <TableCell align="left">Email</TableCell>
+                  <TableCell size="small" align="left">
+                    Add role to user
+                  </TableCell>
                   <TableCell size="small" align="left">
                     Edit User
                   </TableCell>
@@ -110,6 +197,16 @@ function Users() {
                     </TableCell>
                     <TableCell align="left">{user.last_name}</TableCell>
                     <TableCell align="left">{user.email}</TableCell>
+                    <TableCell align="left">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => handleRoleChange(user.id)}
+                      >
+                        ADD ROLE
+                      </Button>
+                    </TableCell>
                     <TableCell align="left">
                       {" "}
                       <Link to={`/admin/users/edit/${user.id}`}>

@@ -25,7 +25,6 @@ import EventTypes from "./events/EventTypes";
 import { useSelector, useDispatch } from "react-redux";
 
 import Promotions from "./promotions/Promotions";
-import CreatePromotions from "./promotions/CreatePromotions";
 
 import {
   Avatar,
@@ -41,6 +40,7 @@ import {
   Typography,
   Drawer
 } from "@material-ui/core";
+
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";

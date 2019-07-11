@@ -179,11 +179,12 @@ const Reviews = () => {
         <br />
         Reviews
       </h1>
-      <div className="container mx-auto text-center mt-16 ">
+      <div className="container mx-auto text-center mt-16">
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"
           className="bg-gray-400 mb-4 "
+          style={{ marginBottom: "50px" }}
         >
           <ListItem button onClick={handleClickList} className="p-6">
             <ListItemIcon>{/* icon  */}</ListItemIcon>

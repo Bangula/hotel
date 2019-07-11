@@ -8,7 +8,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import bgImage from "../../assets/images/events-bg.jpg";
 
 import { getAllEvents } from "../../services/http/endpoints/events";
-import { now } from "moment";
 
 const useStyles = makeStyles(theme => ({
   progress: {
