@@ -505,7 +505,7 @@ const Admin = props => {
                 {/* ///////// end events//////// */}
                 <NavLink
                   exact
-                  to="/admin/newsletter"
+                  to="/admin/subscribers"
                   activeClassName="admin-link"
                 >
                   <ListItem button>
@@ -519,22 +519,6 @@ const Admin = props => {
                   </ListItem>
                 </NavLink>
                 {/* END NEWSLETTER */}
-                <NavLink
-                  exact
-                  to="/admin/subscribers"
-                  activeClassName="admin-link"
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <Icon
-                        className={clsx(classes.icon, "fas fa-rss")}
-                        color="action"
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Subscribers" />
-                  </ListItem>
-                </NavLink>
-                {/* END SUBSCRIBERS */}
 
                 <NavLink exact to="/admin/reviews" activeClassName="admin-link">
                   <ListItem button>
