@@ -20,6 +20,7 @@ import Profile from "./myProfile/Profile";
 import Subscribers from "./subscribers/Subscribers";
 import Songs from "./songs/Songs";
 import Events from "./events/Events";
+import EventTypes from "./events/EventTypes";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -667,6 +668,11 @@ const Admin = props => {
                     component={Subscribers}
                   />
                   <Route exact path={`/admin/events`} component={Events} />
+                  <Route
+                    exact
+                    path={`/admin/events/types`}
+                    component={EventTypes}
+                  />
                   <Route exact path={`/admin/songs`} component={Songs} />
                 </Switch>
               </div>
