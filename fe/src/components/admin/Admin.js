@@ -10,7 +10,7 @@ import Users from "./users/Users";
 import Gallery from "./gallery/Gallery";
 import CreateGallery from "./gallery/CreateGallery";
 import Newsletter from "./Newsletter";
-import Reviews from "./Reviews";
+import AdminReviews from "./AdminReviews";
 import EditUser from "./users/EditUser";
 import Rooms from "./rooms/Rooms";
 import RoomTypes from "./rooms/RoomTypes";
@@ -605,7 +605,11 @@ const Admin = props => {
                     path={`/admin/newsletter`}
                     component={Newsletter}
                   />
-                  <Route exact path={`/admin/reviews`} component={Reviews} />
+                  <Route
+                    exact
+                    path={`/admin/reviews`}
+                    component={AdminReviews}
+                  />
 
                   <Route
                     exact
