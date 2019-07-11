@@ -127,6 +127,7 @@ const Admin = props => {
   const [openGallery, setOpenGallery] = React.useState(false);
   const [openRooms, setOpenRooms] = React.useState(false);
   const [openPromotions, setOpenPromotions] = React.useState(false);
+  const [openEvents, setOpenEvents] = React.useState(false);
 
   const dispatch = useDispatch();
   const hideLayout = useSelector(state => state.user.hideLayout);
@@ -455,18 +456,52 @@ const Admin = props => {
 
                 {/* ////////////////////// end gallery ///////// */}
 
-                <NavLink to="/admin/events">
-                  <ListItem button>
-                    <ListItemIcon>
-                      <Icon
-                        className={clsx(classes.icon, "fas fa-columns")}
-                        color="action"
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Events" />
-                  </ListItem>
-                </NavLink>
+                <ListItem
+                  button
+                  button
+                  onClick={() => setOpenEvents(!openEvents)}
+                >
+                  <ListItemIcon>
+                    <Icon
+                      className={clsx(classes.icon, "fas fa-columns")}
+                      color="action"
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Events" />
+                  {openEvents ? <ExpandLess /> : <ExpandMore />}
+                </ListItem>
 
+                <Divider component="li" variant="middle" />
+
+                <Collapse
+                  in={openEvents}
+                  timeout="auto"
+                  unmountOnExit
+                  className={classes.nested}
+                >
+                  <List component="div" className={classes.submenu}>
+                    <NavLink
+                      exact
+                      to="/admin/events"
+                      activeClassName="admin-link"
+                    >
+                      <ListItem button>
+                        <ListItemText primary="All Events" />
+                      </ListItem>
+                    </NavLink>
+
+                    <NavLink
+                      to="/admin/events/types"
+                      activeClassName="admin-link"
+                    >
+                      <ListItem button>
+                        <ListItemText primary="Event Types" />
+                      </ListItem>
+                    </NavLink>
+                  </List>
+                </Collapse>
+
+                {/* ///////// end events//////// */}
                 <NavLink
                   exact
                   to="/admin/newsletter"
