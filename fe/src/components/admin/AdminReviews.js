@@ -26,7 +26,9 @@ import {
 import {
   getReviewsOnHold,
   getReviewsApproved,
-  getPage
+  getPage,
+  approveReview,
+  deleteReview
 } from "@endpoints/reviews";
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
@@ -65,43 +67,115 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const getAllReviewsApproved = async page => {
-  const { data, error } = await getReviewsApproved(page);
-  if (data) {
-    console.log("Reviews approved fetched", data.data);
-  } else if (error) {
-    console.log(error.response);
-  }
-};
-
-//per page
-const getAllReviews = async page => {
-  const { data, error } = await getPage(page);
-  if (data) {
-    console.log("Reviews approved fetched", data.data);
-  } else if (error) {
-    console.log(error.response);
-  }
-};
-
 // REVIEWS ON HOLD ////////////////////////////////
-const ReviewsOnHold = () => {
+const ReviewsComponent = props => {
   const [totalPages, setTotalPages] = useState("");
   const [reviews, setReviews] = useState([]);
-  const [currentPage, setCurrentPage] = useState("");
-  const getAllReviewsOnHold = async page => {
-    const { data, error } = await getReviewsOnHold(page);
+  const [currentPage, setCurrentPage] = useState(1); //for api
+
+  //per page
+  const getAllReviews = async page => {
+    const { data, error } = await getPage(page);
     if (data) {
       setReviews(data.data.data);
-      console.log("Reviews on hold fetched", data.data);
+      setTotalPages(data.data.meta.pagination.total_pages);
+      console.log("Reviews  fetched", data.data);
     } else if (error) {
       console.log(error.response);
     }
   };
 
+  // REVIEWS ON HOLD
+  const getAllReviewsOnHold = async page => {
+    const { data, error } = await getReviewsOnHold(page);
+    if (data) {
+      setReviews(data.data.data);
+      setTotalPages(data.data.meta.pagination.total_pages);
+      console.log("Reviews on hold fetched", data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  // REVIEWS approved
+  const getAllReviewsApproved = async page => {
+    const { data, error } = await getReviewsApproved(page);
+    if (data) {
+      setReviews(data.data.data);
+      setTotalPages(data.data.meta.pagination.total_pages);
+      console.log("Reviews APPROVED fetched", data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  // Approve Review
+  const approveSingleReview = async id => {
+    const { data, error } = await approveReview(id);
+    if (data) {
+      if (props.onHold) {
+        getAllReviewsOnHold(currentPage);
+      }
+      console.log("Review Approved", data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  // Delete review
+  const deleteSingleReview = async id => {
+    const { data, error } = await deleteReview(id);
+    if (reviews.length === 1) {
+      setCurrentPage(currentPage - 1);
+      console.log("ostao jos jedan");
+    }
+    if (data) {
+      if (props.onHold && reviews.length > 1) {
+        getAllReviewsOnHold(currentPage);
+      }
+      if (props.approved && reviews.length > 1) {
+        console.log("ovo ME ZEZA ", reviews.length);
+        getAllReviewsApproved(currentPage);
+      }
+      if (props.allReviews && reviews.length > 1) {
+        getAllReviews(currentPage);
+      }
+      console.log("Review Deleted", data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+
+  //Kada se menja strana paginacije
   useEffect(() => {
-    getAllReviewsOnHold();
+    if (reviews.length) {
+      if (props.onHold) {
+        getAllReviewsOnHold(currentPage);
+      } else if (props.approved) {
+        getAllReviewsApproved(currentPage);
+      } else if (props.allReviews) {
+        getAllReviews(currentPage);
+      }
+    }
+  }, [currentPage]);
+
+  //Inicijalno ucitavanje, zavisno od taba
+  useEffect(() => {
+    if (props.onHold) {
+      getAllReviewsOnHold(currentPage);
+    } else if (props.approved) {
+      getAllReviewsApproved(currentPage);
+    } else if (props.allReviews) {
+      getAllReviews(currentPage);
+    }
   }, []);
+
+  //ako je na poslednjoj strani obrisan poslednji unos, da ucita stranicu ispred
+  // useEffect(() => {
+  //   if (reviews.length === 0 && currentPage !== 1) {
+
+  //     getAllReviewsOnHold(currentPage);
+  //   }
+  // }, [reviews]);
+  console.log("karent pejdz", currentPage);
+  console.log("duzina reviews niza", reviews.length);
   return (
     <>
       {reviews.length ? (
@@ -118,7 +192,9 @@ const ReviewsOnHold = () => {
                     Room Rate
                   </TableCell>
                   <TableCell align="left">Accomodation Rate</TableCell>
-                  <TableCell align="left">Approve Review</TableCell>
+                  {props.onHold ? (
+                    <TableCell align="left">Approve Review</TableCell>
+                  ) : null}
                   <TableCell align="left">Decline Review</TableCell>
                 </TableRow>
               </TableHead>
@@ -167,27 +243,27 @@ const ReviewsOnHold = () => {
                         {review.accommodation_rate} |
                       </span>
                     </TableCell>
-                    <TableCell align="left">
-                      {" "}
-                      <Link to="#">
-                        <Button
-                          // onClick={() => {
-
-                          //   setFacilityForEdit(facility);
-                          // }}
-                          variant="contained"
-                          color="primary"
-                        >
-                          Approve Review
-                        </Button>
-                      </Link>
-                    </TableCell>
+                    {/* Ako postoji onHold prop da renderuje approve dugme inace ne treba */}
+                    {props.onHold ? (
+                      <TableCell align="left">
+                        {" "}
+                        <Link to="#">
+                          <Button
+                            onClick={() => approveSingleReview(review.id)}
+                            variant="contained"
+                            color="primary"
+                          >
+                            Approve Review
+                          </Button>
+                        </Link>
+                      </TableCell>
+                    ) : null}
 
                     <TableCell align="left">
                       {" "}
                       <Button
                         // onClick={() => handleClickOpenModal(facility.id)}
-                        // onClick={() => deleteSingleFacility(facility.id)}
+                        onClick={() => deleteSingleReview(review.id)}
                         variant="contained"
                         color="secondary"
                       >
@@ -219,7 +295,7 @@ const ReviewsOnHold = () => {
   );
 };
 
-function AdminReviews() {
+const AdminReviews = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -231,21 +307,33 @@ function AdminReviews() {
     <div className={classes.root} style={{ marginTop: "50px" }}>
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
-          <LinkTab label="Page One" href="/drafts" />
-          <LinkTab label="Page Two" href="/trash" />
-          <LinkTab label="Page Three" href="/spam" />
+          <LinkTab label="Reviews on HOLD" href="/drafts" />
+          <LinkTab label="Approved Reviews" href="/trash" />
+          <LinkTab label="All Reviews" href="/spam" />
         </Tabs>
       </AppBar>
 
       {value === 0 && (
         <TabContainer>
-          <ReviewsOnHold />
+          {/* Reviwes on Hold */}
+          <ReviewsComponent onHold />
         </TabContainer>
       )}
-      {value === 1 && <TabContainer>Page Two</TabContainer>}
-      {value === 2 && <TabContainer>Page Three</TabContainer>}
+      {value === 1 && (
+        <TabContainer>
+          {" "}
+          {/* Approved Reviews */}
+          <ReviewsComponent approved />
+        </TabContainer>
+      )}
+      {value === 2 && (
+        <TabContainer>
+          {/* All Reviews */}
+          <ReviewsComponent allReviews />
+        </TabContainer>
+      )}
     </div>
   );
-}
+};
 
 export default AdminReviews;
