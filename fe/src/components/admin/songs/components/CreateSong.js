@@ -66,6 +66,16 @@ const CreateSong = ({ id, setValue }) => {
       .max(20, "Too LONG!.")
   });
 
+  let genreSelectList = genres.length
+    ? genres.map(item => {
+        return (
+          <MenuItem key={item.id} value={item.name}>
+            {item.name}
+          </MenuItem>
+        );
+      })
+    : null;
+
   const initialValues = {
     name: Object.keys(songData).length > 0 ? songData.name : "",
     artist: Object.keys(songData).length > 0 ? songData.artist : "",
@@ -213,10 +223,7 @@ const CreateSong = ({ id, setValue }) => {
                 <Field name="genre_id">
                   {({ field }) => (
                     <Select {...field} label="Select genre">
-                      <MenuItem value={"Rock"}>Rock</MenuItem>
-                      <MenuItem value={"Pop"}>Pop</MenuItem>
-                      <MenuItem value={"Rap"}>Rap</MenuItem>
-                      <MenuItem value={"Trance"}>Trance</MenuItem>
+                      {genreSelectList}
                     </Select>
                   )}
                 </Field>

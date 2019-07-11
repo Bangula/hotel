@@ -20,11 +20,11 @@ import Profile from "./myProfile/Profile";
 import Subscribers from "./subscribers/Subscribers";
 import Songs from "./songs/Songs";
 import Events from "./events/Events";
+import EventTypes from "./events/EventTypes";
 
 import { useSelector, useDispatch } from "react-redux";
 
 import Promotions from "./promotions/Promotions";
-import CreatePromotions from "./promotions/CreatePromotions";
 
 import {
   Avatar,
@@ -40,6 +40,7 @@ import {
   Typography,
   Drawer
 } from "@material-ui/core";
+
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
@@ -504,7 +505,7 @@ const Admin = props => {
                 {/* ///////// end events//////// */}
                 <NavLink
                   exact
-                  to="/admin/newsletter"
+                  to="/admin/subscribers"
                   activeClassName="admin-link"
                 >
                   <ListItem button>
@@ -518,22 +519,6 @@ const Admin = props => {
                   </ListItem>
                 </NavLink>
                 {/* END NEWSLETTER */}
-                <NavLink
-                  exact
-                  to="/admin/subscribers"
-                  activeClassName="admin-link"
-                >
-                  <ListItem button>
-                    <ListItemIcon>
-                      <Icon
-                        className={clsx(classes.icon, "fas fa-rss")}
-                        color="action"
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Subscribers" />
-                  </ListItem>
-                </NavLink>
-                {/* END SUBSCRIBERS */}
 
                 <NavLink exact to="/admin/reviews" activeClassName="admin-link">
                   <ListItem button>
@@ -667,6 +652,11 @@ const Admin = props => {
                     component={Subscribers}
                   />
                   <Route exact path={`/admin/events`} component={Events} />
+                  <Route
+                    exact
+                    path={`/admin/events/types`}
+                    component={EventTypes}
+                  />
                   <Route exact path={`/admin/songs`} component={Songs} />
                 </Switch>
               </div>

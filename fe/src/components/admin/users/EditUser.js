@@ -105,7 +105,7 @@ const EditUser = props => {
         : "renderuj formu"}
       {Object.keys(user).length ? (
         <Container maxWidth="md">
-          <h1 className="large text-primary">Edit Your Profile</h1>
+          <h1 className="large text-primary mt-16">Edit Your Profile</h1>
           <Formik
             enableReinitialize
             onSubmit={async values => {

@@ -90,14 +90,8 @@ const Event = ({ event, join }) => {
                   <span className="font-semibold">{event.started_at}</span>
                   <br />
                 </Typography>
-                {/* <Typography variant="body2" color="textSecondary" component="p">
-                  Location: <br />
-                </Typography> */}
               </div>
               <div>
-                {/* <Typography variant="body2" color="textSecondary" component="p">
-                  Category:
-                </Typography> */}
                 <Typography variant="body2" color="textSecondary" component="p">
                   Capacity: <br />
                   <span className="font-semibold">{event.capacity}</span>
