@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <div
-      className="navbar text-white z-50 absolute w-full"
+      className="navbar text-white z-50 absolute w-full "
       style={{ marginTop: "150px" }}
     >
       <nav className="w-full text-center" style={{ margin: "0 auto" }}>

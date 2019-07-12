@@ -134,7 +134,7 @@ function Subscribers() {
     if (data) {
       console.log(data.data);
       setSubscribeError("");
-      getAllSubscribers(currentPage);
+      getSubscribers(currentPage);
       Alert.success(<i className="fas fa-check" />, {
         effect: "slide",
         timeout: 2000,

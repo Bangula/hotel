@@ -45,7 +45,7 @@ const TopHeader = () => {
   let cartItems = promotions.length + rooms.length;
 
   return (
-    <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8">
+    <div className="pt-16 bg-blue w-full flex absolute t-0 left-0 z-50 px-8 ">
       <div className="text-white w-1/4 text-left">
         <p>
           <i className="mr-2 fas fa-phone-alt" />
