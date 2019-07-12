@@ -27,7 +27,7 @@ const Home = () => {
       <Fade {...properties}>
         <div className="each-fade">
           <div
-            className="h-screen bg-no-repeat bg-cover relative"
+            className="h-screen bg-no-repeat  bg-cover relative"
             style={{
               backgroundImage: `url(${slideImages[0]})`
             }}
@@ -36,7 +36,7 @@ const Home = () => {
               className="w-2/3"
               style={{
                 position: "absolute",
-                top: "50%",
+                top: "40%",
                 left: "0",
                 right: "0",
                 margin: "0 auto",
@@ -57,7 +57,7 @@ const Home = () => {
               className="w-2/3"
               style={{
                 position: "absolute",
-                top: "50%",
+                top: "40%",
                 left: "0",
                 right: "0",
                 margin: "0 auto",

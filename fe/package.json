@@ -28,6 +28,7 @@
     "react-router-dom": "^5.0.1",
     "react-s-alert": "^1.4.1",
     "react-scripts": "3.0.1",
+    "react-sizes": "^2.0.0",
     "react-slick": "^0.24.0",
     "react-slideshow-image": "^1.2.0",
     "react-table": "^6.10.0",
