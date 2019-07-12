@@ -96,6 +96,9 @@ const Reviews = () => {
   ] = React.useState("1"); //value for radio buttons
 
   const [openList, setOpenList] = React.useState(false);
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   function handleRadioHotelChange(event) {
     setSelectedHotelRate(event.target.value);

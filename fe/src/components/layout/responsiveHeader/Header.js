@@ -37,8 +37,8 @@ const Header = () => {
   return (
     <>
       <div
-        className="flex justify-between md:hidden absolute top-0 left-0"
-        style={{ zIndex: "150" }}
+        className="flex justify-between md:hidden fixed top-0 left-0 w-full"
+        style={{ zIndex: "150", background: "rgba(0,0,0,0.6)" }}
       >
         <div className="self-center">
           <Button onClick={() => setMenuIsActive(true)}>
@@ -56,7 +56,7 @@ const Header = () => {
             }}
           />
         </div>
-        <div>
+        <div className="self-center">
           <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
             <IconButton
               aria-label="Cart"

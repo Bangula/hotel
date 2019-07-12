@@ -9,6 +9,9 @@ import img3 from "@assets/images/slide_3.jpg";
 function GalleryBox() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const openLightbox = useCallback((event, { photo, index }) => {
     setCurrentImage(index);
@@ -74,7 +77,7 @@ function GalleryBox() {
         <br />
         Gallery
       </h1>
-      <div className="container mx-auto mt-16 mb-16">
+      <div className="container mx-auto mt-16 mb-16 px-2">
         <Gallery photos={photos} onClick={openLightbox} />
         <ModalGateway>
           {viewerIsOpen ? (

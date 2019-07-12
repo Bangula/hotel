@@ -3,12 +3,14 @@ import { getAllEvents } from "../../services/http/endpoints/events";
 import { Link } from "react-router-dom";
 
 import bgImage from "../../assets/images/events-bg.jpg";
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 // Components
 import Event from "../events/components/Event";
 
 const UpcomingEvents = () => {
   const [events, setEvents] = React.useState([]);
+  const { windowWidth } = React.useContext(WidthContext);
 
   React.useEffect(() => {
     getData();
@@ -37,16 +39,15 @@ const UpcomingEvents = () => {
   return (
     <div
       style={{
-        backgroundImage: `url(${bgImage})`,
+        backgroundImage: windowWidth < 1024 ? null : `url(${bgImage})`,
         backgroundPositionX: "500px",
         backgroundPositionY: "250px",
-        paddingBottom: "160px",
         marginTop: "100px"
       }}
-      className="bg-no-repeat"
+      className="bg-no-repeat pb-16 md:pb-56"
     >
-      <div className="mt-32 container mx-auto">
-        <h1 className="text-center text-5xl text-gray-700 home-header italic">
+      <div className="mt-32 px-2 md:px-0  container mx-auto">
+        <h1 className="text-center text-3xl md:text-5xl text-gray-700 home-header italic">
           Upcoming events
         </h1>
         <div className="mt-24">{newList}</div>

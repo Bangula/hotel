@@ -1,6 +1,8 @@
 import React from "react";
-import Slider from "react-slick";
 import Alert from "react-s-alert";
+
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
 
 import { getPromotions } from "../../services/http/endpoints/promotions";
 
@@ -16,6 +18,8 @@ const Promotions = () => {
   React.useEffect(() => {
     getData();
   }, []);
+
+  const handleOnDragStart = e => e.preventDefault();
 
   async function getData() {
     const { data, error } = await getPromotions();
@@ -34,40 +38,42 @@ const Promotions = () => {
     setModalIsOpen(false);
     console.log(id);
   };
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 800,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    autoplay: true,
-    appendDots: dots => (
-      <div
-        style={{
-          borderRadius: "10px",
-          top: "350px"
-        }}
-      >
-        <ul style={{ margin: "0px", paddingTop: "50px" }}> {dots} </ul>
-      </div>
-    )
+  const responsive = {
+    0: { items: 1 },
+    1024: { items: 2 }
   };
   const cardList =
     promotions.length > 0
       ? promotions.map(item => {
           return (
-            <PromotionCard item={item} key={item.id} openModal={openModal} />
+            <PromotionCard
+              onDragStart={handleOnDragStart}
+              item={item}
+              key={item.id}
+              openModal={openModal}
+              className="item"
+            />
           );
         })
       : null;
   return (
-    <div className="promotionSlider w-full mt-32">
+    <div className="promotionSlider container mx-auto w-full mt-2 md:mt-32">
       <Alert />
-      <h1 className="text-center  text-5xl text-gray-700  z-50 home-header italic">
+      <h1 className="text-center text-3xl md:text-5xl text-gray-700 home-header italic">
         Promotions
       </h1>
       <div className="mt-16 ">
-        <Slider {...settings}>{cardList}</Slider>
+        <AliceCarousel
+          responsive={responsive}
+          autoPlayInterval={3000}
+          autoPlayDirection="ltr"
+          autoPlay={true}
+          fadeOutAnimation={true}
+          mouseDragEnabled={true}
+          disableAutoPlayOnAction={true}
+        >
+          {cardList}
+        </AliceCarousel>
       </div>
       {modalIsOpen ? (
         <PromotionModal

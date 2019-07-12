@@ -15,6 +15,8 @@ import Alert from "react-s-alert";
 import Modal from "@common/modal";
 import ModalContent from "./ModalContent";
 
+import { WidthContext } from "@components/common/context/ContextProvider";
+
 import {
   Card,
   CardContent,
@@ -42,21 +44,24 @@ const Room = ({ data, fullWidth, close, open }) => {
   const [miniBar, setMiniBar] = useState(false);
   const [balcony, setBalcony] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
+  const [adultNum, setAdultNum] = useState("");
+  const [childrenNum, setChildrenNum] = useState("");
   const [services, setServices] = React.useState({
     gym: false,
     sports: false,
     restaurant: false,
     wellness: false
   });
-
-  const [adultNum, setAdultNum] = useState("");
-  const [childrenNum, setChildrenNum] = useState("");
-
   const [state, setState] = React.useState({
     checkIn: new Date(),
     checkOut: new Date()
   });
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const { windowWidth } = React.useContext(WidthContext);
 
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const classes = useStyles();
@@ -122,7 +127,7 @@ const Room = ({ data, fullWidth, close, open }) => {
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2" align="center">
-              {data.room_number}
+              No. {data.room_number}
             </Typography>
             <div>
               <p className="text-center italic mt-4 text-gray-600 text-xl">
@@ -133,7 +138,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                   id="wifi"
                   className={`${
                     wifi ? "text-white bg-teal-500" : "text-black  shadow-md"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities`}
+                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0 `}
                 >
                   <i className="fas fa-wifi" />
                   <br />
@@ -143,7 +148,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                   id="tv"
                   className={`${
                     tv ? "text-white bg-teal-500" : "text-black  shadow-md "
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities`}
+                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
                 >
                   <i className="fas fa-tv" />
                   <br />
@@ -153,7 +158,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                   id="ac"
                   className={`${
                     ac ? "text-white bg-teal-500" : "text-black  shadow-md "
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities`}
+                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
                 >
                   <i className="fas fa-fan" />
                   <br />
@@ -165,7 +170,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                     miniBar
                       ? "text-white bg-teal-500"
                       : "text-black  shadow-md black"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities`}
+                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
                 >
                   <i className="fas fa-cocktail" />
                   <br />
@@ -177,7 +182,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                     balcony
                       ? "text-white bg-teal-500"
                       : "text-black  shadow-md black"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities`}
+                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
                 >
                   <i className="fas fa-building" />
                   <br />
@@ -190,7 +195,7 @@ const Room = ({ data, fullWidth, close, open }) => {
               <div>
                 <p className="italic text-gray-600">Select services:</p>
                 <div className="text-center">
-                  <div className="flex flex-wrap justify-center">
+                  <div className="flex flex-wrap justify-center ">
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -258,7 +263,7 @@ const Room = ({ data, fullWidth, close, open }) => {
             <div className="mt-4">
               <p className="italic text-gray-600 mb-4">Period:</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <div className="flex justify-around">
+                <div className="flex justify-around flex-col md:flex-row">
                   <DatePicker
                     value={state.checkIn}
                     label="Check In"
@@ -266,6 +271,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                   />
                   <DatePicker
                     value={state.checkOut}
+                    style={{ marginTop: windowWidth > 768 ? null : "20px" }}
                     label="Check Out"
                     onChange={value => setState({ ...state, checkOut: value })}
                   />
@@ -275,7 +281,7 @@ const Room = ({ data, fullWidth, close, open }) => {
 
             <div className="mt-6">
               <p className="italic text-gray-600">Guests number:</p>
-              <div className="flex justify-around">
+              <div className="flex justify-around flex-col md:flex-row">
                 <TextField
                   id="standard-name"
                   label="Adults"

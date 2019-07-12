@@ -15,6 +15,7 @@ import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Button } from "@material-ui/core";
 
 import { getAllRooms } from "../../services/http/endpoints/rooms";
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 // Components
 import RoomList from "./components/RommList";
@@ -41,7 +42,10 @@ const Booking = props => {
   const [roomId, setRoomId] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const { windowWidth } = React.useContext(WidthContext);
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     getData(currentPage);
   }, []);
 
@@ -76,7 +80,7 @@ const Booking = props => {
           <br />
           Booking
         </h1>
-        <div className="filter container mx-auto mt-2">
+        <div className="filter container mx-auto mt-2 px-4 md:px-0">
           <h1 className="text-gray-600 italic py-8 font-semibold text-2xl">
             Filter:
           </h1>
@@ -84,23 +88,26 @@ const Booking = props => {
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <div className="flex flex-wrap">
                 <DatePicker
+                  fullWidth={windowWidth > 768 ? null : true}
                   value={checkIn}
                   label="Check In Date:"
                   onChange={value => setCheckIn(value)}
                 />
                 <div className="mx-4" />
                 <DatePicker
+                  fullWidth={windowWidth > 768 ? null : true}
                   value={checkOut}
                   label="Check Out Date:"
                   onChange={value => setCheckOut(value)}
+                  style={{ marginTop: windowWidth > 768 ? null : "20px" }}
                 />
                 <div className="mx-4" />
 
-                <div>
+                <div className="w-full mt-5">
                   <FormControl>
                     <InputLabel htmlFor="age-simple">Number of beds</InputLabel>
                     <Select
-                      style={{ width: "200px" }}
+                      style={{ width: windowWidth < 768 ? "200px" : "100%" }}
                       value={roomType}
                       onChange={value => setRoomType(value)}
                       inputProps={{
@@ -122,6 +129,7 @@ const Booking = props => {
                     id="standard-uncontrolled"
                     label="From"
                     defaultValue=""
+                    fullWidth={windowWidth > 768 ? null : true}
                   />
                   <div className="mx-4" />
 
@@ -129,13 +137,14 @@ const Booking = props => {
                     id="standard-uncontrolled"
                     label="To"
                     defaultValue=""
+                    fullWidth={windowWidth > 768 ? null : true}
                   />
                 </div>
               </div>
 
               <div className="mt-8">
                 <h1 className="italic  text-gray-600">Select facilites:</h1>
-                <div className="flex mt-4">
+                <div className="flex justify-between md:justify-start mt-4">
                   <div
                     id="wifi"
                     onClick={() => setWifi(!wifi)}
@@ -189,7 +198,7 @@ const Booking = props => {
                       balcony
                         ? "text-white bg-teal-500"
                         : "text-  shadow-md black"
-                    } text-center py-4 w-24 border border-gray-400 mr-2 fasilities hover:shadow-xl`}
+                    } text-center py-4 w-24 border border-gray-400 fasilities hover:shadow-xl`}
                   >
                     <i className="fas fa-building" />
                     <br />
@@ -206,7 +215,7 @@ const Booking = props => {
             </MuiPickersUtilsProvider>
           </div>
         </div>
-        <div className="container mx-auto mt-16">
+        <div className="container mx-auto mt-16 px-2">
           <h1 className="py-8 italic text-gray-600">Available rooms</h1>
 
           <RoomList data={roomList} handleGetDetails={handleGetDetails} />

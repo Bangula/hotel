@@ -6,6 +6,7 @@ import Map from "./components/Map";
 
 const ContactUs = () => {
   useEffect(() => {
+    window.scrollTo(0, 0);
     document.title = "Quantox Hotel - Contact";
   });
   return (
@@ -17,7 +18,7 @@ const ContactUs = () => {
           <br />
           Contact Us
         </h1>
-        <div className="flex contact-info container mx-auto mt-16 ">
+        <div className="flex flex-wrap contact-info container mx-auto mt-16 px-4 text-center md:text-left">
           <div className="w-full md:w-1/2 ">
             <h1 className="home-header  text-3xl text-gray-600">Info:</h1>
             <p className="leading-loose mt-8 text-lg">
@@ -33,7 +34,7 @@ const ContactUs = () => {
               info@quantox.com
             </p>
           </div>
-          <div className="w-full md:w-1/2 home-header">
+          <div className="w-full md:w-1/2 home-header mt-16 md:mt-0">
             <ContactForm />
           </div>
         </div>

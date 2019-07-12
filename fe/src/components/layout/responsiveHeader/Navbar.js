@@ -2,14 +2,22 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { NavLink, Link } from "react-router-dom";
 import Logo from "@assets/images/logo.png";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = ({ menuIsActive, setMenuIsActive }) => {
+  const isAdmin = useSelector(state => state.user.isAdmin);
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const dispatch = useDispatch();
   let menuPosition;
   if (menuIsActive) {
     menuPosition = "0px";
   } else {
     menuPosition = "-100%";
   }
+  const handleLogout = () => {
+    setMenuIsActive();
+    dispatch({ type: "LOGOUT_USER" });
+  };
   return (
     <div
       className="h-screen lg:hidden bg-gray-800 left-0 fixed z-50 p-4 top-0  w-2/3 sm:w-1/2 md:w-1/3"
@@ -31,7 +39,7 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
           />
         </div>
         <button onClick={setMenuIsActive}>
-          <i class="fas fa-chevron-left" />
+          <i className="fas fa-chevron-left" />
         </button>
       </div>
       <nav className="w-full text-gray-200" style={{ margin: "0 auto" }}>
@@ -85,20 +93,7 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
           >
             REVIEWS
           </NavLink>
-          <NavLink
-            onClick={setMenuIsActive}
-            className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
-            to="/login"
-          >
-            LOGIN
-          </NavLink>
-          <NavLink
-            onClick={setMenuIsActive}
-            className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
-            to="/register"
-          >
-            REGISTER
-          </NavLink>
+
           <NavLink
             onClick={setMenuIsActive}
             className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
@@ -106,6 +101,43 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
           >
             CONTACT US
           </NavLink>
+          {isAuthenticated ? (
+            <>
+              <NavLink
+                onClick={handleLogout}
+                className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
+                to="/"
+              >
+                LOGOUT
+              </NavLink>
+              {isAdmin ? (
+                <NavLink
+                  onClick={setMenuIsActive}
+                  className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
+                  to="/admin"
+                >
+                  ADMIN PANEL
+                </NavLink>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <NavLink
+                onClick={setMenuIsActive}
+                className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
+                to="/login"
+              >
+                LOGIN
+              </NavLink>
+              <NavLink
+                onClick={setMenuIsActive}
+                className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
+                to="/register"
+              >
+                REGISTER
+              </NavLink>
+            </>
+          )}
         </div>
       </nav>
     </div>

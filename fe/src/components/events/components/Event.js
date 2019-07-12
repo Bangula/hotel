@@ -9,6 +9,7 @@ import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 import {
   Card,
@@ -27,15 +28,16 @@ const useStyles = makeStyles({
   },
   media: {
     height: "100%",
-    width: "40vh"
+    width: "30vw"
   },
   content: {
     paddin: "20px 20px"
   }
 });
-const Event = ({ event, join }) => {
-  const user = useSelector(state => state.user);
 
+const Event = ({ event, join }) => {
+  const { windowWidth } = React.useContext(WidthContext);
+  const user = useSelector(state => state.user);
   const joinUserToEvent = async () => {
     const { data, error } = await joinToEvent(event.id);
     if (data) {
@@ -59,16 +61,23 @@ const Event = ({ event, join }) => {
   };
 
   return (
-    <div className="">
-      <Card className={`${classes.card} hover:shadow-2xl`}>
+    <div className="px-4 md:px-0">
+      <Card
+        className={`${classes.card} hover:shadow-2xl`}
+        style={{ flexDirection: windowWidth < 1024 ? "column" : "row" }}
+      >
         <div>
           <CardMedia
             className={`${classes.media} relative `}
             image={room1}
             title={event.title}
+            style={{
+              width: windowWidth < 1024 ? "100vw" : "30vw",
+              height: windowWidth < 1024 ? "260px" : "100%"
+            }}
           />
         </div>
-        <div className={join ? "pl-16 pb-8" : null}>
+        <div className={join ? "md:pl-16 pb-8" : null}>
           <CardContent className={classes.content}>
             <Typography gutterBottom variant="h5" component="h2" align="center">
               {event.title}

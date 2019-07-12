@@ -4,9 +4,7 @@ import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Link } from "react-router-dom";
 
-import WindowWidthProvider, {
-  WidthContext
-} from "@components/common/context/WindowWidthProvider";
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 const CheckBar = props => {
   const [state, setState] = React.useState({

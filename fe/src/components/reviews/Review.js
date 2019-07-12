@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 import {
   Card,
@@ -23,12 +24,14 @@ const useStyles = makeStyles({
   }
 });
 const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
+  const { windowWidth } = React.useContext(WidthContext);
   const classes = useStyles();
   // console.log("REVIEW PROPS", hotel_rate, room_rate, accommodation_rate);
   const averageRating = (hotel_rate + room_rate + accommodation_rate) / 3;
   //  console.log(averageRating);
+
   return (
-    <Card className={`${classes.card} hover:shadow-2xl  mb-6`}>
+    <Card className={`${classes.card} hover:shadow-2xl mb-6`}>
       <CardContent className="flex justify-between">
         <Typography variant="h5" component="h2" align="left">
           User Review
@@ -94,7 +97,7 @@ const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
 
       <Divider variant="middle" />
 
-      <CardContent className="flex justify-between">
+      <CardContent className="flex flex-wrap justify-between">
         <Typography variant="h5" component="h2" align="left">
           Comment :
         </Typography>
@@ -102,7 +105,7 @@ const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
           variant="body2"
           color="textSecondary"
           component="p"
-          className="w-9/12 text-justify"
+          className="w-full mt-0 mt-4 md:w-9/12 text-justify"
         >
           A spacious deluxe room which has a double bed and a single bed. Ideal
           for any... A spacious deluxe room which has a double bed and a single

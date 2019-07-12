@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Room from "@components/rooms/components/Room";
 
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { getRoomById } from "../../../services/http/endpoints/rooms";
 
@@ -35,24 +30,6 @@ const RoomDetails = ({ id, open, close }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        {/* <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={close} color="primary">
-            Disagree
-          </Button>
-          <Button onClick={close
-        } color="primary" autoFocus>
-            Agree
-          </Button>
-        </DialogActions> */}
         <div>
           <Room data={data} fullWidth close={close} />
         </div>

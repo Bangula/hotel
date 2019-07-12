@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { subscribeUser } from "../../../services/http/endpoints/subscribe";
 import Alert from "react-s-alert";
 
@@ -10,8 +10,13 @@ import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import ArrowForward from "@material-ui/icons/ArrowForward";
 
-import { Field, Formik, ErrorMessage } from "formik";
-import * as Yup from "yup";
+// Galery images
+import hotel1 from "@assets/images/footer/hotel1.jpg";
+import hotel2 from "@assets/images/footer/hotel2.jpg";
+import hotel3 from "@assets/images/footer/hotel3.jpg";
+import hotel4 from "@assets/images/footer/hotel4.jpg";
+
+import { WidthContext } from "@components/common/context/ContextProvider";
 
 import Logo from "@assets/images/logo.png";
 
@@ -38,17 +43,9 @@ const useStyles = makeStyles({
 const Footer = () => {
   const [email, setEmail] = React.useState("");
 
+  const { windowWidth } = React.useContext(WidthContext);
+
   const classes = useStyles();
-
-  const Schema = Yup.object().shape({
-    name: Yup.string()
-      .email("Must be valid email.")
-      .required("Name is required")
-  });
-
-  const initialValues = {
-    email: ""
-  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -69,14 +66,15 @@ const Footer = () => {
   return (
     <div className="footer absolute w-full py-8">
       <div className="container mx-auto pb-8">
-        <div className="flex flex-wrap">
-          <div className="weather md:w-3/12 px-2">
+        <div className="flex flex-wrap px-4 md:px-0">
+          <div className="weather md:w-3/12 px-2 text-center md:text-left">
             <img
               src={Logo}
               alt="quantox logo"
               className=""
               style={{
-                width: "200px"
+                width: "200px",
+                margin: windowWidth < 768 ? "0 auto" : null
               }}
             />
             <p className="text-sm text-gray-400 pt-4">
@@ -87,12 +85,45 @@ const Footer = () => {
             </p>
           </div>
 
-          <div className=" md:w-3/12 px-2">
-            <h1 className="text-gray-200 text-xl italic">Gallery</h1>
+          <div className="w-full md:w-3/12 px-2">
+            <h1 className="text-gray-200 text-xl italic text-center md:text-left mt-4 md:mt-0">
+              Gallery
+            </h1>
+            <div className="flex mt-4 px-2 flex-wrap">
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel1} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel2} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel3} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel1} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel4} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel1} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel4} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel3} alt="hotel room" />
+              </Link>
+              <Link to="/gallery">
+                <img className="mb-2 mr-2" src={hotel2} alt="hotel room" />
+              </Link>
+            </div>
           </div>
 
-          <div className="socialIcons  md:w-3/12 px-2">
-            <h1 className="text-gray-200 text-xl italic">Contact Us</h1>
+          <div className="socialIcons w-full md:w-3/12 px-2 text-center md:text-left">
+            <h1 className="text-gray-200 text-xl italic mt-4 md:mt-0">
+              Contact Us
+            </h1>
             <p className="text-sm text-gray-400 pt-4">
               Kraljevackog Bataljona bb
             </p>
@@ -101,8 +132,10 @@ const Footer = () => {
             <p className="text-sm text-gray-400 ">Tel.: +1 998 150 3020</p>
             <p className="text-sm text-gray-400 mt-2">quantox@contact.com</p>
           </div>
-          <div className="subscribe  md:w-3/12 text-left px-2">
-            <h1 className="text-gray-200 text-xl italic">Stay in touch</h1>
+          <div className="subscribe w-full md:w-3/12 text-left px-2">
+            <h1 className="text-gray-200 text-xl italic text-center md:text-left mt-4 md:mt-0">
+              Stay in touch
+            </h1>
             <br />
             <form onSubmit={handleSubmit}>
               <Paper className={classes.root}>
@@ -128,7 +161,7 @@ const Footer = () => {
 
             <br />
 
-            <div className="py-4 flex mt-2">
+            <div className="py-4 flex justify-center md:justify-left mt-2 ">
               <a
                 href="#"
                 className="mr-4 text-white text-xl hover:text-gray-600"
@@ -158,7 +191,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="container mx-auto copyright border-t border-gray-400">
-        <p className="text-sm text-gray-400 pt-8">
+        <p className="text-sm text-gray-400 pt-8 text-center md:text-left">
           Copyright © 2019 Quantox Hotel
         </p>
       </div>

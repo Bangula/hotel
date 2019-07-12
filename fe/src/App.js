@@ -21,13 +21,13 @@ import Admin from "@components/admin/Admin";
 import Dashboard from "@components/admin/Dashboard";
 import UserProfile from "@components/user/UserProfile";
 import Footer from "./components/layout/footer/Footer";
-import WindowWidthProvider from "@components/common/context/WindowWidthProvider";
+import ContextProvider from "@components/common/context/ContextProvider";
 
 function App(props) {
   const hideLayout = useSelector(state => state.user.hideLayout);
   return (
     <BrowserRouter history={history}>
-      <WindowWidthProvider>
+      <ContextProvider>
         <div className="App">
           <div>
             {hideLayout ? null : <Header />}
@@ -49,7 +49,7 @@ function App(props) {
             {hideLayout ? null : <Footer />}
           </div>
         </div>
-      </WindowWidthProvider>
+      </ContextProvider>
     </BrowserRouter>
   );
 }

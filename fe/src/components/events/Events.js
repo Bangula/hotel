@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import bgImage from "../../assets/images/events-bg.jpg";
-
 import { getAllEvents } from "../../services/http/endpoints/events";
 
 const useStyles = makeStyles(theme => ({
@@ -26,6 +24,7 @@ const Events = () => {
   const [loader, setLoader] = useState(true);
 
   React.useEffect(() => {
+    window.scrollTo(0, 0);
     getData();
   }, []);
 

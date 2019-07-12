@@ -29,6 +29,9 @@ const useStyles = makeStyles(theme => ({
 export default function Cart() {
   const promotions = useSelector(state => state.cart.promotions);
   const rooms = useSelector(state => state.cart.rooms);
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const cartItems = promotions.concat(rooms);
 
   const dispatch = useDispatch();
