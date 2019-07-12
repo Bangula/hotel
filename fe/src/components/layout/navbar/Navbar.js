@@ -10,48 +10,64 @@ const Navbar = () => {
     >
       <nav className="w-full text-center" style={{ margin: "0 auto" }}>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/"
         >
           HOME
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/booking"
         >
           BOOKING
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/rooms"
         >
           ROOMS
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/events"
         >
           EVENTS
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/services"
         >
           SERVICES
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/gallery"
         >
           GALLERY
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/reviews"
         >
           REVIEWS
         </NavLink>
         <NavLink
+          exact
+          activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/contact-us"
         >

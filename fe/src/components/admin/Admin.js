@@ -359,54 +359,23 @@ const Admin = props => {
                 </Collapse>
                 {/* ////////////////////// end ROOMS ///////////////////////////*/}
 
-                <ListItem
-                  button
-                  onClick={() => setOpenPromotions(!openPromotions)}
+                <NavLink
+                  exact
+                  to="/admin/promotions"
+                  activeClassName="admin-link"
                 >
-                  <ListItemIcon>
-                    <Icon
-                      className={clsx(classes.icon, "fas fa-ad")}
-                      color="action"
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary="Promotions" />
-                  {openPromotions ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
+                  <ListItem button>
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-ad")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Promotions" />
+                  </ListItem>
+                </NavLink>
+
                 <Divider component="li" variant="middle" />
-                <Collapse
-                  in={openPromotions}
-                  timeout="auto"
-                  unmountOnExit
-                  className={classes.nested}
-                >
-                  <List component="div" className={classes.submenu}>
-                    <NavLink
-                      exact
-                      to="/admin/promotions"
-                      activeClassName="admin-link"
-                    >
-                      <ListItem button>
-                        <ListItemText primary="Promotions" />
-                      </ListItem>
-                    </NavLink>
-                    <NavLink
-                      to="/admin/promotions/create"
-                      activeClassName="admin-link"
-                    >
-                      <ListItem button>
-                        <ListItemText primary="Create Promotion" />
-                      </ListItem>
-                    </NavLink>
-                    <NavLink
-                      to="/admin/promotions/edit"
-                      activeClassName="admin-link"
-                    >
-                      <ListItem button>
-                        <ListItemText primary="Edit Promotions" />
-                      </ListItem>
-                    </NavLink>
-                  </List>
-                </Collapse>
 
                 {/* //////////////////////// END PROMOTIONS//////////////////// */}
 
@@ -636,16 +605,7 @@ const Admin = props => {
                     path={`/admin/promotions`}
                     component={Promotions}
                   />
-                  <Route
-                    exact
-                    path={`/admin/promotions/create`}
-                    component={Promotions}
-                  />
-                  <Route
-                    exact
-                    path={`/admin/promotions/edit`}
-                    component={Promotions}
-                  />
+
                   <Route
                     exact
                     path={`/admin/subscribers`}

@@ -5,6 +5,11 @@ export const getPromotions = () => {
   return toResponse(http.get("/promotions"));
 };
 
+//http://api.quantox-hotel.local/v1/promotions?page=2
+
+export const getPromotionsPerPage = page => {
+  return toResponse(http.get(`/promotions?page=${page}`));
+};
 export const getPromotionById = id => {
   return toResponse(http.get(`/promotions/${id}`));
 };
