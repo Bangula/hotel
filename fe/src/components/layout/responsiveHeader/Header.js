@@ -57,7 +57,10 @@ const Header = () => {
           />
         </div>
         <div className="self-center">
-          <NavLink className="font-semibold  hover:text-gray-300" to="/cart">
+          <NavLink
+            className="font-semibold  hover:text-gray-300"
+            to="/cart mr-2"
+          >
             <IconButton
               aria-label="Cart"
               className="text-white"

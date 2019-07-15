@@ -182,7 +182,7 @@ const Reviews = () => {
         <br />
         Reviews
       </h1>
-      <div className="container mx-auto text-center mt-16">
+      <div className="container mx-auto text-center mt-16 px-2">
         <List
           component="nav"
           aria-labelledby="nested-list-subheader"

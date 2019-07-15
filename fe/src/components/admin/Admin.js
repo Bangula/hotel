@@ -46,6 +46,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
+import { WidthContext } from "@components/common/context/ContextProvider";
+
 import { Switch, Route, NavLink, Link, Redirect } from "react-router-dom";
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -130,12 +132,17 @@ const Admin = props => {
   const [openPromotions, setOpenPromotions] = React.useState(false);
   const [openEvents, setOpenEvents] = React.useState(false);
 
+  const { windowWidth } = React.useContext(WidthContext);
+
   const dispatch = useDispatch();
   const hideLayout = useSelector(state => state.user.hideLayout);
   const isAdmin = useSelector(state => state.user.isAdmin);
   const userName = useSelector(state => state.user.info.data.first_name);
 
   useEffect(() => {
+    if (windowWidth < 768) {
+      setOpen(false);
+    }
     dispatch({
       type: "HIDE_LAYOUT"
     });
@@ -185,7 +192,7 @@ const Admin = props => {
                   </ListItemIcon>
                   <ListItemText primary={userName} />
                 </ListItem>
-                <div className="w-2/12">
+                <div className="hidden md:block w-2/12">
                   <Link
                     style={{ transition: "all 0.1s" }}
                     to="/"
@@ -527,6 +534,20 @@ const Admin = props => {
                     />
                   </ListItemIcon>
                   <ListItemText primary="Logout" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={() => {
+                    props.history.push("/");
+                  }}
+                >
+                  <ListItemIcon>
+                    <Icon
+                      className={clsx(classes.icon, "fas fa-sign-out-alt")}
+                      color="action"
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary="Close panel" />
                 </ListItem>
               </List>
               <Divider />
