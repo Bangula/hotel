@@ -17,6 +17,8 @@ import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 //import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 import { getServices } from "@endpoints/services";
+import { getRoomTypes } from "@endpoints/rooms";
+import { createPromotion } from "@endpoints/promotions";
 
 import Modal from "../Modal";
 //initial values formik
@@ -57,6 +59,8 @@ const CreateOrEditPromotion = props => {
 
   const [services, setServices] = useState([]);
   const [selectedService, setSelectedService] = useState([]);
+  const [roomTypes, setRoomTypes] = useState([]);
+  const [selectedRoomType, setSelectedRoomType] = useState("");
 
   const [invalidName, setInvalidName] = useState("");
   const [invalidDescription, setInvalidDescription] = useState("");
@@ -91,7 +95,7 @@ const CreateOrEditPromotion = props => {
 
   const initialValues = {
     name: "",
-    price: "",
+    // price: "",
     description: "",
     discount: "",
     discount_children: "",
@@ -99,14 +103,32 @@ const CreateOrEditPromotion = props => {
     ending_at: endingAt,
     services: selectedService ? selectedService : "",
     facilities: ["y59ovgexpal8p6dr"],
-    room_types: { count: "1", room_type_id: "2" }
+    // room_types: { count: "1", room_type_id: "2" }
+    room_types: selectedRoomType ? selectedRoomType : ""
   };
 
+  const createSinglePromotion = async values => {
+    const { data, error } = await createPromotion(values);
+    if (data) {
+      console.log("Promotion created");
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
   const getAllServices = async () => {
     const { data, error } = await getServices();
     if (data) {
       setServices(data.data.data);
       console.log("services fethed", data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  };
+  const getAllRoomTypes = async (page = 1) => {
+    const { data, error } = await getRoomTypes(page);
+    if (data) {
+      setRoomTypes(data.data.data);
+      console.log("Room Types fethed", data.data);
     } else if (error) {
       console.log(error.response);
     }
@@ -125,6 +147,7 @@ const CreateOrEditPromotion = props => {
   //console.log("edit facility props", facility);
   useEffect(() => {
     getAllServices();
+    getAllRoomTypes();
   }, []);
 
   return (
@@ -137,7 +160,7 @@ const CreateOrEditPromotion = props => {
             enableReinitialize
             onSubmit={(values, actions) => {
               console.log("Edit or create facility", values);
-
+              createSinglePromotion(values);
               // if (Object.keys(facility).length && facility.id) {
               //   handleClickOpenModal();
               //   setModalInfo1(values);
@@ -162,6 +185,10 @@ const CreateOrEditPromotion = props => {
             }) => {
               if (values.services !== "") {
                 setSelectedService(values.services);
+              }
+              console.log("room type", values.room_types);
+              if (values.room_types !== "") {
+                setSelectedRoomType(values.room_types);
               }
               // if (values.room_type_id !== "") {
               //   setRoomTypeId(values.room_type_id);
@@ -197,7 +224,6 @@ const CreateOrEditPromotion = props => {
                         : false
                     }
                   />
-
                   {(errors.name && touched.name) || invalidName ? (
                     <span className="text-danger">
                       {errors.name || invalidName}
@@ -219,14 +245,12 @@ const CreateOrEditPromotion = props => {
                         : false
                     }
                   />
-
                   {(errors.description && touched.description) ||
                   invalidDescription ? (
                     <span className="text-danger">
                       {errors.description || invalidDescription}
                     </span>
                   ) : null}
-
                   <TextField
                     margin="normal"
                     type="text"
@@ -242,13 +266,11 @@ const CreateOrEditPromotion = props => {
                         : false
                     }
                   />
-
                   {(errors.discount && touched.discount) || invalidDiscount ? (
                     <span className="text-danger">
                       {errors.discount || invalidDiscount}
                     </span>
                   ) : null}
-
                   <TextField
                     margin="normal"
                     type="text"
@@ -265,14 +287,12 @@ const CreateOrEditPromotion = props => {
                         : false
                     }
                   />
-
                   {(errors.discount_children && touched.discount_children) ||
                   invalidDiscountChildren ? (
                     <span className="text-danger">
                       {errors.discount_children || invalidDiscountChildren}
                     </span>
                   ) : null}
-
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <Grid
                       container
@@ -298,11 +318,11 @@ const CreateOrEditPromotion = props => {
 
                   <FormControl className="w-full ">
                     <InputLabel htmlFor="age-simple">
-                      Select Room Type
+                      Select Services
                     </InputLabel>
                     <Select
                       className="mb-8"
-                      value={selectedService}
+                      value={values.services}
                       onChange={handleChange}
                       onBlur={handleBlur}
                       inputProps={{
@@ -331,7 +351,41 @@ const CreateOrEditPromotion = props => {
                       </span>
                     ) : null}{" "}
                   </FormControl>
-                  {/* end select */}
+
+                  <FormControl className="w-full ">
+                    <InputLabel htmlFor="simple">Select Room Types</InputLabel>
+                    <Select
+                      className="mb-8"
+                      value={values.room_types}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      inputProps={{
+                        name: "room_types",
+                        id: "simple"
+                      }}
+                      error={
+                        (errors.room_types && touched.room_types) ||
+                        invalidService
+                          ? true
+                          : false
+                      }
+                    >
+                      {roomTypes.length
+                        ? roomTypes.map(type => {
+                            return (
+                              <MenuItem value={type.id} key={type.id}>
+                                {type.name}
+                              </MenuItem>
+                            );
+                          })
+                        : null}
+                    </Select>
+                    {/* {(errors.services && touched.services) || invalidService ? (
+                      <span className="text-danger">
+                        {errors.services || invalidService}
+                      </span>
+                    ) : null}{" "} */}
+                  </FormControl>
 
                   {/* OVDE MODAL */}
                   <Button

@@ -139,10 +139,16 @@ const Admin = props => {
   const isAdmin = useSelector(state => state.user.isAdmin);
   const userName = useSelector(state => state.user.info.data.first_name);
 
+  //for nav menu
   useEffect(() => {
     if (windowWidth < 768) {
       setOpen(false);
+    } else {
+      setOpen(true);
     }
+  }, [windowWidth]);
+
+  useEffect(() => {
     dispatch({
       type: "HIDE_LAYOUT"
     });
@@ -535,20 +541,23 @@ const Admin = props => {
                   </ListItemIcon>
                   <ListItemText primary="Logout" />
                 </ListItem>
-                <ListItem
-                  button
-                  onClick={() => {
-                    props.history.push("/");
-                  }}
-                >
-                  <ListItemIcon>
-                    <Icon
-                      className={clsx(classes.icon, "fas fa-sign-out-alt")}
-                      color="action"
-                    />
-                  </ListItemIcon>
-                  <ListItemText primary="Close panel" />
-                </ListItem>
+
+                {windowWidth < 768 ? (
+                  <ListItem
+                    button
+                    onClick={() => {
+                      props.history.push("/");
+                    }}
+                  >
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-sign-out-alt")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Close panel" />
+                  </ListItem>
+                ) : null}
               </List>
               <Divider />
             </Drawer>
