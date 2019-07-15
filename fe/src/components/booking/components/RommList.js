@@ -37,25 +37,27 @@ export default function SimpleTable({ data, handleGetDetails }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map(room => (
-              <TableRow key={room.id}>
-                <TableCell component="th" scope="row">
-                  {room.room_number}
-                </TableCell>
-                <TableCell align="left">3</TableCell>
-                <TableCell align="left">3</TableCell>
-                <TableCell align="left">50$/Night</TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={e => handleGetDetails(room.id)}
-                  >
-                    Details
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
+            {data
+              .filter(item => item.usable > 0)
+              .map(room => (
+                <TableRow key={room.id}>
+                  <TableCell component="th" scope="row">
+                    {room.room_number}
+                  </TableCell>
+                  <TableCell align="left">3</TableCell>
+                  <TableCell align="left">3</TableCell>
+                  <TableCell align="left">50$/Night</TableCell>
+                  <TableCell align="right">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleGetDetails(room.id)}
+                    >
+                      Details
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </Paper>

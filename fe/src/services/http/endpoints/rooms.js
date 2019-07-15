@@ -2,11 +2,15 @@ import http from "../index";
 import toResponse from "@helpers/toResponse";
 
 export const getAllRooms = pageNum => {
-  return toResponse(http.get(`/rooms?page=${pageNum}`));
+  return toResponse(
+    http.get(`/rooms?page=${pageNum}?include=roomType,facilities,gallery`)
+  );
 };
 
 export const getRoomById = id => {
-  return toResponse(http.get(`/rooms/${id}`));
+  return toResponse(
+    http.get(`/rooms/${id}?include=roomType,facilities,gallery`)
+  );
 };
 export const createRoom = credentials => {
   return toResponse(http.post("/rooms", credentials));

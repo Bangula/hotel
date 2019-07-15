@@ -11,7 +11,9 @@ export const getPromotionsPerPage = page => {
   return toResponse(http.get(`/promotions?page=${page}`));
 };
 export const getPromotionById = id => {
-  return toResponse(http.get(`/promotions/${id}`));
+  return toResponse(
+    http.get(`/promotions/${id}?include=roomTypes,file,services,facilities`)
+  );
 };
 
 export const createPromotion = credentials => {

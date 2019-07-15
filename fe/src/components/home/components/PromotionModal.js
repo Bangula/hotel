@@ -51,7 +51,7 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
     const { data, error } = await getPromotionById(modalId);
     if (data) {
       setPromoDetails(data.data.data);
-      console.log(data.data.data);
+      console.log(data);
     } else if (error) {
       console.log(error);
     }
@@ -72,9 +72,9 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
 
             <Typography gutterBottom>{promoDetails.description}</Typography>
           </div>
-          <div>
+          <div className="px-4 md:px-0">
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <div className="flex justify-around">
+              <div className="flex flex-col md:flex-row justify-around">
                 <DatePicker
                   value={state.checkIn}
                   label="Check In"
@@ -90,7 +90,7 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
           </div>
           <div className="mt-6">
             <p className="italic text-gray-600 pl-4">Guests number:</p>
-            <div className="flex justify-around">
+            <div className="flex flex-col md:flex-row justify-around px-4 md:px-0">
               <TextField
                 id="standard-name"
                 label="Adults"

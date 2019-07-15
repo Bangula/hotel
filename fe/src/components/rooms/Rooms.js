@@ -46,6 +46,7 @@ const Rooms = () => {
     const { data, error } = await getAllRooms(page);
 
     if (data) {
+      console.log(data);
       setAllRooms(data.data.data);
       setLoader(false);
       setTotalPages(data.data.meta.pagination.total_pages);

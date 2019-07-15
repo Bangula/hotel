@@ -58,8 +58,8 @@ const Header = () => {
         </div>
         <div className="self-center">
           <NavLink
-            className="font-semibold  hover:text-gray-300"
-            to="/cart mr-2"
+            className="font-semibold  hover:text-gray-300 mr-2"
+            to="/cart"
           >
             <IconButton
               aria-label="Cart"

@@ -57,7 +57,7 @@ const Booking = props => {
     const { data, error } = await getAllRooms(page);
 
     if (data) {
-      console.log(data.data.data);
+      console.log(data);
       setRoomList(data.data.data);
       setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
@@ -115,9 +115,10 @@ const Booking = props => {
                         id: "age-simple"
                       }}
                     >
-                      <MenuItem value={1}>One bed</MenuItem>
-                      <MenuItem value={2}>Two beds</MenuItem>
-                      <MenuItem value={3}>Three beds</MenuItem>
+                      <MenuItem value={1}>One</MenuItem>
+                      <MenuItem value={2}>Two</MenuItem>
+                      <MenuItem value={3}>Three</MenuItem>
+                      <MenuItem value={3}>Four</MenuItem>
                     </Select>
                   </FormControl>
                 </div>

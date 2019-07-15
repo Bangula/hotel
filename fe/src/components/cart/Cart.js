@@ -174,7 +174,7 @@ export default function Cart() {
               <RouteLink
                 style={{ transition: "all 0.3s" }}
                 className="border border-blue-400 text-blue-600 px-8 py-4 rounded-lg hover:text-blue-400 shadow-lg hover:shadow-xl"
-                to="/rooms"
+                to="/booking"
               >
                 Show available rooms
               </RouteLink>

@@ -2,7 +2,9 @@ import http from "../index";
 import toResponse from "@helpers/toResponse";
 
 export const getAllEvents = page => {
-  return toResponse(http.get(`/events?page=${page}`));
+  return toResponse(
+    http.get(`/events?page=${page}?include=songs,users,location`)
+  );
 };
 
 export const joinToEvent = id => {
@@ -18,7 +20,7 @@ export const createEvent = obj => {
 };
 
 export const getEventById = id => {
-  return toResponse(http.get(`/events/${id}`));
+  return toResponse(http.get(`/events/${id}?include=songs,users,location`));
 };
 
 export const updateEvent = (obj, id) => {

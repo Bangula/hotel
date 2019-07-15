@@ -73,13 +73,13 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
             >
               BOOKING
             </NavLink>
-            <NavLink
+            {/* <NavLink
               onClick={setMenuIsActive}
               className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"
               to="/rooms"
             >
               ROOMS
-            </NavLink>
+            </NavLink> */}
             <NavLink
               onClick={setMenuIsActive}
               className="w-full mr-4 font-semibold border-b border-white hover:border-white py-4 navlink-transition tracking-widest"

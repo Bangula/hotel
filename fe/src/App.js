@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 
 // Components
 import Header from "@components/layout/header/Header";
-import Rooms from "@components/rooms/Rooms";
+// import Rooms from "@components/rooms/Rooms";
+import Room from "@components/rooms/components/Room";
 import Home from "@components/home/Home";
 import Booking from "@components/booking/Booking";
 import Events from "@components/events/Events";
@@ -34,7 +35,8 @@ function App(props) {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/booking" component={Booking} />
-              <Route path="/rooms" component={Rooms} />
+              {/* <Route path="/rooms" component={Rooms} /> */}
+              <Route path="/room" component={Room} />
               <Route path="/events" component={Events} />
               <Route path="/services" component={Services} />
               <Route path="/gallery" component={Gallery} />

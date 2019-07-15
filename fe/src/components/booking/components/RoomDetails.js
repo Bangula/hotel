@@ -16,6 +16,7 @@ const RoomDetails = ({ id, open, close }) => {
     const { data, error } = await getRoomById(id);
     if (data) {
       console.log(data);
+      setData(data.data.data);
     } else if (error) {
       console.log(error);
     }

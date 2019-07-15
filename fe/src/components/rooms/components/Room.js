@@ -38,11 +38,6 @@ const useStyles = makeStyles({
 });
 
 const Room = ({ data, fullWidth, close, open }) => {
-  const [wifi, setWifi] = useState(true);
-  const [tv, setTv] = useState(true);
-  const [ac, setAc] = useState(false);
-  const [miniBar, setMiniBar] = useState(false);
-  const [balcony, setBalcony] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [adultNum, setAdultNum] = useState("");
   const [childrenNum, setChildrenNum] = useState("");
@@ -102,12 +97,26 @@ const Room = ({ data, fullWidth, close, open }) => {
     }
   };
 
+  const facilitiesList =
+    Object.keys(data).length > 0
+      ? data.facilities.data.map(item => {
+          return (
+            <span
+              key={item.id}
+              className="border-r border-gray-400 px-4 px-2 text-gray-600 italic"
+            >
+              {item.name}
+            </span>
+          );
+        })
+      : null;
+
   return (
     <>
       <div
         className={`${
           fullWidth ? "w-full" : "md:w-6/12"
-        } room-item w-full  justify-between px-4 mt-16`}
+        } room-item w-full justify-between px-0 mt-16`}
       >
         <Card className={`${classes.card} hover:shadow-2xl`}>
           <CardMedia
@@ -122,72 +131,26 @@ const Room = ({ data, fullWidth, close, open }) => {
             color="primary"
             className={`${classes.fab} absolute mx-auto p-6`}
           >
-            <Link to="# "> $70/Night</Link>
+            <Link to="# ">
+              {`${
+                Object.keys(data).length > 0
+                  ? data.roomType.data.price_adult
+                  : null
+              }`}
+              $ /Night
+            </Link>
           </Fab>
 
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2" align="center">
-              No. {data.room_number}
+              {Object.keys(data).length > 0 ? data.roomType.data.name : null}
             </Typography>
             <div>
               <p className="text-center italic mt-4 text-gray-600 text-xl">
                 Facilities
               </p>
               <div className="flex flex-wrap justify-center text-center mt-4">
-                <div
-                  id="wifi"
-                  className={`${
-                    wifi ? "text-white bg-teal-500" : "text-black  shadow-md"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0 `}
-                >
-                  <i className="fas fa-wifi" />
-                  <br />
-                  <span className="text-xs">WiFi</span>
-                </div>
-                <div
-                  id="tv"
-                  className={`${
-                    tv ? "text-white bg-teal-500" : "text-black  shadow-md "
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
-                >
-                  <i className="fas fa-tv" />
-                  <br />
-                  <span className="text-xs">TV</span>
-                </div>
-                <div
-                  id="ac"
-                  className={`${
-                    ac ? "text-white bg-teal-500" : "text-black  shadow-md "
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
-                >
-                  <i className="fas fa-fan" />
-                  <br />
-                  <span className="text-xs">A/C</span>
-                </div>
-                <div
-                  id="miniBar"
-                  className={`${
-                    miniBar
-                      ? "text-white bg-teal-500"
-                      : "text-black  shadow-md black"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
-                >
-                  <i className="fas fa-cocktail" />
-                  <br />
-                  <span className="text-xs">Mini Bar</span>
-                </div>
-                <div
-                  id="balcony"
-                  className={`${
-                    balcony
-                      ? "text-white bg-teal-500"
-                      : "text-black  shadow-md black"
-                  } text-center py-4 w-20 border border-gray-400 mr-2 fasilities mb-2 md:mb-0`}
-                >
-                  <i className="fas fa-building" />
-                  <br />
-                  <span className="text-xs">Balcony</span>
-                </div>
+                {facilitiesList}
               </div>
             </div>
 
@@ -298,9 +261,9 @@ const Room = ({ data, fullWidth, close, open }) => {
                 />
               </div>
             </div>
-            <div className="mt-8">
+            <div className="mt-8 ">
               {close ? (
-                <div className="flex flex-end">
+                <div className="flex flex-end w-full">
                   <Button
                     variant="contained"
                     color="secondary"

@@ -25,14 +25,14 @@ const Navbar = () => {
         >
           BOOKING
         </NavLink>
-        <NavLink
+        {/* <NavLink
           exact
           activeClassName="home-link"
           className="mr-4 font-semibold border-b border-transparent hover:border-white pb-4 navlink-transition tracking-widest"
           to="/rooms"
         >
           ROOMS
-        </NavLink>
+        </NavLink> */}
         <NavLink
           exact
           activeClassName="home-link"
