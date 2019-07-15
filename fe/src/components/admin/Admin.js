@@ -5,7 +5,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple, grey } from "@material-ui/core/colors";
-import Dashboard from "./Dashboard";
+import Dashboard from "./dashboard/Dashboard";
 import Users from "./users/Users";
 import Gallery from "./gallery/Gallery";
 import CreateGallery from "./gallery/CreateGallery";
@@ -141,6 +141,10 @@ const Admin = props => {
 
   //for nav menu
   useEffect(() => {
+    if (props.location.pathname === "/admin") {
+      props.history.push("/admin/dashboard");
+    }
+
     if (windowWidth < 768) {
       setOpen(false);
     } else {
@@ -166,7 +170,7 @@ const Admin = props => {
   function handleDrawerClose() {
     setOpen(false);
   }
-
+  console.log("admin props", props);
   return (
     <>
       {isAdmin ? (
