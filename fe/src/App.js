@@ -18,7 +18,7 @@ import Login from "@components/login/Login";
 import Register from "@components/register/Register";
 import Cart from "@components/cart/Cart";
 import Admin from "@components/admin/Admin";
-import Dashboard from "@components/admin/Dashboard";
+
 import UserProfile from "@components/user/UserProfile";
 import Footer from "./components/layout/footer/Footer";
 import ContextProvider from "@components/common/context/ContextProvider";
