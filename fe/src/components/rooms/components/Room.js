@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useSelector, useDispatch } from "react-redux";
+import { Field, Formik, Form, ErrorMessage } from "formik";
 
 import moment from "moment";
 
@@ -42,8 +43,11 @@ const useStyles = makeStyles({
 
 const Room = ({ data, fullWidth, close, open }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const [adultNum, setAdultNum] = useState("");
   const [childrenNum, setChildrenNum] = useState("");
+  const [maxPersons, setMaxPersons] = useState("");
+
   const [services, setServices] = React.useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [state, setState] = React.useState({
@@ -54,6 +58,7 @@ const Room = ({ data, fullWidth, close, open }) => {
   React.useEffect(() => {
     window.scrollTo(0, 0);
     getAllServices();
+    setMaxPersons(data.roomType ? data.roomType.data.max_persons : 4);
   }, []);
 
   const { windowWidth } = React.useContext(WidthContext);
@@ -217,7 +222,10 @@ const Room = ({ data, fullWidth, close, open }) => {
             </div>
 
             <div className="mt-6">
-              <p className="italic text-gray-600">Guests number:</p>
+              <p className="italic text-gray-600">
+                Guests number:
+                <span className="font-semibold">{` (Max. ${maxPersons})`}</span>
+              </p>
               <div className="flex justify-around flex-col md:flex-row">
                 <TextField
                   id="standard-name"
@@ -249,6 +257,14 @@ const Room = ({ data, fullWidth, close, open }) => {
                   <Button
                     variant="contained"
                     color="primary"
+                    disabled={
+                      Number(maxPersons) <
+                        Number(adultNum) + Number(childrenNum) ||
+                      adultNum === "" ||
+                      childrenNum === ""
+                        ? true
+                        : false
+                    }
                     onClick={handleSubmit}
                   >
                     ADD TO CART
@@ -259,6 +275,14 @@ const Room = ({ data, fullWidth, close, open }) => {
                   variant="contained"
                   color="primary"
                   fullWidth
+                  disabled={
+                    Number(maxPersons) <
+                      Number(adultNum) + Number(childrenNum) ||
+                    adultNum === "" ||
+                    childrenNum === ""
+                      ? true
+                      : false
+                  }
                   onClick={handleSubmit}
                 >
                   ADD TO CART

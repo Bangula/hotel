@@ -6,15 +6,21 @@ import InputModal from "./components/InputModal";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Moment from "react-moment";
+
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
 
 // Components
 import TabContainer from "./components/TabContainer";
 import { Redirect } from "react-router-dom";
 
-import {
-  updateUserInfo,
-  getLogedUser
-} from "../../services/http/endpoints/users";
+import { updateUserInfo, getLogedUser } from "@endpoints/users";
+import { getAllReservations } from "@endpoints/reservations";
 
 const useStyles = makeStyles(theme => ({
   submit: {
@@ -24,6 +30,14 @@ const useStyles = makeStyles(theme => ({
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper
     }
+  },
+  root: {
+    width: "100%",
+    marginTop: theme.spacing(3),
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 650
   }
 }));
 
@@ -31,6 +45,7 @@ const UserProfile = ({ adminPanel }) => {
   const user = useSelector(state => state.user.info.data);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [value, setValue] = useState(0);
+  const [reservations, setReservations] = useState([]);
 
   const [infoField, setInfoField] = useState("");
 
@@ -39,14 +54,29 @@ const UserProfile = ({ adminPanel }) => {
 
   useEffect(() => {
     getUserData();
+    getReservations();
     window.scrollTo(0, 0);
   }, []);
 
   async function getUserData() {
     const { data, error } = await getLogedUser();
     if (data) {
-      console.log(data.data.data);
+      console.log(data);
       setUserInfo(data.data.data);
+    } else if (error) {
+      console.log(error);
+    }
+  }
+  async function getReservations() {
+    const { data, error } = await getAllReservations(user.id);
+    if (data) {
+      console.log(data);
+      let userReservations = data.data.data.length
+        ? data.data.data.filter(item => {
+            return user.id === item.user.data.id;
+          })
+        : [];
+      setReservations(userReservations);
     } else if (error) {
       console.log(error);
     }
@@ -60,6 +90,37 @@ const UserProfile = ({ adminPanel }) => {
     setInfoField(e.target.id);
     setModalIsOpen(true);
   };
+
+  const reservationList =
+    reservations.length > 0 ? (
+      <Paper className={classes.root}>
+        <h1 className="p-2 italic">Reservations</h1>
+        <Table className={classes.table}>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell align="left">Booked</TableCell>
+              <TableCell align="right">Total price</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {reservations
+              ? reservations.map((item, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="left">{item.real_id}</TableCell>
+                    <TableCell align="left">
+                      <Moment format="YYYY/MM/DD">
+                        {item.created_at.date}
+                      </Moment>
+                    </TableCell>
+                    <TableCell align="right">{item.total_price}</TableCell>
+                  </TableRow>
+                ))
+              : null}
+          </TableBody>
+        </Table>
+      </Paper>
+    ) : null;
 
   return (
     <>
@@ -195,9 +256,7 @@ const UserProfile = ({ adminPanel }) => {
                     </div>
                   </TabContainer>
                 )}
-                {value === 1 && (
-                  <TabContainer>List of user rezervations</TabContainer>
-                )}
+                {value === 1 && <TabContainer>{reservationList}</TabContainer>}
               </div>
             </div>
 
