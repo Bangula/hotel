@@ -79,9 +79,11 @@ const CreateSong = ({ id, setValue }) => {
   const initialValues = {
     name: Object.keys(songData).length > 0 ? songData.name : "",
     artist: Object.keys(songData).length > 0 ? songData.artist : "",
+
     link: Object.keys(songData).length > 0 ? songData.link : "",
     duration: Object.keys(songData).length > 0 ? songData.duration : "",
-    genre_id: Object.keys(songData).length > 0 ? "" : "Rock"
+    genre_id:
+      Object.keys(songData).length > 0 ? songData.genre.data.name : "Rock"
   };
 
   if (Object.keys(songData).length > 0) console.log(songData.name);

@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useSelector, useDispatch } from "react-redux";
 
+import moment from "moment";
+
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
@@ -16,6 +18,7 @@ import Modal from "@common/modal";
 import ModalContent from "./ModalContent";
 
 import { WidthContext } from "@components/common/context/ContextProvider";
+import { getServices } from "@endpoints/services";
 
 import {
   Card,
@@ -41,12 +44,8 @@ const Room = ({ data, fullWidth, close, open }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [adultNum, setAdultNum] = useState("");
   const [childrenNum, setChildrenNum] = useState("");
-  const [services, setServices] = React.useState({
-    gym: false,
-    sports: false,
-    restaurant: false,
-    wellness: false
-  });
+  const [services, setServices] = React.useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
   const [state, setState] = React.useState({
     checkIn: new Date(),
     checkOut: new Date()
@@ -54,6 +53,7 @@ const Room = ({ data, fullWidth, close, open }) => {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    getAllServices();
   }, []);
 
   const { windowWidth } = React.useContext(WidthContext);
@@ -62,23 +62,35 @@ const Room = ({ data, fullWidth, close, open }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const handleChange = name => event => {
-    setServices({ ...services, [name]: event.target.checked });
+  const handleChange = id => {
+    if (!selectedServices.includes(id)) {
+      setSelectedServices([...selectedServices, id]);
+    } else {
+      let newArr = [...selectedServices];
+      let index = newArr.indexOf(id);
+      newArr.splice(index, 1);
+      setSelectedServices(newArr);
+    }
   };
+
+  async function getAllServices() {
+    const { data, error } = await getServices();
+    if (data) {
+      console.log(data);
+      setServices(data.data.data);
+    } else if (error) {
+      console.log(error.response);
+    }
+  }
 
   const handleSubmit = () => {
     if (!isAuthenticated) {
       setModalIsOpen(true);
     } else {
       let room = {};
-      room.started_at = state.checkIn;
-      room.ended_at = state.checkOut;
-      room.services = [];
-
-      if (services.gym) room.services.push("gym");
-      if (services.sports) room.services.push("sports");
-      if (services.restaurant) room.services.push("restaurant");
-      if (services.wellness) room.services.push("wellness");
+      room.started_at = moment(state.checkIn).format("YYYY-MM-DD");
+      room.ended_at = moment(state.checkOut).format("YYYY-MM-DD");
+      room.services = selectedServices;
 
       room.adults = adultNum;
       room.children = childrenNum;
@@ -96,6 +108,26 @@ const Room = ({ data, fullWidth, close, open }) => {
       if (close) close();
     }
   };
+
+  const servicesList = services.length
+    ? services.map(item => {
+        return (
+          <FormControlLabel
+            key={item.id}
+            control={
+              <Checkbox
+                onChange={() => handleChange(item.id)}
+                color="primary"
+                inputProps={{
+                  "aria-label": "secondary checkbox"
+                }}
+              />
+            }
+            label={item.name}
+          />
+        );
+      })
+    : null;
 
   const facilitiesList =
     Object.keys(data).length > 0
@@ -159,65 +191,7 @@ const Room = ({ data, fullWidth, close, open }) => {
                 <p className="italic text-gray-600">Select services:</p>
                 <div className="text-center">
                   <div className="flex flex-wrap justify-center ">
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={services.gym}
-                          onChange={handleChange("gym")}
-                          value={services.gym}
-                          color="primary"
-                          inputProps={{
-                            "aria-label": "secondary checkbox"
-                          }}
-                        />
-                      }
-                      label="Gym"
-                    />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={services.sports}
-                          onChange={handleChange("sports")}
-                          value="sports"
-                          color="primary"
-                          inputProps={{
-                            "aria-label": "secondary checkbox"
-                          }}
-                        />
-                      }
-                      label="Sports"
-                    />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={services.restaurant}
-                          onChange={handleChange("restaurant")}
-                          value="restaurant"
-                          color="primary"
-                          inputProps={{
-                            "aria-label": "secondary checkbox"
-                          }}
-                        />
-                      }
-                      label="Restaurant"
-                    />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={services.wellness}
-                          onChange={handleChange("wellness")}
-                          value="wellness"
-                          color="primary"
-                          inputProps={{
-                            "aria-label": "secondary checkbox"
-                          }}
-                        />
-                      }
-                      label="Wellness"
-                    />
+                    {servicesList}
                   </div>
                 </div>
               </div>

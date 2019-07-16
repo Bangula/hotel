@@ -2,7 +2,7 @@ import http from "../index";
 import toResponse from "@helpers/toResponse";
 
 export const getAllSongs = page => {
-  return toResponse(http.get(`/songs?page=${page}`));
+  return toResponse(http.get(`/songs?page=${page}&include=genre`));
 };
 
 export const createSong = song => {
@@ -18,5 +18,5 @@ export const updateSong = (song, id) => {
 };
 
 export const getSongById = id => {
-  return toResponse(http.get(`/songs/${id}`));
+  return toResponse(http.get(`/songs/${id}?include=genre`));
 };

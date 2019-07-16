@@ -9,11 +9,14 @@ import Paper from "@material-ui/core/Paper";
 import Moment from "react-moment";
 import Button from "@material-ui/core/Button";
 import { Link as RouteLink } from "react-router-dom";
+import Alert from "react-s-alert";
 
 import { createReservation } from "../../services/http/endpoints/reservations";
 
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "@material-ui/core";
+
+import Modal from "../admin/Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,25 +29,79 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Cart() {
+export default function Cart(props) {
+  const [modalIsActive, setModalIsActive] = React.useState(false);
+  const [bookModalIsActive, setBookModalIsActive] = React.useState(false);
+
+  const [promotionId, setPromotionId] = React.useState("");
+  const [roomId, setRoomId] = React.useState("");
+
   const promotions = useSelector(state => state.cart.promotions);
   const rooms = useSelector(state => state.cart.rooms);
+  const { isAuthenticated } = state => state.user;
+
   React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const cartItems = promotions.concat(rooms);
 
   const dispatch = useDispatch();
 
   const classes = useStyles();
+  if (rooms.length) console.log(rooms);
+  if (promotions.length) console.log(promotions);
 
   const handleBook = async () => {
-    let room = { rooms: rooms[0] };
-    const { data, error } = await createReservation(room);
-    if (data) {
-      console.log(data);
-    } else if (error) {
-      console.log(error.response);
+    if (rooms.length) {
+      let room = { rooms: rooms };
+      const { data, error } = await createReservation(room);
+      if (data) {
+        console.log(data);
+        Alert.success("Reservation completed!", {
+          effect: "slide",
+          timeout: 2000
+        });
+        dispatch({ type: "RESERVATION_COMPLETED" });
+      } else if (error) {
+        Alert.error("Error creating reservation!", {
+          effect: "slide",
+          timeout: 2000
+        });
+        console.log(error.response);
+      }
+    }
+    if (promotions.length) {
+      let promotion = { promotion: promotions[0] };
+      const { data, error } = await createReservation(promotion);
+      if (data) {
+        console.log(data);
+        Alert.success("Reservation completed!", {
+          effect: "slide",
+          timeout: 2000
+        });
+        dispatch({ type: "RESERVATION_COMPLETED" });
+      } else if (error) {
+        Alert.error("Error creating reservation!", {
+          effect: "slide",
+          timeout: 2000
+        });
+        console.log(error.response);
+      }
+    }
+  };
+
+  const handleDelete = () => {
+    if (promotionId.length) {
+      dispatch({
+        type: "DELETE_PROMOTION",
+        payload: promotionId
+      });
+    } else if (roomId.length) {
+      dispatch({
+        type: "DELETE_ROOM",
+        payload: roomId
+      });
     }
   };
 
@@ -76,11 +133,15 @@ export default function Cart() {
                       <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() =>
-                          dispatch({
-                            type: "DELETE_PROMOTION",
-                            payload: item.promotion_id
-                          })
+                        onClick={
+                          () => {
+                            setPromotionId(item.promotion_id);
+                            setModalIsActive(true);
+                          }
+                          // dispatch({
+                          //   type: "DELETE_PROMOTION",
+                          //   payload: item.promotion_id
+                          // })
                         }
                       >
                         <i className="far fa-trash-alt" />
@@ -122,11 +183,15 @@ export default function Cart() {
                       <Button
                         variant="contained"
                         color="secondary"
-                        onClick={() =>
-                          dispatch({
-                            type: "DELETE_ROOM",
-                            payload: item.room_id
-                          })
+                        onClick={
+                          () => {
+                            setRoomId(item.room_id);
+                            setModalIsActive(true);
+                          }
+                          // dispatch({
+                          //   type: "DELETE_ROOM",
+                          //   payload: item.room_id
+                          // })
                         }
                       >
                         <i className="far fa-trash-alt" />
@@ -142,6 +207,21 @@ export default function Cart() {
 
   return (
     <>
+      <Modal
+        open={modalIsActive}
+        handleClose={() => setModalIsActive(false)}
+        userAction={() => handleDelete()}
+        modalHeader={"Remove item"}
+        modalText={"Are you shure you want to remove item from cart?"}
+      />
+      <Modal
+        open={bookModalIsActive}
+        handleClose={() => setBookModalIsActive(false)}
+        userAction={handleBook}
+        modalHeader={"Make reservation"}
+        modalText={"Proceed with reservation?"}
+      />
+      <Alert />
       <div className="header-image" />
       <div className="pb-32 px-2">
         <h1 className="home-header text-center text-5xl text-gray-600 z-50">
@@ -160,7 +240,7 @@ export default function Cart() {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={handleBook}
+                  onClick={() => setBookModalIsActive(true)}
                 >
                   BOOK
                 </Button>

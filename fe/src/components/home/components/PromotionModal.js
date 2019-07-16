@@ -30,7 +30,7 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
 
   const handleSubmit = e => {
     let promotion = {};
-    promotion.promotion_id = promoDetails.id;
+    promotion.id = promoDetails.id;
     promotion.started_at = state.checkIn;
     promotion.ended_at = state.checkOut;
     promotion.count = "1";

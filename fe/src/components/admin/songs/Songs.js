@@ -139,7 +139,7 @@ const Songs = () => {
                       <TableRow>
                         <TableCell>Song name</TableCell>
                         <TableCell align="left">Artist</TableCell>
-
+                        <TableCell align="left">Genre</TableCell>
                         <TableCell align="right">Edit</TableCell>
                         <TableCell align="right">Delete</TableCell>
                       </TableRow>
@@ -150,6 +150,7 @@ const Songs = () => {
                           <TableCell component="th" scope="row">
                             {song.name}
                           </TableCell>
+
                           <TableCell
                             align="left"
                             style={{
@@ -159,6 +160,17 @@ const Songs = () => {
                             }}
                           >
                             {song.artist}
+                          </TableCell>
+
+                          <TableCell
+                            align="left"
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                              fontStyle: "italic"
+                            }}
+                          >
+                            {song.genre.data.name}
                           </TableCell>
 
                           <TableCell align="right">

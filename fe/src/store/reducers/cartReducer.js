@@ -33,6 +33,12 @@ export const cartReducer = (state = initialState, action) => {
         ...state,
         promotions: newArr1
       };
+    case "RESERVATION_COMPLETED":
+      return {
+        ...state,
+        promotions: [],
+        rooms: []
+      };
     default:
       return state;
   }
