@@ -24,6 +24,9 @@ const Events = () => {
   const [loader, setLoader] = useState(true);
 
   React.useEffect(() => {
+    document.title = "Quantox Hotel - Events";
+  }, []);
+  React.useEffect(() => {
     window.scrollTo(0, 0);
     getData();
   }, []);

@@ -4,6 +4,9 @@ import NewUsers from "./NewUsers";
 import DashboardPromotions from "./DashboardPromotions";
 import DailyUsers from "./DailyUsers";
 const Dashboard = () => {
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Dashboard";
+  }, []);
   return (
     <>
       <div style={{ paddingTop: "60px" }} className="flex flex-col ">

@@ -92,6 +92,9 @@ const Register = props => {
   //     }
   //   }
   // }, [responseErrors]);
+  useEffect(() => {
+    document.title = "Quantox Hotel - Register";
+  }, []);
 
   const classes = useStyles();
   console.log("LOGIN PROPS", props);

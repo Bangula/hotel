@@ -10,6 +10,9 @@ function GalleryBox() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   React.useEffect(() => {
+    document.title = "Quantox Hotel - Gallery";
+  }, []);
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

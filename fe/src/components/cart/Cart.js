@@ -41,6 +41,9 @@ export default function Cart(props) {
   const { isAuthenticated } = state => state.user;
 
   React.useEffect(() => {
+    document.title = "Quantox Hotel - Cart";
+  }, []);
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 

@@ -64,10 +64,33 @@ const DashboardPromotions = props => {
           <Card className="w-11/12 mx-auto">
             <Paper>
               <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Latest Promotions
-                </Typography>
-                <Divider />
+                <TableHead>
+                  <TableRow>
+                    <TableCell />
+
+                    <TableCell align="left" />
+                    <TableCell align="left" />
+
+                    <TableCell align="left">
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                        className="flex justify-center items-center"
+                      >
+                        Latest Promotions
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left" />
+                    <TableCell align="left" />
+
+                    <TableCell align="left">
+                      <Button variant="contained">Promotions</Button>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <Divider style={{ marginTop: "10px" }} />
               </CardContent>
               <Table>
                 <TableHead>

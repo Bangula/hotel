@@ -45,6 +45,9 @@ const Booking = props => {
   const { windowWidth } = React.useContext(WidthContext);
 
   useEffect(() => {
+    document.title = "Quantox Hotel - Booking";
+  }, []);
+  useEffect(() => {
     window.scrollTo(0, 0);
     getData(currentPage);
   }, []);

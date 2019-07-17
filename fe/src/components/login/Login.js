@@ -18,6 +18,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = props => {
+  useEffect(() => {
+    document.title = "Quantox Hotel - Login";
+  }, []);
   // const responseErrors = useSelector(state => state.user.responseErrors);
   // const dispatch = useDispatch();
 

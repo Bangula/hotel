@@ -7,6 +7,9 @@ import serviceWellness from "@assets/images/services/service_wellness.jpg";
 
 const Services = () => {
   React.useEffect(() => {
+    document.title = "Quantox Hotel - Services";
+  }, []);
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (

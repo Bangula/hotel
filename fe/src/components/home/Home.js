@@ -23,6 +23,9 @@ const properties = {
 
 const Home = () => {
   React.useEffect(() => {
+    document.title = "Quantox Hotel";
+  }, []);
+  React.useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
