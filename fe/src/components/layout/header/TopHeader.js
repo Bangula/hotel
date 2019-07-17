@@ -80,10 +80,6 @@ const TopHeader = () => {
         {user.isAuthenticated ? (
           <div>
             <div>
-              <Link to="/user">
-                <i className="fas fa-user mr-4" />
-              </Link>
-
               <Button
                 className={`${
                   classes.button
@@ -92,6 +88,10 @@ const TopHeader = () => {
               >
                 LOGOUT
               </Button>
+              <Link to="/user">
+                <i className="fas fa-user mr-4" />
+              </Link>
+
               <NavLink
                 className="font-semibold  hover:text-gray-300"
                 to="/cart"
