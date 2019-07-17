@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleTable({ data, handleGetDetails }) {
+function RoomList({ data, handleGetDetails }) {
   const classes = useStyles();
 
   return (
@@ -64,3 +64,5 @@ export default function SimpleTable({ data, handleGetDetails }) {
     </>
   );
 }
+
+export default RoomList;
