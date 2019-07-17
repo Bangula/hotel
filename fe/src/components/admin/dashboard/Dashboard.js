@@ -5,7 +5,7 @@ import DashboardPromotions from "./DashboardPromotions";
 import DailyUsers from "./DailyUsers";
 const Dashboard = () => {
   React.useEffect(() => {
-    document.title = "Quantox Hotel - Dashboard";
+    document.title = "Quantox Hotel - Admin Dashboard";
   }, []);
   return (
     <>

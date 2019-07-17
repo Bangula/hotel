@@ -67,6 +67,10 @@ const Songs = () => {
   const [songId, setSongId] = useState("");
   const [editId, setEditid] = useState("");
 
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Songs";
+  }, []);
+
   useEffect(() => {
     setEditid("");
     getData(currentPage);

@@ -240,7 +240,12 @@ const CreateSong = ({ id, setValue }) => {
 
               <br />
               <div className="w-full flex justify-end">
-                <Button variant="contained" color="primary" type="submit">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  fullWidth
+                >
                   {Object.keys(songData).length > 0 ? "Edit" : "Create"}
                 </Button>
               </div>

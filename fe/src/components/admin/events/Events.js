@@ -69,6 +69,10 @@ const Events = () => {
   const [eventId, setEventId] = useState("");
   const [editId, setEditid] = useState("");
 
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Events";
+  }, []);
+
   useEffect(() => {
     setEditid("");
     getData(currentPage);

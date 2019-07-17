@@ -71,6 +71,10 @@ const PromotionsComponent = props => {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalPromotion, setModalPromotion] = React.useState("");
 
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Promotions";
+  }, []);
+
   //per page
   const getAllPromotions = async page => {
     const { data, error } = await getPromotionsPerPage(page);

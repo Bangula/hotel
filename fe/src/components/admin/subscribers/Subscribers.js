@@ -60,6 +60,10 @@ function Subscribers() {
   const [email, setEmail] = React.useState("");
   const [value, setValue] = React.useState(0);
 
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Subscribers";
+  }, []);
+
   function handleChange(event, newValue) {
     setValue(newValue);
   }

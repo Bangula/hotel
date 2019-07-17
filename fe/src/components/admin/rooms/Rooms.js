@@ -54,6 +54,9 @@ function Rooms() {
   const [modalRoom, setModalRoom] = React.useState(""); //stores data of current room id for modal
 
   const [typeForEdit, setTypeForEdit] = React.useState({});
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Rooms";
+  }, []);
 
   function handleClickOpenModal(id) {
     setModalRoom(id);

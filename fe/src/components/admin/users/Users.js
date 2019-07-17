@@ -47,6 +47,9 @@ function Users() {
   useEffect(() => {
     getRoles();
   }, []);
+  React.useEffect(() => {
+    document.title = "Quantox Hotel - Admin Panel - Users";
+  }, []);
 
   async function getRoles() {
     const { data, error } = await getAllRoles();

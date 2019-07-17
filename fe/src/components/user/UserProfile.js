@@ -160,7 +160,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           First Name:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.first_name
                               ? userInfo.first_name
                               : "no data"}
@@ -177,7 +177,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           Last Name:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.last_name
                               ? userInfo.last_name
                               : "no data"}
@@ -194,7 +194,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           Email:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.email ? userInfo.email : "no data"}
                           </span>
                         </p>
@@ -209,7 +209,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           Phone Number:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.phone_number
                               ? userInfo.phone_number
                               : "no data"}
@@ -226,7 +226,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           Address:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.address ? userInfo.address : "no data"}
                           </span>
                         </p>
@@ -241,7 +241,7 @@ const UserProfile = ({ adminPanel }) => {
                       <div className="flex py-4 border-b-2 justify-between pl-2">
                         <p className="italic text-gray-600 leading-normal pt-2">
                           City:{" "}
-                          <span className="font-semibold ml-4 text-2xl">
+                          <span className="font-semibold ml-4 text-lg md:text-2xl">
                             {userInfo.city ? userInfo.city : "no data"}
                           </span>
                         </p>
