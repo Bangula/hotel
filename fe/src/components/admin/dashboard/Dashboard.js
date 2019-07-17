@@ -10,12 +10,12 @@ const Dashboard = () => {
   return (
     <>
       <div style={{ paddingTop: "60px" }} className="flex flex-col ">
-        <div className="flex ">
+        <div className="flex md:flex-row flex-col">
           <NewsletterChart />
           <DailyUsers />
           <NewsletterChart />
         </div>
-        <div className="flex justify-between w-full pb-6">
+        <div className="flex justify-between md:flex-row  flex-col w-full pb-6">
           <NewUsers />
           <DashboardPromotions />
         </div>

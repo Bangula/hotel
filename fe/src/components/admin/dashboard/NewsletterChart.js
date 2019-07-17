@@ -66,7 +66,7 @@ const data = [
 export default class Example extends PureComponent {
   render() {
     return (
-      <Card className="w-2/6 ">
+      <Card className="md:w-2/6 w-full">
         <CardContent>
           {/* <Typography gutterBottom variant="h5" component="h2">
             New Users
