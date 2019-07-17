@@ -44,9 +44,9 @@ export default function SimpleTable({ data, handleGetDetails }) {
                   <TableCell component="th" scope="row">
                     {room.room_number}
                   </TableCell>
-                  <TableCell align="left">3</TableCell>
-                  <TableCell align="left">3</TableCell>
-                  <TableCell align="left">50$/Night</TableCell>
+                  <TableCell align="left">-</TableCell>
+                  <TableCell align="left">-</TableCell>
+                  <TableCell align="left">-</TableCell>
                   <TableCell align="right">
                     <Button
                       variant="contained"

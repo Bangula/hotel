@@ -61,7 +61,7 @@ const Booking = props => {
       setRoomList(data.data.data);
       setTotalPages(data.data.meta.pagination.total_pages);
     } else if (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }
 

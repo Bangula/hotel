@@ -126,8 +126,7 @@ const UserProfile = ({ adminPanel }) => {
     <>
       {user ? (
         <>
-          {/* {adminPanel ? null : <div className="user-header" />} */}
-          <div className="header-image" />
+          {adminPanel ? null : <div className="header-image" />}
           <div className="container mx-auto mt-16 px-4 pb-32">
             {adminPanel ? null : (
               <h1 className="">
