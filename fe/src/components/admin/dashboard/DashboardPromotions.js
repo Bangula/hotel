@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import { getPromotionsPerPage } from "@endpoints/promotions";
 import "@zendeskgarden/react-pagination/dist/styles.css";
+import Icon from "@material-ui/core/Icon";
 
 // PROMOTIONS PANEL
 const DashboardPromotions = props => {
@@ -63,15 +64,16 @@ const DashboardPromotions = props => {
         {promotions.length ? (
           <Card className="w-11/12 mx-auto">
             <Paper>
-              <CardContent>
-                <TableHead>
+              <CardContent className="flex justify-center">
+                <TableHead style={{ margin: "0 auto" }}>
                   <TableRow>
+                    <TableCell align="left">
+                      New : {promotions.length}
+                    </TableCell>
+
                     <TableCell />
 
-                    <TableCell align="left" />
-                    <TableCell align="left" />
-
-                    <TableCell align="left">
+                    <TableCell align="right">
                       <Typography
                         variant="body2"
                         color="textSecondary"
@@ -82,10 +84,17 @@ const DashboardPromotions = props => {
                       </Typography>
                     </TableCell>
                     <TableCell align="left" />
-                    <TableCell align="left" />
 
                     <TableCell align="left">
-                      <Button variant="contained">Promotions</Button>
+                      <Link to="/admin/promotions">
+                        <Button
+                          variant="contained"
+                          style={{ marginLeft: "66px" }}
+                        >
+                          Promotions
+                          <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
+                        </Button>
+                      </Link>
                     </TableCell>
                   </TableRow>
                 </TableHead>

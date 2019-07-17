@@ -77,11 +77,41 @@ function NewUsers() {
           <div className="from-top " />
           <Card className="w-11/12 mx-auto">
             <Paper className={classes.root}>
-              <CardContent>
-                <Typography variant="body2" color="textSecondary" component="p">
-                  Latest registered users
-                </Typography>
-                <Divider />
+              <CardContent className="flex justify-center">
+                <TableHead style={{ margin: "0 auto" }}>
+                  <TableRow>
+                    <TableCell align="left">New :{users.length}</TableCell>
+
+                    <TableCell />
+
+                    <TableCell align="right">
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                        className="flex justify-center items-center"
+                      >
+                        Latest Users
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="left" />
+                    <TableCell align="left" />
+
+                    <TableCell align="left">
+                      <Link to="/admin/users">
+                        <Button
+                          variant="contained"
+                          style={{ marginLeft: "66px" }}
+                        >
+                          Users
+                          <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
+                        </Button>
+                      </Link>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+
+                <Divider style={{ marginTop: "10px" }} />
               </CardContent>
               <Table className="">
                 <TableHead>
