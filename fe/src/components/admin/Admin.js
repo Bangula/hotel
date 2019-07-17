@@ -450,7 +450,7 @@ const Admin = props => {
                 >
                   <ListItemIcon>
                     <Icon
-                      className={clsx(classes.icon, "fas fa-columns")}
+                      className={clsx(classes.icon, "far fa-calendar-alt")}
                       color="action"
                     />
                   </ListItemIcon>

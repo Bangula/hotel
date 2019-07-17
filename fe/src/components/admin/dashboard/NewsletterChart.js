@@ -1,15 +1,11 @@
 import React, { PureComponent } from "react";
 import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend
+  Radar,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis
 } from "recharts";
-
 import {
   Card,
   Divider,
@@ -17,53 +13,52 @@ import {
   Button,
   Typography
 } from "@material-ui/core";
-
 const data = [
   {
-    name: "Jan",
-    "Last Year": 4000,
-    "This Year": 2400,
-    amt: 2400
+    subject: "Mon",
+    A: 120,
+    B: 110,
+    fullMark: 150
   },
   {
-    name: "feb",
-    "Last Year": 3000,
-    "This Year": 1398,
-    amt: 2210
+    subject: "Tue",
+    A: 98,
+    B: 130,
+    fullMark: 150
   },
   {
-    name: "Mar",
-    "Last Year": 2000,
-    "This Year": 9800,
-    amt: 2290
+    subject: "Wed",
+    A: 86,
+    B: 130,
+    fullMark: 150
   },
   {
-    name: "Apr",
-    "Last Year": 2780,
-    "This Year": 3908,
-    amt: 2000
+    subject: "Thu",
+    A: 99,
+    B: 100,
+    fullMark: 150
   },
   {
-    name: "May",
-    "Last Year": 1890,
-    "This Year": 4800,
-    amt: 2181
+    subject: "Fri",
+    A: 85,
+    B: 90,
+    fullMark: 150
   },
   {
-    name: "Jun",
-    "Last Year": 2390,
-    "This Year": 3800,
-    amt: 2500
+    subject: "Sat",
+    A: 65,
+    B: 85,
+    fullMark: 150
   },
   {
-    name: "Jul",
-    "Last Year": 3490,
-    "This Year": 4300,
-    amt: 2100
+    subject: "Sun",
+    A: 65,
+    B: 85,
+    fullMark: 150
   }
 ];
 
-export default class Example extends PureComponent {
+export default class DashboardNewsletter extends PureComponent {
   render() {
     return (
       <Card className="md:w-2/6 w-full">
@@ -76,26 +71,18 @@ export default class Example extends PureComponent {
           </Typography>
           {/* <Divider /> */}
         </CardContent>
-        <BarChart
-          className=" mx-auto shadow-md"
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}
-        >
-          <CartesianGrid strokeDasharray="2 " />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="Last Year" fill="#8884d8" />
-          <Bar dataKey="This Year" fill="#82ca9d" />
-        </BarChart>
+        <RadarChart cx="50%" cy="50%" width={500} height={300} data={data}>
+          <PolarGrid />
+          <PolarAngleAxis dataKey="subject" />
+          <PolarRadiusAxis />
+          <Radar
+            name="Mike"
+            dataKey="A"
+            stroke="#8884d8"
+            fill="#8884d8"
+            fillOpacity={0.6}
+          />
+        </RadarChart>
       </Card>
     );
   }
