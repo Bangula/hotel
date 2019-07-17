@@ -67,7 +67,7 @@ export default class DashboardNewsletter extends PureComponent {
             New Users
         </Typography> */}
           <Typography variant="body2" color="textSecondary" component="p">
-            Stats for new users compared with last years results
+            Stats for newsletter
           </Typography>
           {/* <Divider /> */}
         </CardContent>
