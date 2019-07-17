@@ -24,6 +24,14 @@ import UserProfile from "@components/user/UserProfile";
 import Footer from "./components/layout/footer/Footer";
 
 function App(props) {
+  const [showScrollToTop, setShowScrollToTop] = React.useState(false);
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
+  function handleScroll() {
+    if (window.scrollY > 200) setShowScrollToTop(true);
+    else if (window.scrollY < 200) setShowScrollToTop(false);
+  }
   const hideLayout = useSelector(state => state.user.hideLayout);
   const { windowWidth } = React.useContext(WidthContext);
 
@@ -31,8 +39,22 @@ function App(props) {
     <BrowserRouter history={history}>
       <div className="App">
         <button
-          className="fixed text-3xl"
-          style={{ bottom: "20px", right: "20px", zIndex: "300" }}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: "smooth"
+            })
+          }
+          className={`${
+            showScrollToTop ? "visible" : "invisible"
+          } fixed text-3xl`}
+          style={{
+            bottom: "20px",
+            right: "20px",
+            zIndex: "300",
+            transition: "all 0.3s"
+          }}
         >
           <i
             className="fas fa-chevron-circle-up"
