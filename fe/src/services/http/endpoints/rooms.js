@@ -2,9 +2,7 @@ import http from "../index";
 import toResponse from "@helpers/toResponse";
 
 export const getAllRooms = pageNum => {
-  return toResponse(
-    http.get(`/rooms?page=${pageNum}?include=roomType,facilities,gallery`)
-  );
+  return toResponse(http.get(`/rooms?page=${pageNum}&include=facilities`));
 };
 
 export const getRoomById = id => {
