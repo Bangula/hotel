@@ -52,16 +52,16 @@ const TopHeader = () => {
           +31 (0) 20 507 0000
         </p>
         <div className="text-left mt-4">
-          <a href="#" className="mr-4">
+          <a href="/" className="mr-4">
             <i className="fab fa-facebook-square" />
           </a>
-          <a href="#" className="mr-4">
+          <a href="/" className="mr-4">
             <i className="fab fa-linkedin" />
           </a>
-          <a href="#" className="mr-4">
+          <a href="/" className="mr-4">
             <i className="fab fa-twitter-square" />
           </a>
-          <a href="#">
+          <a href="/">
             <i className="fab fa-instagram" />
           </a>
         </div>
@@ -84,14 +84,12 @@ const TopHeader = () => {
                 <i className="fas fa-user mr-4" />
               </Link>
 
-              <Button
-                className={`${
-                  classes.button
-                } mr-8 font-semibold text-white  hover:text-gray-300`}
+              <button
+                className="mx-4 font-semibold  hover:text-gray-300"
                 onClick={() => dispatch({ type: "LOGOUT_USER" })}
               >
                 LOGOUT
-              </Button>
+              </button>
               <NavLink
                 className="font-semibold  hover:text-gray-300"
                 to="/cart"

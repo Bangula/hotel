@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Room from "@components/rooms/components/Room";
+import Drawer from "@material-ui/core/Drawer";
 
-import Dialog from "@material-ui/core/Dialog";
+// import Dialog from "@material-ui/core/Dialog";
 
 import { getRoomById } from "../../../services/http/endpoints/rooms";
 
@@ -18,13 +19,13 @@ const RoomDetails = ({ id, open, close }) => {
       console.log(data);
       setData(data.data.data);
     } else if (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }
 
   return (
     <div>
-      <Dialog
+      {/* <Dialog
         open={open}
         fullWidth
         onClose={close}
@@ -34,7 +35,12 @@ const RoomDetails = ({ id, open, close }) => {
         <div>
           <Room data={data} fullWidth close={close} />
         </div>
-      </Dialog>
+      </Dialog> */}
+      <Drawer anchor="right" open={open} onClose={close}>
+        <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+          <Room id={data} fullWidth close={close} />
+        </div>
+      </Drawer>
     </div>
   );
 };

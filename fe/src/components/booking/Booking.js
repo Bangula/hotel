@@ -47,6 +47,7 @@ const Booking = props => {
   useEffect(() => {
     document.title = "Quantox Hotel - Booking";
   }, []);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     getData(currentPage);

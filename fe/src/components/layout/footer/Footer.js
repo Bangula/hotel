@@ -163,25 +163,25 @@ const Footer = () => {
 
             <div className="py-4 flex justify-center md:justify-left mt-2 ">
               <a
-                href="#"
+                href="/"
                 className="mr-4 text-white text-xl hover:text-gray-600"
               >
                 <i className="fab fa-facebook-square" />
               </a>
               <a
-                href="#"
+                href="/"
                 className="mr-4 text-white text-xl hover:text-gray-600"
               >
                 <i className="fab fa-linkedin" />
               </a>
               <a
-                href="#"
+                href="/"
                 className="mr-4 text-white text-xl hover:text-gray-600"
               >
                 <i className="fab fa-twitter-square" />
               </a>
               <a
-                href="#"
+                href="/"
                 className="mr-4 text-white text-xl hover:text-gray-600"
               >
                 <i className="fab fa-instagram" />
