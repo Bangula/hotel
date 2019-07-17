@@ -1,8 +1,9 @@
 import React from "react";
-import NewsletterChart from "./NewsletterChart";
+import RegisteredUsersChart from "./RegisteredUsersChart";
 import NewUsers from "./NewUsers";
 import DashboardPromotions from "./DashboardPromotions";
 import DailyUsers from "./DailyUsers";
+import NewsletterChart from "./NewsletterChart";
 const Dashboard = () => {
   React.useEffect(() => {
     document.title = "Quantox Hotel - Admin Dashboard";
@@ -11,8 +12,9 @@ const Dashboard = () => {
     <>
       <div style={{ paddingTop: "60px" }} className="flex flex-col ">
         <div className="flex md:flex-row flex-col">
-          <NewsletterChart />
+          <RegisteredUsersChart />
           <DailyUsers />
+
           <NewsletterChart />
         </div>
         <div className="flex justify-between md:flex-row  flex-col w-full pb-6">
