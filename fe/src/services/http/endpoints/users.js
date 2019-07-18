@@ -14,7 +14,7 @@ export const getLogedUser = () => {
 };
 
 export const getUser = userId => {
-  return toResponse(http.get(`/users/${userId}`));
+  return toResponse(http.get(`/users/${userId}?include=roles`));
 };
 
 export const getUsers = () => {

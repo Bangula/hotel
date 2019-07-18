@@ -84,6 +84,8 @@ const EditUser = props => {
     if (data) {
       console.log("single user fetched", data);
       setUser(data.data.data);
+    } else if (error) {
+      console.log(error.response);
     }
   };
 
@@ -94,7 +96,6 @@ const EditUser = props => {
   }, []);
 
   //Compoment has been reused for edit
-  console.log("get single user by id props", props);
   return (
     <>
       {!(Object.keys(props.match.params).length && props.match.params.userId)

@@ -67,7 +67,12 @@ export const authReducer = (state = initialState, action) => {
           isAdmin: true
         };
       } else {
-        return { ...state, info: action.payload, isAuthenticated: true };
+        return {
+          ...state,
+          info: action.payload,
+          isAuthenticated: true,
+          isAdmin: false
+        };
       }
 
     case HIDE_LAYOUT:

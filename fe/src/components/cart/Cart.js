@@ -189,6 +189,7 @@ export default function Cart(props) {
                         onClick={
                           () => {
                             setRoomId(item.room_id);
+                            console.log(item.room_id);
                             setModalIsActive(true);
                           }
                           // dispatch({
