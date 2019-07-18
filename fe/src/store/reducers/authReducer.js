@@ -9,7 +9,11 @@ export const getToken = () => localStorage["jwtToken"];
 
 const initialState = {
   isAuthenticated: !!getToken(),
-  isAdmin: true,
+  isAdmin: JSON.parse(localStorage.getItem("user"))
+    ? JSON.parse(localStorage.getItem("user")).data.roles.data.filter(item => {
+        return item.name === "admin";
+      }).length > 0
+    : false,
   info: JSON.parse(localStorage.getItem("user")) || {},
   serverErrors: {
     login: "",
@@ -51,7 +55,21 @@ export const authReducer = (state = initialState, action) => {
       };
 
     case SAVE_USER_INFO:
-      return { ...state, info: action.payload, isAuthenticated: true };
+      if (
+        action.payload.data.roles.data.filter(item => {
+          return item.name === "admin";
+        }).length > 0
+      ) {
+        return {
+          ...state,
+          info: action.payload,
+          isAuthenticated: true,
+          isAdmin: true
+        };
+      } else {
+        return { ...state, info: action.payload, isAuthenticated: true };
+      }
+
     case HIDE_LAYOUT:
       return {
         ...state,

@@ -4,8 +4,8 @@ import bgImage from "@assets/images/about.jpg";
 const About = () => {
   return (
     <div
-      className="about w-full relative z-50 mt-16 md:mt-32 bg-fixed"
-      style={{ height: "50vh", backgroundImage: `url(${bgImage})` }}
+      className="about pb-32 w-full relative z-50 mt-16 md:mt-32 bg-fixed"
+      style={{ height: "60vh", backgroundImage: `url(${bgImage})` }}
     >
       <div
         className="absolute w-full h-full left-0 top-0 bg-contain z-10 pt-4 md:pt-16"

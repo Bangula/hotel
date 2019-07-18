@@ -79,13 +79,10 @@ const EditUser = props => {
     address: user.address ? user.address : ""
   };
 
-  //   useEffect(() => {
-  //     props.getProfile();
-  //   }, [user.hasSetProfile]);
   const getUserById = async userId => {
     const { data, error } = await getUser(userId);
     if (data) {
-      console.log("single user fetched", data.data.data);
+      console.log("single user fetched", data);
       setUser(data.data.data);
     }
   };

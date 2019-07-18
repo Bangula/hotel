@@ -10,7 +10,7 @@ export const loginUser = credentials => {
 };
 
 export const getLogedUser = () => {
-  return toResponse(http.get("/user/profile"));
+  return toResponse(http.get(`/user/profile?include=roles`));
 };
 
 export const getUser = userId => {
