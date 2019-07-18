@@ -45,9 +45,12 @@ const Booking = props => {
   const { windowWidth } = React.useContext(WidthContext);
 
   useEffect(() => {
+    if (roomId.length) setModalIsOpen(true);
+  }, [roomId]);
+
+  useEffect(() => {
     document.title = "Quantox Hotel - Booking";
   }, []);
-
   useEffect(() => {
     window.scrollTo(0, 0);
     getData(currentPage);
@@ -72,7 +75,11 @@ const Booking = props => {
   const handleGetDetails = id => {
     console.log(id);
     setRoomId(id);
-    setModalIsOpen(true);
+    // setModalIsOpen(true);
+  };
+  const handleClose = () => {
+    setRoomId("");
+    setModalIsOpen(false);
   };
 
   return (
@@ -237,11 +244,7 @@ const Booking = props => {
           </div>
         </div>
       </div>
-      <RoomDetails
-        id={roomId}
-        open={modalIsOpen}
-        close={() => setModalIsOpen(false)}
-      />
+      <RoomDetails id={roomId} open={modalIsOpen} close={handleClose} />
     </>
   );
 };

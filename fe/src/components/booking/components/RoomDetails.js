@@ -38,7 +38,7 @@ const RoomDetails = ({ id, open, close }) => {
       </Dialog> */}
       <Drawer anchor="right" open={open} onClose={close}>
         <div style={{ maxWidth: "600px", margin: "0 auto" }}>
-          <Room id={data} fullWidth close={close} />
+          <Room data={data} fullWidth close={close} />
         </div>
       </Drawer>
     </div>

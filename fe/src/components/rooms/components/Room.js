@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   }
 });
 
-const Room = ({ data, fullWidth, close, open }) => {
+const Room = ({ data, fullWidth, close }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [adultNum, setAdultNum] = useState("");
@@ -243,9 +243,9 @@ const Room = ({ data, fullWidth, close, open }) => {
                 />
               </div>
             </div>
-            <div className="mt-8 ">
+            <div className="mt-8 w-full flex flex-end">
               {close ? (
-                <div className="flex flex-end w-full">
+                <div className="">
                   <Button
                     variant="contained"
                     color="secondary"
