@@ -152,17 +152,6 @@ const Admin = props => {
     }
   }, [windowWidth]);
 
-  useEffect(() => {
-    dispatch({
-      type: "HIDE_LAYOUT"
-    });
-    return () => {
-      dispatch({
-        type: "SHOW_LAYOUT"
-      });
-    };
-  }, []);
-
   function handleDrawerOpen() {
     setOpen(true);
   }

@@ -23,6 +23,27 @@ import Admin from "@components/admin/Admin";
 import UserProfile from "@components/user/UserProfile";
 import Footer from "./components/layout/footer/Footer";
 
+const Main = () => (
+  <>
+    <Header />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route path="/booking" component={Booking} />
+      <Route path="/room" component={Room} />
+      <Route path="/events" component={Events} />
+      <Route path="/services" component={Services} />
+      <Route path="/gallery" component={Gallery} />
+      <Route path="/reviews" component={Reviews} />
+      <Route path="/contact-us" component={ContactUs} />
+      <Route path="/login" component={Login} />
+      <Route path="/register" component={Register} />
+      <Route path="/cart" component={Cart} />
+      <Route path="/user" component={UserProfile} />
+    </Switch>
+    <Footer />
+  </>
+);
+
 function App(props) {
   const [showScrollToTop, setShowScrollToTop] = React.useState(false);
   React.useEffect(() => {
@@ -63,23 +84,10 @@ function App(props) {
         </button>
 
         <div>
-          {hideLayout ? null : <Header />}
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/booking" component={Booking} />
-            <Route path="/room" component={Room} />
-            <Route path="/events" component={Events} />
-            <Route path="/services" component={Services} />
-            <Route path="/gallery" component={Gallery} />
-            <Route path="/reviews" component={Reviews} />
-            <Route path="/contact-us" component={ContactUs} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/user" component={UserProfile} />
             <Route path="/admin" component={Admin} />
+            <Route path="/" component={Main} />
           </Switch>
-          {hideLayout ? null : <Footer />}
         </div>
       </div>
     </BrowserRouter>
