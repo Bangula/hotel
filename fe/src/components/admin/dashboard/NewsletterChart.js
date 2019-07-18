@@ -63,10 +63,7 @@ export default class DashboardNewsletter extends PureComponent {
     return (
       <Card className="md:w-2/6 w-full">
         <CardContent>
-          {/* <Typography gutterBottom variant="h5" component="h2">
-            New Users
-        </Typography> */}
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography variant="body2" color="textSecondary" component="h3">
             Stats for newsletter
           </Typography>
           {/* <Divider /> */}
@@ -80,7 +77,7 @@ export default class DashboardNewsletter extends PureComponent {
             dataKey="A"
             stroke="#8884d8"
             fill="#8884d8"
-            fillOpacity={0.6}
+            fillOpacity={0.5}
           />
         </RadarChart>
       </Card>
