@@ -75,41 +75,23 @@ function NewUsers() {
       {users.length ? (
         <>
           <div className="from-top " />
-          <Card className="w-11/12 mx-auto">
+          <Card className="md:w-11/12 w-full mx-auto">
             <Paper className={classes.root}>
-              <CardContent className="flex justify-center">
-                <TableHead style={{ margin: "0 auto" }}>
-                  <TableRow>
-                    <TableCell align="left">New :{users.length}</TableCell>
-
-                    <TableCell />
-
-                    <TableCell align="right">
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                        className="flex justify-center items-center"
-                      >
-                        Latest Users
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left" />
-                    <TableCell align="left" />
-
-                    <TableCell align="left">
-                      <Link to="/admin/users">
-                        <Button
-                          variant="contained"
-                          style={{ marginLeft: "66px" }}
-                        >
-                          Users
-                          <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
-                        </Button>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
+              <CardContent className="flex  justify-end items-center">
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  style={{ marginRight: "auto" }}
+                >
+                  latest registered users
+                </Typography>
+                <Link to="/admin/users">
+                  <Button variant="contained">
+                    Users
+                    <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
+                  </Button>
+                </Link>
 
                 <Divider style={{ marginTop: "10px" }} />
               </CardContent>

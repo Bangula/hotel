@@ -65,7 +65,7 @@ const data = [
 export default class DailyUsers extends PureComponent {
   render() {
     return (
-      <Card className=" w-full">
+      <Card className="w-full">
         <CardContent>
           {/* <Typography gutterBottom variant="h5" component="h2">
           New Users
@@ -76,8 +76,8 @@ export default class DailyUsers extends PureComponent {
           {/* <Divider /> */}
         </CardContent>
         <ComposedChart
-          className="mx-auto shadow-md"
-          width={500}
+          className="mx-auto flex-grow shadow-md"
+          width={450}
           height={300}
           data={data}
           margin={{

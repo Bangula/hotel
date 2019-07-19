@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { green } from "@material-ui/core/colors";
 import {
-  makeStyles,
   Button,
   Table,
   TableBody,
@@ -11,18 +10,19 @@ import {
   TableRow,
   Paper,
   CircularProgress,
-  Typography,
   Card,
   Divider,
   CardContent,
-  Badge
+  Badge,
+  Typography
 } from "@material-ui/core";
 import { getPromotionsPerPage } from "@endpoints/promotions";
 import "@zendeskgarden/react-pagination/dist/styles.css";
-import Icon from "@material-ui/core/Icon";
+import { WidthContext } from "../../common/context/ContextProvider";
 
 // PROMOTIONS PANEL
 const DashboardPromotions = props => {
+  const { windowWidth } = React.useContext(WidthContext);
   const [totalPages, setTotalPages] = useState(null);
   const [promotions, setPromotions] = useState([]);
 
@@ -62,44 +62,23 @@ const DashboardPromotions = props => {
       <>
         <div className="from-top " />
         {promotions.length ? (
-          <Card className="w-11/12 mx-auto">
+          <Card className="md:w-11/12 w-full mx-auto">
             <Paper>
-              <CardContent className="flex justify-center">
-                <TableHead style={{ margin: "0 auto" }}>
-                  <TableRow>
-                    <TableCell align="left">
-                      New : {promotions.length}
-                    </TableCell>
-
-                    <TableCell />
-
-                    <TableCell align="right">
-                      <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                        className="flex justify-center items-center"
-                      >
-                        Latest Promotions
-                      </Typography>
-                    </TableCell>
-                    <TableCell align="left" />
-
-                    <TableCell align="left">
-                      <Link to="/admin/promotions">
-                        <Button
-                          variant="contained"
-                          style={{ marginLeft: "66px" }}
-                        >
-                          Promotions
-                          <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
-                        </Button>
-                      </Link>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-
-                <Divider style={{ marginTop: "10px" }} />
+              <CardContent className="flex justify-end">
+                <Typography
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                  style={{ marginRight: "auto" }}
+                >
+                  latest registered users
+                </Typography>
+                <Link to="/admin/promotions">
+                  <Button variant="contained">
+                    Promotions
+                    <i className="pl-4 text-lg far fa-arrow-alt-circle-right " />
+                  </Button>
+                </Link>
               </CardContent>
               <Table>
                 <TableHead>
@@ -109,7 +88,7 @@ const DashboardPromotions = props => {
                     <TableCell className="cell-sm" align="left">
                       Starting At
                     </TableCell>
-                    <TableCell className="cell-sm" align="left">
+                    <TableCell className="cell-xs" align="left">
                       Ending At
                     </TableCell>
                     <TableCell className="cell-xs" align="left">
@@ -121,9 +100,13 @@ const DashboardPromotions = props => {
                   {promotions.map(promotion => (
                     <TableRow key={promotion.id}>
                       <TableCell align="left">{promotion.name}</TableCell>
-                      <TableCell>{promotion.starting_at}</TableCell>
-                      <TableCell>{promotion.ending_at}</TableCell>
-                      <TableCell>
+                      <TableCell className="cell-sm">
+                        {promotion.starting_at}
+                      </TableCell>
+                      <TableCell className="cell-sm">
+                        {promotion.ending_at}
+                      </TableCell>
+                      <TableCell className="cell-xs">
                         {promotion.active ? (
                           <Badge color="primary" variant="dot" />
                         ) : (

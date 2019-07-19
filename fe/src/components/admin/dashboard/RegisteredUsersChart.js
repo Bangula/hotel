@@ -66,7 +66,7 @@ const data = [
 export default class Example extends PureComponent {
   render() {
     return (
-      <Card className=" w-full mb-4">
+      <>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             Stats for new users compared with last years results
@@ -74,8 +74,8 @@ export default class Example extends PureComponent {
           {/* <Divider /> */}
         </CardContent>
         <BarChart
-          className=" mx-auto shadow-md"
-          width={500}
+          className=" mx-auto w-full shadow-md"
+          width={450}
           height={300}
           data={data}
           margin={{
@@ -93,7 +93,7 @@ export default class Example extends PureComponent {
           <Bar dataKey="Last Year" fill="#8884d8" />
           <Bar dataKey="This Year" fill="#82ca9d" />
         </BarChart>
-      </Card>
+      </>
     );
   }
 }
