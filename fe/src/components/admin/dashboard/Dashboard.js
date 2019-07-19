@@ -10,14 +10,13 @@ const Dashboard = () => {
   }, []);
   return (
     <>
-      <div style={{ paddingTop: "60px" }} className="flex flex-col ">
-        <div className="flex md:flex-row flex-col">
+      <div style={{ paddingTop: "60px" }} className="flex lg:flex-row flex-col">
+        <div className="flex flex-wrap flex-col">
           <RegisteredUsersChart />
           <DailyUsers />
-
           <NewsletterChart />
         </div>
-        <div className="flex justify-between md:flex-row  flex-col w-full pb-6">
+        <div className="flex w-2/3 flex-col w-full pb-6">
           <NewUsers />
           <DashboardPromotions />
         </div>

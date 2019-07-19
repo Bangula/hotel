@@ -135,10 +135,12 @@ function Subscribers() {
     e.preventDefault();
     const { data, error } = await subscribeUser({ email: newEmail });
     console.log(newEmail);
+
     if (data) {
       console.log(data.data);
       setSubscribeError("");
       getSubscribers(currentPage);
+
       Alert.success(<i className="fas fa-check" />, {
         effect: "slide",
         timeout: 2000,

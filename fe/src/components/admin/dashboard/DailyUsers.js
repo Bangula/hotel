@@ -65,7 +65,7 @@ const data = [
 export default class DailyUsers extends PureComponent {
   render() {
     return (
-      <Card className="md:w-2/6  w-full">
+      <Card className=" w-full">
         <CardContent>
           {/* <Typography gutterBottom variant="h5" component="h2">
           New Users

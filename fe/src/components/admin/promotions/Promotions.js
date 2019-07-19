@@ -207,7 +207,6 @@ const PromotionsComponent = props => {
                       {" "}
                       <Button
                         onClick={() => handleClickOpenModal(promotion.id)}
-                        // onClick={() => deleteSinglePromotion(promotion.id)}
                         variant="contained"
                         color="secondary"
                       >
@@ -254,7 +253,11 @@ const Promotions = () => {
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
           <LinkTab label="All Promotions" href="/drafts" />
-          <LinkTab label="Create or Edit Promotion" href="/trash" />
+          <LinkTab
+            label="*NEXT VERSION FEATURE* -  Create or Edit Promotion "
+            href="/trash"
+            disabled
+          />
         </Tabs>
       </AppBar>
 

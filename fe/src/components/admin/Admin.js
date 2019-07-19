@@ -136,7 +136,7 @@ const Admin = props => {
   const { windowWidth } = React.useContext(WidthContext);
 
   const dispatch = useDispatch();
-  const hideLayout = useSelector(state => state.user.hideLayout);
+
   const isAdmin = useSelector(state => state.user.isAdmin);
   const userName = useSelector(state => state.user.info.data.first_name);
 
@@ -173,7 +173,7 @@ const Admin = props => {
                 [classes.appBarShift]: open
               })}
             >
-              <Toolbar>
+              <Toolbar className="flex justify-between">
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
@@ -184,7 +184,7 @@ const Admin = props => {
                   <MenuIcon />
                 </IconButton>
 
-                <ListItem button>
+                <ListItem>
                   <ListItemIcon>
                     <Avatar className={classes.purpleAvatar}>
                       <i className="fas fa-user" />
@@ -193,12 +193,20 @@ const Admin = props => {
                   <ListItemText primary={userName} />
                 </ListItem>
                 <div className="hidden md:block w-2/12">
+                  <p
+                    style={{ transition: "all 0.1s" }}
+                    className="mx-4 py-2 rounded-lg w-20"
+                  >
+                    v-1.0.3
+                  </p>
+                </div>
+                <div className="hidden md:block w-2/12">
                   <Link
                     style={{ transition: "all 0.1s" }}
                     to="/"
-                    className="px-4 py-2 bg-red-600 rounded-lg hover:bg-red-400"
+                    className="flex px-2 flex-no-wrap items-center justify-center text-center py-2 bg-red-600 hover:bg-red-400"
                   >
-                    CLOSE PANEL
+                    <p className="">CLOSE PANEL</p>
                   </Link>
                 </div>
               </Toolbar>
@@ -406,7 +414,7 @@ const Admin = props => {
                   className={classes.nested}
                 >
                   <List component="div" className={classes.submenu}>
-                    <NavLink
+                    {/* <NavLink
                       exact
                       to="/admin/gallery"
                       activeClassName="admin-link"
@@ -414,20 +422,23 @@ const Admin = props => {
                       <ListItem button>
                         <ListItemText primary="All galleries" />
                       </ListItem>
-                    </NavLink>
+                    </NavLink> */}
 
                     <NavLink
                       to="/admin/gallery/create"
                       activeClassName="admin-link"
                     >
                       <ListItem button>
-                        <ListItemText primary="Create Gallery" />
+                        <ListItemText
+                          primary="Create Gallery"
+                          secondary="Beta Feature"
+                        />{" "}
                       </ListItem>
                     </NavLink>
 
-                    <ListItem button>
+                    {/* <ListItem button>
                       <ListItemText primary="Edit Gallery" />
-                    </ListItem>
+                    </ListItem> */}
                   </List>
                 </Collapse>
 
@@ -486,7 +497,7 @@ const Admin = props => {
                   <ListItem button>
                     <ListItemIcon>
                       <Icon
-                        className={clsx(classes.icon, "fas fa-mail-bulk")}
+                        className={clsx(classes.icon, "far fa-calendar-check")}
                         color="action"
                       />
                     </ListItemIcon>
@@ -553,20 +564,23 @@ const Admin = props => {
                 </ListItem>
 
                 {windowWidth < 768 ? (
-                  <ListItem
-                    button
-                    onClick={() => {
-                      props.history.push("/");
-                    }}
-                  >
-                    <ListItemIcon>
-                      <Icon
-                        className={clsx(classes.icon, "fas fa-sign-out-alt")}
-                        color="action"
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Close panel" />
-                  </ListItem>
+                  <>
+                    <ListItem
+                      button
+                      onClick={() => {
+                        props.history.push("/");
+                      }}
+                    >
+                      <ListItemIcon>
+                        <Icon
+                          className={clsx(classes.icon, "fas fa-outdent")}
+                          color="action"
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="Close panel" />
+                    </ListItem>
+                    <p className="text-center ">v-1.0.3</p>
+                  </>
                 ) : null}
               </List>
               <Divider />
