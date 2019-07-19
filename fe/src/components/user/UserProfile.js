@@ -78,7 +78,7 @@ const UserProfile = ({ adminPanel }) => {
         : [];
       setReservations(userReservations);
     } else if (error) {
-      console.log(error);
+      console.log(error.response);
     }
   }
 

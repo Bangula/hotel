@@ -5,8 +5,8 @@ export const createReservation = reservation => {
   return toResponse(http.post("/reservations", reservation));
 };
 
-export const getAllReservations = () => {
-  return toResponse(http.get("/reservations"));
+export const getAllReservations = page => {
+  return toResponse(http.get(`/reservations?page=${page}`));
 };
 
 export const deleteReservation = id => {

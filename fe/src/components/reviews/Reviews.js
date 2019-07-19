@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Review from "./Review";
-import { getReviews, getPage, createReview } from "@endpoints/reviews";
+import { getReviewsApproved, getPage, createReview } from "@endpoints/reviews";
 import { getAllRooms } from "@endpoints/rooms";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
@@ -126,8 +126,9 @@ const Reviews = () => {
   const classes = useStyles();
 
   const getAllReviews = async () => {
-    const { data, error } = await getReviews();
+    const { data, error } = await getReviewsApproved();
     if (data) {
+      console.log(data);
       setReviews(data.data);
       setCurrentPage(data.data.meta.pagination.current_page);
 

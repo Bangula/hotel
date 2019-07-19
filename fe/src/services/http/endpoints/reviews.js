@@ -17,7 +17,9 @@ export const getReviewsOnHold = page => {
 };
 //http://api.quantox-hotel.local/v1/reviews?search=status%3Aapprove&page=2
 export const getReviewsApproved = page => {
-  return toResponse(http.get(`/reviews?search=status%3Aapprove&page=${page}`));
+  return toResponse(
+    http.get(`/reviews?search=status%3Aapprove&page=${page}&include=user`)
+  );
 };
 export const approveReview = id => {
   return toResponse(http.get(`reviews/${id}/approve`));

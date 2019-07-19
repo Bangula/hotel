@@ -23,7 +23,14 @@ const useStyles = makeStyles({
     transform: "translate(-50%,-50%)"
   }
 });
-const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
+const Review = ({
+  hotel_rate,
+  room_rate,
+  accommodation_rate,
+  comment,
+  user,
+  ...props
+}) => {
   const { windowWidth } = React.useContext(WidthContext);
   const classes = useStyles();
   // console.log("REVIEW PROPS", hotel_rate, room_rate, accommodation_rate);
@@ -34,7 +41,7 @@ const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
     <Card className={`${classes.card} hover:shadow-2xl mb-6`}>
       <CardContent className="flex justify-between">
         <Typography variant="h5" component="h2" align="left">
-          User Review
+          {user && user.data.first_name}
         </Typography>
         <Typography
           variant="h5"
@@ -107,10 +114,7 @@ const Review = ({ hotel_rate, room_rate, accommodation_rate, ...props }) => {
           component="p"
           className="w-full mt-0 mt-4 md:w-9/12 text-justify"
         >
-          A spacious deluxe room which has a double bed and a single bed. Ideal
-          for any... A spacious deluxe room which has a double bed and a single
-          bed. Ideal for any... A spacious deluxe room which has a double bed
-          and a single bed. Ideal for any...
+          {comment}
         </Typography>
       </CardContent>
       <Divider variant="fullWidth" />

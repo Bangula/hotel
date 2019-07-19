@@ -21,6 +21,7 @@ import Subscribers from "./subscribers/Subscribers";
 import Songs from "./songs/Songs";
 import Events from "./events/Events";
 import EventTypes from "./events/EventTypes";
+import Reservations from "./reservations/Reservations";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -477,6 +478,22 @@ const Admin = props => {
                   </List>
                 </Collapse>
 
+                <NavLink
+                  exact
+                  to="/admin/reservations"
+                  activeClassName="admin-link"
+                >
+                  <ListItem button>
+                    <ListItemIcon>
+                      <Icon
+                        className={clsx(classes.icon, "fas fa-mail-bulk")}
+                        color="action"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary="Reservations" />
+                  </ListItem>
+                </NavLink>
+
                 {/* ///////// end events//////// */}
                 <NavLink
                   exact
@@ -635,6 +652,12 @@ const Admin = props => {
                     component={Subscribers}
                   />
                   <Route exact path={`/admin/events`} component={Events} />
+                  <Route
+                    exact
+                    path={`/admin/reservations`}
+                    component={Reservations}
+                  />
+
                   <Route
                     exact
                     path={`/admin/events/types`}
