@@ -136,7 +136,7 @@ const Admin = props => {
   const { windowWidth } = React.useContext(WidthContext);
 
   const dispatch = useDispatch();
-  const hideLayout = useSelector(state => state.user.hideLayout);
+
   const isAdmin = useSelector(state => state.user.isAdmin);
   const userName = useSelector(state => state.user.info.data.first_name);
 
@@ -192,6 +192,14 @@ const Admin = props => {
                   </ListItemIcon>
                   <ListItemText primary={userName} />
                 </ListItem>
+                <div className="hidden md:block w-2/12">
+                  <p
+                    style={{ transition: "all 0.1s" }}
+                    className="mx-4 py-2 rounded-lg "
+                  >
+                    v 1.0.3
+                  </p>
+                </div>
                 <div className="hidden md:block w-2/12">
                   <Link
                     style={{ transition: "all 0.1s" }}
@@ -486,7 +494,7 @@ const Admin = props => {
                   <ListItem button>
                     <ListItemIcon>
                       <Icon
-                        className={clsx(classes.icon, "fas fa-mail-bulk")}
+                        className={clsx(classes.icon, "far fa-calendar-check")}
                         color="action"
                       />
                     </ListItemIcon>
