@@ -414,7 +414,7 @@ const Admin = props => {
                   className={classes.nested}
                 >
                   <List component="div" className={classes.submenu}>
-                    <NavLink
+                    {/* <NavLink
                       exact
                       to="/admin/gallery"
                       activeClassName="admin-link"
@@ -422,20 +422,23 @@ const Admin = props => {
                       <ListItem button>
                         <ListItemText primary="All galleries" />
                       </ListItem>
-                    </NavLink>
+                    </NavLink> */}
 
                     <NavLink
                       to="/admin/gallery/create"
                       activeClassName="admin-link"
                     >
                       <ListItem button>
-                        <ListItemText primary="Create Gallery" />
+                        <ListItemText
+                          primary="Create Gallery"
+                          secondary="Beta Feature"
+                        />{" "}
                       </ListItem>
                     </NavLink>
 
-                    <ListItem button>
+                    {/* <ListItem button>
                       <ListItemText primary="Edit Gallery" />
-                    </ListItem>
+                    </ListItem> */}
                   </List>
                 </Collapse>
 
