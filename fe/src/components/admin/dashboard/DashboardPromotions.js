@@ -71,7 +71,7 @@ const DashboardPromotions = props => {
                   component="p"
                   style={{ marginRight: "auto" }}
                 >
-                  latest registered users
+                  latest promotions
                 </Typography>
                 <Link to="/admin/promotions">
                   <Button variant="contained">
