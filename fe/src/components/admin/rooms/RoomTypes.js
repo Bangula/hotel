@@ -16,26 +16,17 @@ import {
   ListItem,
   List
 } from "@material-ui/core";
-<<<<<<< HEAD
 
 import { getRoomTypes, deleteRoomType } from "@endpoints/rooms";
 
-=======
-import { getRoomTypes, deleteRoomType, createRoomType } from "@endpoints/rooms";
->>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 import Modal from "../Modal";
 import Alert from "react-s-alert";
 
-<<<<<<< HEAD
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-=======
-import { ExpandMore, ExpandLess } from "@material-ui/icons";
-
->>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import EditRoomType from "./EditRoomType";
 
 const useStyles = makeStyles(theme => ({

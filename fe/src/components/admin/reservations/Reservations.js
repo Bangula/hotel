@@ -18,12 +18,6 @@ import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 
 import Modal from "../Modal";
-<<<<<<< HEAD
-
-=======
-import Alert from "react-s-alert";
-//const { windowWidth } = React.useContext(WidthContext);
->>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import { getAllReservations, deleteReservation } from "@endpoints/reservations";
 
 const useStyles = makeStyles(theme => ({

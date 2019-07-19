@@ -10,24 +10,15 @@ import {
   Paper,
   CircularProgress,
   Card,
-  Divider,
   CardContent,
   Badge,
   Typography
 } from "@material-ui/core";
 import { getPromotionsPerPage } from "@endpoints/promotions";
 import "@zendeskgarden/react-pagination/dist/styles.css";
-<<<<<<< HEAD
 
 // PROMOTIONS PANEL
 const DashboardPromotions = () => {
-=======
-import { WidthContext } from "../../common/context/ContextProvider";
-
-// PROMOTIONS PANEL
-const DashboardPromotions = props => {
-  const { windowWidth } = React.useContext(WidthContext);
->>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
   const [totalPages, setTotalPages] = useState(null);
   const [promotions, setPromotions] = useState([]);
 

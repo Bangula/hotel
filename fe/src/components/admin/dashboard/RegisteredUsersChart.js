@@ -9,7 +9,7 @@ import {
   Legend
 } from "recharts";
 
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { CardContent, Typography } from "@material-ui/core";
 
 const data = [
   {
