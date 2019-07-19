@@ -18,7 +18,12 @@ import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 
 import Modal from "../Modal";
+<<<<<<< HEAD
 
+=======
+import Alert from "react-s-alert";
+//const { windowWidth } = React.useContext(WidthContext);
+>>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import { getAllReservations, deleteReservation } from "@endpoints/reservations";
 
 const useStyles = makeStyles(theme => ({
@@ -103,15 +108,21 @@ function Reservations() {
 
         {reservations.length ? (
           <>
-            <Paper className={classes.root}>
-              <Table className={classes.table}>
+            <Paper className={`${classes.root} responsive`}>
+              <Table className="asdasdasdas">
                 <TableHead>
                   <TableRow>
-                    <TableCell align="left">Reservation created</TableCell>
-                    <TableCell align="left">Rooms</TableCell>
+                    <TableCell className="cell-md" align="left">
+                      Created At
+                    </TableCell>
+                    <TableCell className="cell-sm" align="left">
+                      Rooms
+                    </TableCell>
                     <TableCell align="left">Client</TableCell>
                     <TableCell align="left">Phone</TableCell>
-                    <TableCell align="right">Delete</TableCell>
+                    <TableCell className="cell-sm" align="right">
+                      Delete
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

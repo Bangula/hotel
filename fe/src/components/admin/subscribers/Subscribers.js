@@ -180,7 +180,7 @@ function Subscribers() {
                   <Table className={classes.table}>
                     <TableHead>
                       <TableRow>
-                        <TableCell>Id</TableCell>
+                        <TableCell className="cell-xs">Id</TableCell>
                         <TableCell align="left">Email</TableCell>
 
                         <TableCell align="right" />
@@ -189,7 +189,11 @@ function Subscribers() {
                     <TableBody>
                       {subscribers.map(user => (
                         <TableRow key={user.id}>
-                          <TableCell component="th" scope="row">
+                          <TableCell
+                            component="th"
+                            scope="row"
+                            className="cell-xs"
+                          >
                             {user.real_id}
                           </TableCell>
                           <TableCell
@@ -242,7 +246,7 @@ function Subscribers() {
       )}
       {value === 1 && (
         <TabContainer>
-          <div className="shadow-lg mb-16 border   py-8">
+          <div className="shadow-lg mb-16 border  py-8">
             <h1 className="text-center text-gray-600 italic">
               Create new subscriber
             </h1>

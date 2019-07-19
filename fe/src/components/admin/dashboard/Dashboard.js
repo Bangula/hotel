@@ -3,6 +3,11 @@ import RegisteredUsersChart from "./RegisteredUsersChart";
 import NewUsers from "./NewUsers";
 import DashboardPromotions from "./DashboardPromotions";
 import DailyUsers from "./DailyUsers";
+<<<<<<< HEAD
+=======
+import NewsletterChart from "./NewsletterChart";
+
+>>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 const Dashboard = () => {
   React.useEffect(() => {
     document.title = "Quantox Hotel - Admin Dashboard";

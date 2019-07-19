@@ -102,8 +102,12 @@ function Rooms() {
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell align="left">Room Number</TableCell>
-                  <TableCell align="left">Room Usable</TableCell>
+                  <TableCell className="cell-md" align="left">
+                    Room No
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Usable
+                  </TableCell>
 
                   <TableCell size="small" align="left">
                     Edit Room
@@ -114,8 +118,10 @@ function Rooms() {
               <TableBody>
                 {rooms.map(room => (
                   <TableRow key={room.id}>
-                    <TableCell align="left">{room.room_number}</TableCell>
-                    <TableCell align="left">
+                    <TableCell className="cell-sm" align="left">
+                      {room.room_number}
+                    </TableCell>
+                    <TableCell className="cell-sm" align="left">
                       {room.usable ? "true" : "false"}
                     </TableCell>
 

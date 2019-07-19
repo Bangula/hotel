@@ -16,18 +16,26 @@ import {
   ListItem,
   List
 } from "@material-ui/core";
+<<<<<<< HEAD
 
 import { getRoomTypes, deleteRoomType } from "@endpoints/rooms";
 
+=======
+import { getRoomTypes, deleteRoomType, createRoomType } from "@endpoints/rooms";
+>>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
-
 import Modal from "../Modal";
 import Alert from "react-s-alert";
 
+<<<<<<< HEAD
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+=======
+import { ExpandMore, ExpandLess } from "@material-ui/icons";
+
+>>>>>>> 31c52f8a4af1f923431fe6bb38c72a615c91a21a
 import EditRoomType from "./EditRoomType";
 
 const useStyles = makeStyles(theme => ({
@@ -37,7 +45,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //DISABLE ON CLICK RIPPLE
-
 function RoomTypes() {
   const classes = useStyles();
 
@@ -57,7 +64,6 @@ function RoomTypes() {
   function handleCloseModal() {
     setOpenModal(false);
   }
-
   //Toggle list
   function handleClickList() {
     setOpenList(!openList);
@@ -95,7 +101,7 @@ function RoomTypes() {
   }, [currentPage, types]);
 
   return (
-    <div className="text-center" style={{ marginTop: "50px" }}>
+    <div className="text-center" style={{ marginTop: "55px" }}>
       <Alert />
       <Modal
         open={openModal}
@@ -108,7 +114,7 @@ function RoomTypes() {
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
-        className="bg-gray-400 mb-4"
+        className="bg-gray-400 py-6"
       >
         <ListItem button onClick={handleClickList}>
           <ListItemIcon>{/* icon  */}</ListItemIcon>
@@ -133,14 +139,24 @@ function RoomTypes() {
               <TableHead>
                 <TableRow>
                   <TableCell>Type Name</TableCell>
-                  <TableCell align="left">Bed Count</TableCell>
-                  <TableCell align="left">Maximum Persons</TableCell>
-                  <TableCell align="left">Price Adult</TableCell>
-                  <TableCell align="left">Price Child</TableCell>
-                  <TableCell size="small" align="left">
-                    Edit Room Type
+                  <TableCell className="cell-xs" align="left">
+                    Beds
                   </TableCell>
-                  <TableCell align="left">Delete Type</TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Max <br /> Persons
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Price <br /> Adult
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Price <br /> Child
+                  </TableCell>
+                  <TableCell className="cell-sm" size="small" align="left">
+                    Edit <br /> Type
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Delete <br /> Type
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -163,7 +179,7 @@ function RoomTypes() {
                           color="primary"
                           className={classes.button}
                         >
-                          Edit Room Type
+                          Edit
                         </Button>
                       </Link>
                     </TableCell>
@@ -176,7 +192,7 @@ function RoomTypes() {
                         color="secondary"
                         className={classes.button}
                       >
-                        Delete Room Type
+                        Delete
                       </Button>
                     </TableCell>
                   </TableRow>

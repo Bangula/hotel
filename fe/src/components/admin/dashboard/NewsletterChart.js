@@ -65,8 +65,8 @@ export default class DashboardNewsletter extends PureComponent {
         <RadarChart
           cx="50%"
           cy="50%"
-          width={500}
-          height={300}
+          width={400}
+          height={250}
           data={data}
           className=" mx-auto shadow-md"
         >

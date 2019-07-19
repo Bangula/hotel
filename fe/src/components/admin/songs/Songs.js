@@ -109,7 +109,7 @@ const Songs = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root2} style={{ marginTop: "42px" }}>
+    <div className={classes.root2} style={{ marginTop: "60px" }}>
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
@@ -136,9 +136,15 @@ const Songs = () => {
                       <TableRow>
                         <TableCell>Song name</TableCell>
                         <TableCell align="left">Artist</TableCell>
-                        <TableCell align="left">Genre</TableCell>
-                        <TableCell align="right">Edit</TableCell>
-                        <TableCell align="right">Delete</TableCell>
+                        <TableCell className="cell-sm" align="left">
+                          Genre
+                        </TableCell>
+                        <TableCell className="cell-sm" align="right">
+                          Edit
+                        </TableCell>
+                        <TableCell className="cell-sm" align="right">
+                          Delete
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
