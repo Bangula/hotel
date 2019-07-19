@@ -3,7 +3,6 @@ import {
   registerUser,
   getLogedUser
 } from "../../services/http/endpoints/users";
-import jwt_decode from "jwt-decode";
 import { SAVE_USER_INFO } from "@store/types";
 
 export const login = (user, history) => {

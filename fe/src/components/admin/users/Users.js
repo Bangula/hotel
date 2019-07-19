@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -104,12 +103,12 @@ function Users() {
   //Kada se menja strana paginacije
   useEffect(() => {
     if (users.length) getUsersPerPageHandle(currentPage);
-  }, [currentPage]);
+  }, [currentPage, users]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
     if (!users.length) getUsersPerPageHandle(currentPage);
-  }, []);
+  }, [users, currentPage]);
 
   const handleRoleChange = id => {
     setRoleModalStatus(true);

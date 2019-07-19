@@ -6,7 +6,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import { withStyles } from "@material-ui/core/styles";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 // Components
@@ -29,8 +29,6 @@ const Header = () => {
   const [menuIsActive, setMenuIsActive] = React.useState(false);
   const promotions = useSelector(state => state.cart.promotions);
   const rooms = useSelector(state => state.cart.rooms);
-
-  const dispatch = useDispatch();
 
   let cartItems = promotions.length + rooms.length;
 

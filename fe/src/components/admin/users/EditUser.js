@@ -6,11 +6,9 @@ import {
   Button,
   TextField,
   Container,
-  makeStyles,
   CircularProgress
 } from "@material-ui/core";
 import { getUser } from "@endpoints/users";
-import { useSelector, useDispatch } from "react-redux";
 import Modal from "../Modal";
 //initial values formik
 
@@ -40,29 +38,14 @@ const editUserSchema = Yup.object().shape({
     .max(200)
     .required("Address is required")
 });
-const useStyles = makeStyles(theme => ({
-  submit: {
-    padding: 10,
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
 
 const EditUser = props => {
-  const dispatch = useDispatch();
   const [user, setUser] = useState({});
-  const [invalidEmail, setInvalidEmail] = useState("");
-  const [invalidFirstName, setInvalidFirstName] = useState("");
-  const [invalidLastName, setInvalidLastName] = useState("");
-  const [invalidPhone, setInvalidPhone] = useState("");
-  const [invalidCity, setInvalidCity] = useState("");
-  const [invalidAddress, setInvalidAddress] = useState("");
 
-  const [invalidPassword, setInvalidPassword] = useState("");
-  const [invalidPassword2, setInvalidPassword2] = useState("");
   const [openModal, setOpenModal] = React.useState(false);
   const [modalUser, setModalUser] = React.useState({});
 
-  function handleClickOpenModal(userId) {
+  function handleClickOpenModal() {
     setOpenModal(true);
   }
 
@@ -93,7 +76,7 @@ const EditUser = props => {
     //props.match.params.userId
     if (Object.keys(props.match.params).length && props.match.params.userId)
       getUserById(props.match.params.userId);
-  }, []);
+  }, [props.match.params]);
 
   //Compoment has been reused for edit
   return (
@@ -148,17 +131,15 @@ const EditUser = props => {
                     onBlur={handleBlur}
                     value={values.first_name}
                     error={
-                      (errors.first_name && touched.first_name) ||
-                      invalidFirstName
+                      (errors.first_name && touched.first_name) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.first_name && touched.first_name) ||
-                  invalidFirstName ? (
+                  {(errors.first_name && touched.first_name) || "" ? (
                     <span className="text-danger">
-                      {errors.first_name || invalidFirstName}
+                      {errors.first_name || ""}
                     </span>
                   ) : null}
 
@@ -172,16 +153,15 @@ const EditUser = props => {
                     onBlur={handleBlur}
                     value={values.last_name}
                     error={
-                      (errors.last_name && touched.last_name) || invalidLastName
+                      (errors.last_name && touched.last_name) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.last_name && touched.last_name) ||
-                  invalidLastName ? (
+                  {(errors.last_name && touched.last_name) || "" ? (
                     <span className="text-danger">
-                      {errors.last_name || invalidLastName}
+                      {errors.last_name || ""}
                     </span>
                   ) : null}
 
@@ -194,17 +174,11 @@ const EditUser = props => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.email}
-                    error={
-                      (errors.email && touched.email) || invalidEmail
-                        ? true
-                        : false
-                    }
+                    error={(errors.email && touched.email) || "" ? true : false}
                   />
 
-                  {(errors.email && touched.email) || invalidEmail ? (
-                    <span className="text-danger">
-                      {errors.email || invalidEmail}
-                    </span>
+                  {(errors.email && touched.email) || "" ? (
+                    <span className="text-danger">{errors.email || ""}</span>
                   ) : null}
 
                   <TextField
@@ -217,17 +191,15 @@ const EditUser = props => {
                     onBlur={handleBlur}
                     value={values.phone_number}
                     error={
-                      (errors.phone_number && touched.phone_number) ||
-                      invalidPhone
+                      (errors.phone_number && touched.phone_number) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.phone_number && touched.phone_number) ||
-                  invalidPhone ? (
+                  {(errors.phone_number && touched.phone_number) || "" ? (
                     <span className="text-danger">
-                      {errors.phone_number || invalidPhone}
+                      {errors.phone_number || ""}
                     </span>
                   ) : null}
 
@@ -240,17 +212,11 @@ const EditUser = props => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.city}
-                    error={
-                      (errors.city && touched.city) || invalidCity
-                        ? true
-                        : false
-                    }
+                    error={(errors.city && touched.city) || "" ? true : false}
                   />
 
-                  {(errors.city && touched.city) || invalidCity ? (
-                    <span className="text-danger">
-                      {errors.city || invalidCity}
-                    </span>
+                  {(errors.city && touched.city) || "" ? (
+                    <span className="text-danger">{errors.city || ""}</span>
                   ) : null}
 
                   <TextField
@@ -263,16 +229,12 @@ const EditUser = props => {
                     onBlur={handleBlur}
                     value={values.address}
                     error={
-                      (errors.address && touched.address) || invalidAddress
-                        ? true
-                        : false
+                      (errors.address && touched.address) || "" ? true : false
                     }
                   />
 
-                  {(errors.address && touched.address) || invalidAddress ? (
-                    <span className="text-danger">
-                      {errors.address || invalidAddress}
-                    </span>
+                  {(errors.address && touched.address) || "" ? (
+                    <span className="text-danger">{errors.address || ""}</span>
                   ) : null}
 
                   {/* OVDE MODAL */}

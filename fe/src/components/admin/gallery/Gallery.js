@@ -1,4 +1,4 @@
-import React, { createRef, useState, useEffect } from "react";
+import React from "react";
 
 const Gallery = () => {
   React.useEffect(() => {

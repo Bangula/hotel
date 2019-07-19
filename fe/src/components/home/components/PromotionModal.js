@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Typography from "@material-ui/core/Typography";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import TextField from "@material-ui/core/TextField";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -24,6 +23,7 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
 
   React.useEffect(() => {
     getData();
+    // eslint-disable-next-line
   }, []);
 
   const dispatch = useDispatch();

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { useSelector, useDispatch } from "react-redux";
-import { Field, Formik, Form, ErrorMessage } from "formik";
 
 import moment from "moment";
 
@@ -57,8 +56,13 @@ const Room = ({ data, fullWidth, close }) => {
 
   React.useEffect(() => {
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
+
     getAllServices();
+    // eslint-disable-next-line
+
     setMaxPersons(data.roomType ? data.roomType.data.max_persons : 4);
+    // eslint-disable-next-line
   }, []);
 
   const { windowWidth } = React.useContext(WidthContext);

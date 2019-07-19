@@ -67,22 +67,22 @@ function Subscribers() {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const { data, error } = await subscribeUser({ email });
-    console.log(email);
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   const { data, error } = await subscribeUser({ email });
+  //   console.log(email);
 
-    if (data) {
-      console.log(data);
-      Alert.success(<i className="fas fa-check" />, {
-        effect: "slide",
-        timeout: 2000
-      });
-      getAllSubscribers(currentPage);
-    } else if (error) {
-      console.log(error.response);
-    }
-  };
+  //   if (data) {
+  //     console.log(data);
+  //     Alert.success(<i className="fas fa-check" />, {
+  //       effect: "slide",
+  //       timeout: 2000
+  //     });
+  //     getAllSubscribers(currentPage);
+  //   } else if (error) {
+  //     console.log(error.response);
+  //   }
+  // };
 
   function handleClickOpenModal(email) {
     setEmail(email);
@@ -125,11 +125,11 @@ function Subscribers() {
 
   useEffect(() => {
     if (subscribers.length) getSubscribers(currentPage);
-  }, [currentPage]);
+  }, [currentPage, subscribers]);
 
   useEffect(() => {
     if (!subscribers.length) getSubscribers(currentPage);
-  }, []);
+  }, [subscribers, currentPage]);
 
   const handleSubscribe = async e => {
     e.preventDefault();

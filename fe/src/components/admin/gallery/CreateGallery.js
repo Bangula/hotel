@@ -1,35 +1,23 @@
-import React, { createRef, useState, useEffect } from "react";
-import Dropzone, { useDropzone } from "react-dropzone";
-import { Button, TextField, Container, Snackbar } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import React, { useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { Button, TextField } from "@material-ui/core";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { createGallery } from "@endpoints/gallery";
 import {
-  makeStyles,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Typography,
-  useTheme,
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableRow,
-  Paper,
-  CircularProgress
+  Paper
 } from "@material-ui/core";
 
-const Gallery = props => {
+const Gallery = () => {
   const [files, setFiles] = useState([]);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [invalidName, setInvalidName] = useState("");
-  const [invalidDescription, setInvalidDescription] = useState("");
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -145,14 +133,10 @@ const Gallery = props => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 value={values.name}
-                error={
-                  (errors.name && touched.name) || invalidName ? true : false
-                }
+                error={(errors.name && touched.name) || "" ? true : false}
               />
-              {(errors.name && touched.name) || invalidName ? (
-                <span className="text-danger">
-                  {errors.name || invalidName}
-                </span>
+              {(errors.name && touched.name) || "" ? (
+                <span className="text-danger">{errors.name || ""}</span>
               ) : null}
               <TextField
                 // disabled={files.length ? false : true}
@@ -165,17 +149,13 @@ const Gallery = props => {
                 onBlur={handleBlur}
                 value={values.description}
                 error={
-                  (errors.description && touched.description) ||
-                  invalidDescription
+                  (errors.description && touched.description) || ""
                     ? true
                     : false
                 }
               />
-              {(errors.description && touched.description) ||
-              invalidDescription ? (
-                <span className="text-danger">
-                  {errors.description || invalidDescription}
-                </span>
+              {(errors.description && touched.description) || "" ? (
+                <span className="text-danger">{errors.description || ""}</span>
               ) : null}
               <Button
                 type="submit"
@@ -208,7 +188,11 @@ const Gallery = props => {
                   ? files.map((file, index) => (
                       <TableRow key={file.path}>
                         <TableCell component="th" scope="row">
-                          <img src={file.preview} className="h-8" />
+                          <img
+                            src={file.preview}
+                            alt="preview"
+                            className="h-8"
+                          />
                         </TableCell>
                         <TableCell component="th" scope="row">
                           {file.path} - {file.size} bytes

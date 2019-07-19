@@ -1,12 +1,11 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { Link } from "react-router-dom";
 
 import { WidthContext } from "@components/common/context/ContextProvider";
 
-const CheckBar = props => {
+const CheckBar = () => {
   const [state, setState] = React.useState({
     checkIn: new Date(),
     checkOut: new Date()

@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { joinToEvent } from "../../../services/http/endpoints/events";
 import room1 from "@assets/images/rooms/room1.jpg";
@@ -13,13 +12,11 @@ import { WidthContext } from "@components/common/context/ContextProvider";
 
 import {
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
   Typography,
-  Button,
-  Fab
+  Button
 } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -55,9 +52,6 @@ const Event = ({ event, join }) => {
       effect: "slide",
       timeout: 2000
     });
-  };
-  const handleError = () => {
-    Alert.error("Error!");
   };
 
   return (

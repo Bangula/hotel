@@ -22,7 +22,6 @@ const Header = () => {
               zIndex: "110",
               right: 0,
               top: 0,
-              borderBottomLeftRadius: "10px",
               borderBottomLeftRadius: "10px"
             }}
           >

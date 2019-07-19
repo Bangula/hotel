@@ -1,9 +1,5 @@
 import React from "react";
 import ringImg from "@assets/images/services/ring.jpg";
-import serviceGym from "@assets/images/services/service_gym.jpg";
-import servicePool from "@assets/images/services/service_pool.jpg";
-import serviceRestauraunt from "@assets/images/services/service_restauraunt.jpg";
-import serviceWellness from "@assets/images/services/service_wellness.jpg";
 
 const Services = () => {
   React.useEffect(() => {
@@ -23,7 +19,7 @@ const Services = () => {
         </h1>
         <div className="container mx-auto flex flex-wrap mt-16 ">
           <div className="w-full md:w-1/2 ring-image">
-            <img src={ringImg} alt="ring image" className="m-auto pt-6 " />
+            <img src={ringImg} alt="ring" className="m-auto pt-6 " />
           </div>
           <div className="w-full md:w-1/2 px-4">
             <h2 className="text-4xl mb-8">

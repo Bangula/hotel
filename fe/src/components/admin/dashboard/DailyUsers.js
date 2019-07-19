@@ -2,21 +2,13 @@ import React, { PureComponent } from "react";
 import {
   ComposedChart,
   Line,
-  Area,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend
 } from "recharts";
-import {
-  Card,
-  Divider,
-  CardContent,
-  Button,
-  Typography
-} from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 const data = [
   {
     name: "Mon",

@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  getAllSongs,
-  createSong,
-  deleteSong,
-  updateSong,
-  getSongById
-} from "@endpoints/songs";
+import { getAllSongs, deleteSong } from "@endpoints/songs";
 
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -74,7 +67,7 @@ const Songs = () => {
   useEffect(() => {
     setEditid("");
     getData(currentPage);
-  }, [value]);
+  }, [value, currentPage]);
 
   async function getData(page) {
     const { data, error } = await getAllSongs(page);

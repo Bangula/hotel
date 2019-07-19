@@ -2,9 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { getAllEventTypes, deleteEventType } from "@endpoints/events";
 
-import { getAllEvents, deleteEvent } from "@endpoints/events";
-
-import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 
 import AppBar from "@material-ui/core/AppBar";
@@ -66,7 +63,7 @@ const EventsTypes = () => {
   useEffect(() => {
     setEditid("");
     getData(currentPage);
-  }, [value]);
+  }, [value, currentPage]);
 
   async function getData(page) {
     const { data, error } = await getAllEventTypes(page);

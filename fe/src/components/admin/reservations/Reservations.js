@@ -18,7 +18,6 @@ import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 
 import Modal from "../Modal";
-import Alert from "react-s-alert";
 
 import { getAllReservations, deleteReservation } from "@endpoints/reservations";
 
@@ -54,10 +53,10 @@ function Reservations() {
   React.useEffect(() => {
     document.title = "Quantox Hotel - Admin Panel - Reservations";
     getReservations(currentPage);
-  }, []);
+  }, [currentPage]);
   useEffect(() => {
     if (reservations.length) getReservations(currentPage);
-  }, [currentPage]);
+  }, [currentPage, reservations]);
 
   function handleClickOpenModal(id) {
     setId(id);

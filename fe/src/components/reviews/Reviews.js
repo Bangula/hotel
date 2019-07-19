@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 import Review from "./Review";
 import { getReviewsApproved, getPage, createReview } from "@endpoints/reviews";
@@ -7,15 +6,7 @@ import { getAllRooms } from "@endpoints/rooms";
 import * as Yup from "yup";
 import { Formik, Form } from "formik";
 import {
-  makeStyles,
-  useTheme,
   Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Paper,
   CircularProgress,
   Collapse,
   ListItemText,
@@ -33,25 +24,12 @@ import {
   Select,
   MenuItem
 } from "@material-ui/core";
-import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
-import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import "@zendeskgarden/react-pagination/dist/styles.css";
 
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-const useStyles = makeStyles(theme => ({
-  progress: {
-    position: "fixed",
-    top: "50%",
-    zIndex: "100",
-    left: 0,
-    right: 0,
-    margin: "0 auto",
-    transform: "translateY(-50%)"
-  }
-}));
 
 const schema = Yup.object().shape({
   comment: Yup.string()
@@ -83,10 +61,6 @@ const Reviews = () => {
   const [comment, setComment] = useState("");
   const [roomId, setRoomId] = useState("");
   const [rooms, setRooms] = useState(true);
-  const [invalidRoomRate, setInvalidRoomRate] = useState("");
-  const [invalidAccomodationRate, setInvalidAccomodationRate] = useState("");
-  const [invalidRoom, setInvalidRoom] = useState("");
-  const [invalidComment, setInvalidComment] = useState("");
 
   const [selectedHotelRate, setSelectedHotelRate] = React.useState("1"); //value for radio buttons
   const [selectedRoomRate, setSelectedRoomRate] = React.useState("1"); //value for radio buttons
@@ -123,8 +97,6 @@ const Reviews = () => {
     room_id: roomId
   };
 
-  const classes = useStyles();
-
   const getAllReviews = async () => {
     const { data, error } = await getReviewsApproved();
     if (data) {
@@ -134,6 +106,8 @@ const Reviews = () => {
 
       console.log(data.data.meta.pagination);
       setTotalPages(data.data.meta.pagination.total_pages);
+    } else if (error) {
+      console.log(error.response);
     }
   };
 
@@ -141,6 +115,8 @@ const Reviews = () => {
     const { data, error } = await getPage(pageNum);
     if (data) {
       setReviews(data.data);
+    } else if (error) {
+      console.log(error.response);
     }
   };
   const createSingleReview = async credentials => {
@@ -245,14 +221,14 @@ const Reviews = () => {
                         onBlur={handleBlur}
                         value={values.comment}
                         error={
-                          (errors.comment && touched.comment) || invalidComment
+                          (errors.comment && touched.comment) || ""
                             ? true
                             : false
                         }
                       />
-                      {(errors.comment && touched.comment) || invalidComment ? (
+                      {(errors.comment && touched.comment) || "" ? (
                         <span className="text-danger">
-                          {errors.comment || invalidComment}
+                          {errors.comment || ""}
                         </span>
                       ) : null}
 
@@ -270,7 +246,7 @@ const Reviews = () => {
                             id: "age-simple"
                           }}
                           error={
-                            (errors.room_id && touched.room_id) || invalidRoom
+                            (errors.room_id && touched.room_id) || ""
                               ? true
                               : false
                           }
@@ -285,9 +261,9 @@ const Reviews = () => {
                               })
                             : null}
                         </Select>
-                        {(errors.room_id && touched.room_id) || invalidRoom ? (
+                        {(errors.room_id && touched.room_id) || "" ? (
                           <span className="text-danger">
-                            {errors.room_id || invalidRoom}
+                            {errors.room_id || ""}
                           </span>
                         ) : null}{" "}
                       </FormControl>

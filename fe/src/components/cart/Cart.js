@@ -14,7 +14,6 @@ import Alert from "react-s-alert";
 import { createReservation } from "../../services/http/endpoints/reservations";
 
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "@material-ui/core";
 
 import Modal from "../admin/Modal";
 
@@ -29,7 +28,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Cart(props) {
+export default function Cart() {
   const [modalIsActive, setModalIsActive] = React.useState(false);
   const [bookModalIsActive, setBookModalIsActive] = React.useState(false);
 
@@ -38,7 +37,6 @@ export default function Cart(props) {
 
   const promotions = useSelector(state => state.cart.promotions);
   const rooms = useSelector(state => state.cart.rooms);
-  const { isAuthenticated } = state => state.user;
 
   React.useEffect(() => {
     document.title = "Quantox Hotel - Cart";

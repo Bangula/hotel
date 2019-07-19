@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -10,12 +9,7 @@ import {
   TableHead,
   TableRow,
   Paper,
-  CircularProgress,
-  Collapse,
-  ListItemText,
-  ListItemIcon,
-  ListItem,
-  List
+  CircularProgress
 } from "@material-ui/core";
 
 import { getAllRooms, deleteRoom } from "@endpoints/rooms";
@@ -26,15 +20,6 @@ import { Pagination } from "@zendeskgarden/react-pagination";
 
 import Modal from "../Modal";
 import Alert from "react-s-alert";
-
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
-import EditRoomType from "./EditRoomType";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,7 +38,6 @@ function Rooms() {
   const [openModal, setOpenModal] = React.useState(false);
   const [modalRoom, setModalRoom] = React.useState(""); //stores data of current room id for modal
 
-  const [typeForEdit, setTypeForEdit] = React.useState({});
   React.useEffect(() => {
     document.title = "Quantox Hotel - Admin Panel - Rooms";
   }, []);
@@ -92,12 +76,12 @@ function Rooms() {
   //Kada se menja strana paginacije
   useEffect(() => {
     if (rooms.length) getRooms(currentPage);
-  }, [currentPage]);
+  }, [currentPage, rooms]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
     if (!rooms.length) getRooms(currentPage);
-  }, []);
+  }, [rooms, currentPage]);
 
   console.log("room id", modalRoom);
   return (

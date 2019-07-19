@@ -201,13 +201,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-{
-  /* <InputBase
-className={classes.input}
-value={email}
-placeholder="Your Email"
-inputProps={{ "aria-label": "Search Google Maps" }}
-onChange={e => setEmail(e.target.value)}
-/> */
-}

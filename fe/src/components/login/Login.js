@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { useSelector, useDispatch } from "react-redux";
 import { login, getProfile } from "@actions/authActions";
-
-import { Button, TextField, Container, Snackbar } from "@material-ui/core";
-
+import { Button, TextField, Container } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -42,16 +40,14 @@ const Login = props => {
       .min(5, "Password must be at least 6 characters")
       .max(50, "Too LONG!.")
   });
-  const [invalidEmail, setInvalidEmail] = useState("");
-  const [invalidPassword, setInvalidPassword] = useState();
 
   // useEffect(() => {
   //   if (Object.keys(responseErrors).length) {
   //     if (responseErrors.email) {
-  //       setInvalidEmail(responseErrors.email);
+  //       set""(responseErrors.email);
   //     }
   //     if (responseErrors.password) {
-  //       setInvalidPassword(responseErrors.password);
+  //       set""(responseErrors.password);
   //     }
   //   }
   // }, [responseErrors]);
@@ -99,17 +95,11 @@ const Login = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={
-                    (errors.email && touched.email) || invalidEmail
-                      ? true
-                      : false
-                  }
+                  error={(errors.email && touched.email) || "" ? true : false}
                 />
 
-                {(errors.email && touched.email) || invalidEmail ? (
-                  <span className="text-danger">
-                    {errors.email || invalidEmail}
-                  </span>
+                {(errors.email && touched.email) || "" ? (
+                  <span className="text-danger">{errors.email || ""}</span>
                 ) : null}
 
                 <TextField
@@ -122,16 +112,12 @@ const Login = props => {
                   onBlur={handleBlur}
                   value={values.password}
                   error={
-                    (errors.password && touched.password) || invalidPassword
-                      ? true
-                      : false
+                    (errors.password && touched.password) || "" ? true : false
                   }
                 />
 
-                {(errors.password && touched.password) || invalidPassword ? (
-                  <span className="text-danger">
-                    {errors.password || invalidPassword}
-                  </span>
+                {(errors.password && touched.password) || "" ? (
+                  <span className="text-danger">{errors.password || ""}</span>
                 ) : null}
 
                 <Button

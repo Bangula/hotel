@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import Dropzone, { useDropzone } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 import moment from "moment";
 
 // Endpoint actions

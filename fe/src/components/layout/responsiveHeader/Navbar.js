@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { NavLink, Link } from "react-router-dom";
 import Logo from "@assets/images/logo.png";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,14 +8,10 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const dispatch = useDispatch();
   let menuPosition;
-  let menuBackground;
   if (menuIsActive) {
     menuPosition = "0px";
-    menuBackground = "0px";
   } else {
     menuPosition = "-100%";
-
-    menuBackground = "-100%";
   }
   const handleLogout = () => {
     setMenuIsActive();

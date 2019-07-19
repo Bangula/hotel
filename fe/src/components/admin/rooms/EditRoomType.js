@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Button,
   TextField,
   Container,
-  makeStyles,
   CircularProgress
 } from "@material-ui/core";
-import { getUser } from "@endpoints/users";
-import { useSelector, useDispatch } from "react-redux";
 import { createRoomType, updateRoomType } from "@endpoints/rooms";
 
 import Modal from "../Modal";
@@ -38,22 +34,9 @@ const editUserSchema = Yup.object().shape({
     .max(5000)
     .required("Price for Children is required")
 });
-const useStyles = makeStyles(theme => ({
-  submit: {
-    padding: 10,
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
 
 const EditRoomType = ({ type, ...props }) => {
-  const dispatch = useDispatch();
   //   const [type, setType] = useState({});
-
-  const [invalidName, setInvalidName] = useState("");
-  const [invalidBedCount, setInvalidBedCount] = useState("");
-  const [invalidMaxPersons, setInvalidMaxPersons] = useState("");
-  const [invalidPriceAdult, setInvalidPriceAdult] = useState("");
-  const [invalidPriceChild, setInvalidPriceChild] = useState("");
 
   const [openModal, setOpenModal] = React.useState(false);
   const [modalInfo1, setModalInfo1] = React.useState();
@@ -84,15 +67,6 @@ const EditRoomType = ({ type, ...props }) => {
     } else if (error) {
       console.log(error.response);
     }
-  };
-
-  //component only recives props
-  const resetValues = {
-    name: "",
-    bed_count: "",
-    max_persons: "",
-    price_adult: "",
-    price_child: ""
   };
 
   const initialValues = {
@@ -161,17 +135,11 @@ const EditRoomType = ({ type, ...props }) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.name}
-                    error={
-                      (errors.name && touched.name) || invalidName
-                        ? true
-                        : false
-                    }
+                    error={(errors.name && touched.name) || "" ? true : false}
                   />
 
-                  {(errors.name && touched.name) || invalidName ? (
-                    <span className="text-danger">
-                      {errors.name || invalidName}
-                    </span>
+                  {(errors.name && touched.name) || "" ? (
+                    <span className="text-danger">{errors.name || ""}</span>
                   ) : null}
 
                   <TextField
@@ -184,16 +152,15 @@ const EditRoomType = ({ type, ...props }) => {
                     onBlur={handleBlur}
                     value={values.bed_count}
                     error={
-                      (errors.bed_count && touched.bed_count) || invalidBedCount
+                      (errors.bed_count && touched.bed_count) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.bed_count && touched.bed_count) ||
-                  invalidBedCount ? (
+                  {(errors.bed_count && touched.bed_count) || "" ? (
                     <span className="text-danger">
-                      {errors.bed_count || invalidBedCount}
+                      {errors.bed_count || ""}
                     </span>
                   ) : null}
 
@@ -207,17 +174,15 @@ const EditRoomType = ({ type, ...props }) => {
                     onBlur={handleBlur}
                     value={values.max_persons}
                     error={
-                      (errors.max_persons && touched.max_persons) ||
-                      invalidMaxPersons
+                      (errors.max_persons && touched.max_persons) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.max_persons && touched.max_persons) ||
-                  invalidMaxPersons ? (
+                  {(errors.max_persons && touched.max_persons) || "" ? (
                     <span className="text-danger">
-                      {errors.max_persons || invalidMaxPersons}
+                      {errors.max_persons || ""}
                     </span>
                   ) : null}
 
@@ -231,17 +196,15 @@ const EditRoomType = ({ type, ...props }) => {
                     onBlur={handleBlur}
                     value={values.price_adult}
                     error={
-                      (errors.price_adult && touched.price_adult) ||
-                      invalidPriceAdult
+                      (errors.price_adult && touched.price_adult) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.price_adult && touched.price_adult) ||
-                  invalidPriceAdult ? (
+                  {(errors.price_adult && touched.price_adult) || "" ? (
                     <span className="text-danger">
-                      {errors.price_adult || invalidPriceAdult}
+                      {errors.price_adult || ""}
                     </span>
                   ) : null}
 
@@ -255,17 +218,15 @@ const EditRoomType = ({ type, ...props }) => {
                     onBlur={handleBlur}
                     value={values.price_child}
                     error={
-                      (errors.price_child && touched.price_child) ||
-                      invalidPriceChild
+                      (errors.price_child && touched.price_child) || ""
                         ? true
                         : false
                     }
                   />
 
-                  {(errors.price_child && touched.price_child) ||
-                  invalidPriceChild ? (
+                  {(errors.price_child && touched.price_child) || "" ? (
                     <span className="text-danger">
-                      {errors.price_child || invalidPriceChild}
+                      {errors.price_child || ""}
                     </span>
                   ) : null}
 

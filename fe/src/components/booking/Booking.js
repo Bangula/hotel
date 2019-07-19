@@ -21,12 +21,10 @@ import { WidthContext } from "@components/common/context/ContextProvider";
 import RoomList from "./components/RommList";
 import RoomDetails from "./components/RoomDetails";
 
-const Booking = props => {
+const Booking = () => {
   const [checkIn, setCheckIn] = useState(new Date());
   const [checkOut, setCheckOut] = useState(new Date());
   const [roomType, setRoomType] = useState(1);
-  const [priceFrom, setPriceFrom] = useState("");
-  const [priceTo, setPriceTo] = useState("");
 
   const [wifi, setWifi] = useState(false);
   const [tv, setTv] = useState(false);
@@ -54,11 +52,11 @@ const Booking = props => {
   useEffect(() => {
     window.scrollTo(0, 0);
     getData(currentPage);
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (roomList.length) getData(currentPage);
-  }, [currentPage]);
+  }, [currentPage, roomList.length]);
 
   async function getData(page) {
     const { data, error } = await getAllRooms(page);

@@ -7,7 +7,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -16,11 +15,6 @@ import {
   TableRow,
   Paper,
   CircularProgress,
-  Collapse,
-  ListItemText,
-  ListItemIcon,
-  ListItem,
-  List,
   Typography
 } from "@material-ui/core";
 import {
@@ -33,9 +27,6 @@ import {
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
-import Modal from "./Modal";
-import Alert from "react-s-alert";
-
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -154,7 +145,13 @@ const ReviewsComponent = props => {
         getAllReviews(currentPage);
       }
     }
-  }, [currentPage]);
+  }, [
+    currentPage,
+    props.onHold,
+    props.allReviews,
+    reviews.length,
+    props.approved
+  ]);
 
   //Inicijalno ucitavanje, zavisno od taba
   useEffect(() => {
@@ -165,7 +162,7 @@ const ReviewsComponent = props => {
     } else if (props.allReviews) {
       getAllReviews(currentPage);
     }
-  }, []);
+  }, [props.onHold, currentPage, props.approved, props.allReviews]);
 
   //ako je na poslednjoj strani obrisan poslednji unos, da ucita stranicu ispred
   // useEffect(() => {

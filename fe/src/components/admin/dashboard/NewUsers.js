@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -17,18 +16,9 @@ import {
   Typography
 } from "@material-ui/core";
 
-import { getUsersPerPage, deleteUser } from "@endpoints/users";
-import { getAllRoles, assignRoleToUser } from "@endpoints/roles";
-import RoleModal from "../../common/modal";
+import { getUsersPerPage } from "@endpoints/users";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
-import { ThemeProvider } from "@zendeskgarden/react-theming";
-import { Pagination } from "@zendeskgarden/react-pagination";
-
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-
-import Modal from "../Modal";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,7 +56,7 @@ function NewUsers() {
   //Inicijalno ucitavanje s tim da ucitava poslednju stranicu
   useEffect(() => {
     if (!users.length) setPages(1);
-  }, []);
+  }, [users]);
   useEffect(() => {
     if (totalPages) getUsersPerPageHandle(totalPages);
   }, [totalPages]);

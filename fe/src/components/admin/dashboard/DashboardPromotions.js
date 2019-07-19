@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { green } from "@material-ui/core/colors";
 import {
-  makeStyles,
   Button,
   Table,
   TableBody,
@@ -19,10 +17,9 @@ import {
 } from "@material-ui/core";
 import { getPromotionsPerPage } from "@endpoints/promotions";
 import "@zendeskgarden/react-pagination/dist/styles.css";
-import Icon from "@material-ui/core/Icon";
 
 // PROMOTIONS PANEL
-const DashboardPromotions = props => {
+const DashboardPromotions = () => {
   const [totalPages, setTotalPages] = useState(null);
   const [promotions, setPromotions] = useState([]);
 

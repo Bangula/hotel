@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
+import React, { useEffect } from "react";
 import clsx from "clsx";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -38,7 +37,6 @@ import {
   Icon,
   AppBar,
   Toolbar,
-  Typography,
   Drawer
 } from "@material-ui/core";
 
@@ -130,7 +128,6 @@ const Admin = props => {
   const [openUsers, setOpenUsers] = React.useState(false);
   const [openGallery, setOpenGallery] = React.useState(false);
   const [openRooms, setOpenRooms] = React.useState(false);
-  const [openPromotions, setOpenPromotions] = React.useState(false);
   const [openEvents, setOpenEvents] = React.useState(false);
 
   const { windowWidth } = React.useContext(WidthContext);
@@ -151,7 +148,7 @@ const Admin = props => {
     } else {
       setOpen(true);
     }
-  }, [windowWidth]);
+  }, [windowWidth, props.history, props.location.pathname]);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -444,11 +441,7 @@ const Admin = props => {
 
                 {/* ////////////////////// end gallery ///////// */}
 
-                <ListItem
-                  button
-                  button
-                  onClick={() => setOpenEvents(!openEvents)}
-                >
+                <ListItem button onClick={() => setOpenEvents(!openEvents)}>
                   <ListItemIcon>
                     <Icon
                       className={clsx(classes.icon, "far fa-calendar-alt")}

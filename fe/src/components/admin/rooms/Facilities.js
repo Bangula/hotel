@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -18,26 +17,16 @@ import {
   List
 } from "@material-ui/core";
 
-import {
-  getFacilities,
-  deleteFacilitiy,
-  createRoomType
-} from "@endpoints/rooms";
+import { getFacilities, deleteFacilitiy } from "@endpoints/rooms";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 
-import Modal from "../Modal";
 import Alert from "react-s-alert";
 
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import CreateOrEditFacilities from "./CreateOrEditFacilities";
 
 const useStyles = makeStyles(theme => ({
@@ -53,21 +42,9 @@ function Facilities() {
 
   const [currentPage, setCurrentPage] = useState(1); //for api
   const [totalPages, setTotalPages] = useState(1);
-
   const [facilities, setFacilities] = useState([]);
-  const [openModal, setOpenModal] = React.useState(false);
-  const [modalFacility, setModalFacility] = React.useState(""); //stores data of current facility id for modal
   const [openList, setOpenList] = React.useState(false);
   const [facilityForEdit, setFacilityForEdit] = React.useState({});
-
-  function handleClickOpenModal(id) {
-    setModalFacility(id);
-    setOpenModal(true);
-  }
-
-  function handleCloseModal() {
-    setOpenModal(false);
-  }
 
   //Toggle list
   function handleClickList() {
@@ -89,7 +66,6 @@ function Facilities() {
     if (data) {
       Alert.success("Facility Deleted!");
       getAllFacilities(currentPage);
-      handleCloseModal();
     } else if (error) {
       console.log(error.response);
     }
@@ -98,23 +74,17 @@ function Facilities() {
   //Kada se menja strana paginacije
   useEffect(() => {
     if (facilities.length) getAllFacilities(currentPage);
-  }, [currentPage]);
+  }, [currentPage, facilities]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
     if (!facilities.length) getAllFacilities(currentPage);
-  }, []);
+  }, [facilities, currentPage]);
 
   return (
     <div className="text-center">
       <Alert />
-      <Modal
-        open={openModal}
-        handleClose={handleCloseModal}
-        userAction={() => deleteSingleFacility(modalFacility)}
-        modalHeader={"Delete Room Facility"}
-        modalText={"Are you shure you want to delete this room facility?"}
-      />
+
       {/* //////////////////// Add new room Type //////////////////////////// */}
       <div style={{ marginTop: "50px" }} />
       <List

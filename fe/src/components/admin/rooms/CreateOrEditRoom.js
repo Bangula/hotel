@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import {
   Button,
   TextField,
   Container,
-  makeStyles,
-  CircularProgress,
   Checkbox,
   Select,
   MenuItem,
@@ -25,15 +22,12 @@ import {
 
 import {
   createRoom,
-  updateRoom,
   getRoomTypes,
   getFacilities,
   getRoom
 } from "@endpoints/rooms";
-import { useSelector, useDispatch } from "react-redux";
-import Dropzone, { useDropzone } from "react-dropzone";
+import { useDropzone } from "react-dropzone";
 
-import Modal from "../Modal";
 //initial values formik
 
 const createOrEditRoomSchema = Yup.object().shape({
@@ -46,16 +40,8 @@ const createOrEditRoomSchema = Yup.object().shape({
 
   facilities: Yup.array()
 });
-const useStyles = makeStyles(theme => ({
-  submit: {
-    padding: 10,
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
 
 const CreateOrEditRoom = props => {
-  const [invalidRoomTypeId, setInvalidRoomTypeId] = useState("");
-  const [invalidRoomNumber, setInvalidRoomNumber] = useState("");
   const [roomTypeId, setRoomTypeId] = useState("");
   const [roomNumber, setRoomNumber] = useState("");
   const [files, setFiles] = useState([]); //from dropzone
@@ -64,18 +50,6 @@ const CreateOrEditRoom = props => {
   const [roomFacilities, setRoomFacilities] = useState([]); //from api
 
   const [selectedFacilities, setSelectedFacilities] = useState([]); //checkboxes
-
-  const [openModal, setOpenModal] = React.useState(false);
-  const [modalInfo1, setModalInfo1] = React.useState();
-  const [modalInfo2, setModalInfo2] = React.useState();
-
-  function handleClickOpenModal(userId) {
-    setOpenModal(true);
-  }
-
-  function handleCloseModal() {
-    setOpenModal(false);
-  }
 
   const createSingleRoom = async credentials => {
     const fd = new FormData();
@@ -101,14 +75,7 @@ const CreateOrEditRoom = props => {
       console.log(error.response);
     }
   };
-  const updateSingleRoom = async (credentials, id) => {
-    const { data, error } = await updateRoom(credentials, id);
-    if (data) {
-      console.log("Room updated", data.data);
-    } else if (error) {
-      console.log(error.response);
-    }
-  };
+
   const getAllRoomTypes = async (page = 1) => {
     const { data, error } = await getRoomTypes(page);
     if (data) {
@@ -167,9 +134,14 @@ const CreateOrEditRoom = props => {
     if (Object.keys(props.match.params).length && props.match.params.roomId) {
       getSingleRoom(props.match.params.roomId);
     }
+    // eslint-disable-next-line
+
     getAllRoomTypes();
+    // eslint-disable-next-line
+
     getRoomFacilities();
-  }, []);
+    // eslint-disable-next-line
+  }, [props.match.params]);
 
   console.log("edit room props", props);
   return (
@@ -258,16 +230,14 @@ const CreateOrEditRoom = props => {
                   onBlur={handleBlur}
                   value={values.room_number}
                   error={
-                    (errors.room_number && touched.room_number) ||
-                    invalidRoomNumber
+                    (errors.room_number && touched.room_number) || ""
                       ? true
                       : false
                   }
                 />
-                {(errors.room_number && touched.room_number) ||
-                invalidRoomNumber ? (
+                {(errors.room_number && touched.room_number) || "" ? (
                   <span className="text-danger">
-                    {errors.room_number || invalidRoomNumber}
+                    {errors.room_number || ""}
                   </span>
                 ) : null}
 
@@ -283,8 +253,7 @@ const CreateOrEditRoom = props => {
                       id: "age-simple"
                     }}
                     error={
-                      (errors.room_type_id && touched.room_type_id) ||
-                      invalidRoomTypeId
+                      (errors.room_type_id && touched.room_type_id) || ""
                         ? true
                         : false
                     }
@@ -299,10 +268,9 @@ const CreateOrEditRoom = props => {
                         })
                       : null}
                   </Select>
-                  {(errors.room_type_id && touched.room_type_id) ||
-                  invalidRoomTypeId ? (
+                  {(errors.room_type_id && touched.room_type_id) || "" ? (
                     <span className="text-danger">
-                      {errors.room_type_id || invalidRoomTypeId}
+                      {errors.room_type_id || ""}
                     </span>
                   ) : null}{" "}
                 </FormControl>
@@ -372,7 +340,7 @@ const CreateOrEditRoom = props => {
                   ? files.map((file, index) => (
                       <TableRow key={file.path}>
                         <TableCell component="th" scope="row">
-                          <img src={file.preview} className="h-8" />
+                          <img src={file.preview} className="h-8" alt="test" />
                         </TableCell>
                         <TableCell component="th" scope="row">
                           {file.path} - {file.size} bytes

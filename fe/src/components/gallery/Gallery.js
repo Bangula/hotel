@@ -2,10 +2,6 @@ import React, { useState, useCallback } from "react";
 import Gallery from "react-photo-gallery";
 import Carousel, { Modal, ModalGateway } from "react-images";
 
-import img1 from "@assets/images/slide_1.jpg";
-import img2 from "@assets/images/slide_2.jpg";
-import img3 from "@assets/images/slide_3.jpg";
-
 function GalleryBox() {
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);

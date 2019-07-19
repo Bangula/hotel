@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import {
   Button,
   TextField,
   Container,
   makeStyles,
-  CircularProgress,
   Grid,
   FormControl,
   Select,
@@ -20,32 +18,31 @@ import { getServices } from "@endpoints/services";
 import { getRoomTypes } from "@endpoints/rooms";
 import { createPromotion } from "@endpoints/promotions";
 
-import Modal from "../Modal";
 //initial values formik
 
-const facilitiesSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Minimum number of characters is 2")
-    .max(5000)
-    .required("Name is required"),
-  description: Yup.string()
-    .min(2, "Minimum number of characters is 2")
-    .max(5000)
-    .required("Description is required"),
-  discount: Yup.number()
-    .min(0, "Minimum number of characters is 1")
-    .max(5000)
-    .required("Discount price is required"),
-  discount_children: Yup.number()
-    .min(0, "Minimum number of characters is 1")
-    .max(5000)
-    .required("Discount for children price is required"),
-  starting_at: Yup.date(),
-  ending_at: Yup.date(),
-  services: Yup.array(),
-  facilities: Yup.array(),
-  room_types: Yup.object()
-});
+// const facilitiesSchema = Yup.object().shape({
+//   name: Yup.string()
+//     .min(2, "Minimum number of characters is 2")
+//     .max(5000)
+//     .required("Name is required"),
+//   description: Yup.string()
+//     .min(2, "Minimum number of characters is 2")
+//     .max(5000)
+//     .required("Description is required"),
+//   discount: Yup.number()
+//     .min(0, "Minimum number of characters is 1")
+//     .max(5000)
+//     .required("Discount price is required"),
+//   discount_children: Yup.number()
+//     .min(0, "Minimum number of characters is 1")
+//     .max(5000)
+//     .required("Discount for children price is required"),
+//   starting_at: Yup.date(),
+//   ending_at: Yup.date(),
+//   services: Yup.array(),
+//   facilities: Yup.array(),
+//   room_types: Yup.object()
+// });
 const useStyles = makeStyles({
   grid: {
     width: "80%",
@@ -54,7 +51,7 @@ const useStyles = makeStyles({
   }
 });
 
-const CreateOrEditPromotion = props => {
+const CreateOrEditPromotion = () => {
   const classes = useStyles();
 
   const [services, setServices] = useState([]);
@@ -62,15 +59,6 @@ const CreateOrEditPromotion = props => {
   const [roomTypes, setRoomTypes] = useState([]);
   const [selectedRoomType, setSelectedRoomType] = useState("");
 
-  const [invalidName, setInvalidName] = useState("");
-  const [invalidDescription, setInvalidDescription] = useState("");
-  const [invalidStartingAt, setInvalidStartingAt] = useState("");
-  const [invalidDiscount, setInvalidDiscount] = useState("");
-  const [invalidDiscountChildren, setInvalidDiscountChildren] = useState("");
-  const [invalidService, setInvalidService] = useState("");
-  const [openModal, setOpenModal] = React.useState(false);
-  const [modalInfo1, setModalInfo1] = React.useState();
-  const [modalInfo2, setModalInfo2] = React.useState();
   //Started At
   const [startingAt, setStartingAt] = React.useState(
     new Date("2019-08-18T21:11:54")
@@ -84,15 +72,6 @@ const CreateOrEditPromotion = props => {
   function handleEndingAtChange(date) {
     setEndingAt(date);
   }
-
-  function handleClickOpenModal() {
-    setOpenModal(true);
-  }
-
-  function handleCloseModal() {
-    setOpenModal(false);
-  }
-
   const initialValues = {
     name: "",
     // price: "",
@@ -218,16 +197,10 @@ const CreateOrEditPromotion = props => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.name}
-                    error={
-                      (errors.name && touched.name) || invalidName
-                        ? true
-                        : false
-                    }
+                    error={(errors.name && touched.name) || "" ? true : false}
                   />
-                  {(errors.name && touched.name) || invalidName ? (
-                    <span className="text-danger">
-                      {errors.name || invalidName}
-                    </span>
+                  {(errors.name && touched.name) || "" ? (
+                    <span className="text-danger">{errors.name || ""}</span>
                   ) : null}
                   <TextField
                     margin="normal"
@@ -239,16 +212,14 @@ const CreateOrEditPromotion = props => {
                     onBlur={handleBlur}
                     value={values.description}
                     error={
-                      (errors.description && touched.description) ||
-                      invalidDescription
+                      (errors.description && touched.description) || ""
                         ? true
                         : false
                     }
                   />
-                  {(errors.description && touched.description) ||
-                  invalidDescription ? (
+                  {(errors.description && touched.description) || "" ? (
                     <span className="text-danger">
-                      {errors.description || invalidDescription}
+                      {errors.description || ""}
                     </span>
                   ) : null}
                   <TextField
@@ -261,15 +232,11 @@ const CreateOrEditPromotion = props => {
                     onBlur={handleBlur}
                     value={values.discount}
                     error={
-                      (errors.discount && touched.discount) || invalidDiscount
-                        ? true
-                        : false
+                      (errors.discount && touched.discount) || "" ? true : false
                     }
                   />
-                  {(errors.discount && touched.discount) || invalidDiscount ? (
-                    <span className="text-danger">
-                      {errors.discount || invalidDiscount}
-                    </span>
+                  {(errors.discount && touched.discount) || "" ? (
+                    <span className="text-danger">{errors.discount || ""}</span>
                   ) : null}
                   <TextField
                     margin="normal"
@@ -282,15 +249,15 @@ const CreateOrEditPromotion = props => {
                     value={values.discount_children}
                     error={
                       (errors.discount_children && touched.discount_children) ||
-                      invalidDiscountChildren
+                      ""
                         ? true
                         : false
                     }
                   />
                   {(errors.discount_children && touched.discount_children) ||
-                  invalidDiscountChildren ? (
+                  "" ? (
                     <span className="text-danger">
-                      {errors.discount_children || invalidDiscountChildren}
+                      {errors.discount_children || ""}
                     </span>
                   ) : null}
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -330,7 +297,7 @@ const CreateOrEditPromotion = props => {
                         id: "age-simple"
                       }}
                       error={
-                        (errors.services && touched.services) || invalidService
+                        (errors.services && touched.services) || ""
                           ? true
                           : false
                       }
@@ -345,9 +312,9 @@ const CreateOrEditPromotion = props => {
                           })
                         : null}
                     </Select>
-                    {(errors.services && touched.services) || invalidService ? (
+                    {(errors.services && touched.services) || "" ? (
                       <span className="text-danger">
-                        {errors.services || invalidService}
+                        {errors.services || ""}
                       </span>
                     ) : null}{" "}
                   </FormControl>
@@ -364,8 +331,7 @@ const CreateOrEditPromotion = props => {
                         id: "simple"
                       }}
                       error={
-                        (errors.room_types && touched.room_types) ||
-                        invalidService
+                        (errors.room_types && touched.room_types) || ""
                           ? true
                           : false
                       }
@@ -380,9 +346,9 @@ const CreateOrEditPromotion = props => {
                           })
                         : null}
                     </Select>
-                    {/* {(errors.services && touched.services) || invalidService ? (
+                    {/* {(errors.services && touched.services) || "" ? (
                       <span className="text-danger">
-                        {errors.services || invalidService}
+                        {errors.services || ""}
                       </span>
                     ) : null}{" "} */}
                   </FormControl>

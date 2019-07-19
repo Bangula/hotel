@@ -2,7 +2,6 @@ import React, { PureComponent } from "react";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,13 +9,7 @@ import {
   Legend
 } from "recharts";
 
-import {
-  Card,
-  Divider,
-  CardContent,
-  Button,
-  Typography
-} from "@material-ui/core";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 const data = [
   {

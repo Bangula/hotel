@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { WidthContext } from "@components/common/context/ContextProvider";
 
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-  Button,
-  Divider
-} from "@material-ui/core";
+import { Card, CardContent, Typography, Divider } from "@material-ui/core";
 
 const useStyles = makeStyles({
   card: {
@@ -28,10 +20,8 @@ const Review = ({
   room_rate,
   accommodation_rate,
   comment,
-  user,
-  ...props
+  user
 }) => {
-  const { windowWidth } = React.useContext(WidthContext);
   const classes = useStyles();
   // console.log("REVIEW PROPS", hotel_rate, room_rate, accommodation_rate);
   const averageRating = (hotel_rate + room_rate + accommodation_rate) / 3;

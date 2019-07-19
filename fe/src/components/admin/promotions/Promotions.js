@@ -8,7 +8,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -19,18 +18,11 @@ import {
   CircularProgress,
   Typography
 } from "@material-ui/core";
-import {
-  getPromotionsPerPage,
-  deletePromotion,
-  updatePromotion,
-  createPromotion,
-  getPromotionById
-} from "@endpoints/promotions";
+import { getPromotionsPerPage, deletePromotion } from "@endpoints/promotions";
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
 import Modal from "../Modal";
-import Alert from "react-s-alert";
 
 function TabContainer(props) {
   return (
@@ -111,29 +103,15 @@ const PromotionsComponent = props => {
         getAllPromotions(currentPage);
       }
     }
-  }, [currentPage]);
+  }, [currentPage, promotions.length, props.getAll]);
 
   //Inicijalno ucitavanje, zavisno od taba
   useEffect(() => {
     if (props.getAll) {
       getAllPromotions(currentPage);
     }
-    // } else if (props.approved) {
-    //   getAllReviewsApproved(currentPage);
-    // } else if (props.allReviews) {
-    //   getAllReviews(currentPage);
-    // }
-  }, []);
+  }, [currentPage, props.getAll]);
 
-  //ako je na poslednjoj strani obrisan poslednji unos, da ucita stranicu ispred
-  // useEffect(() => {
-  //   if (reviews.length === 0 && currentPage !== 1) {
-
-  //     getAllReviewsOnHold(currentPage);
-  //   }
-  // }, [reviews]);
-  // console.log("karent pejdz", currentPage);
-  // console.log("duzina reviews niza", reviews.length);
   function handleClickOpenModal(id) {
     setModalPromotion(id);
     setOpenModal(true);

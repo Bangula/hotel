@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { Button, TextField, Container, Snackbar } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import InputModal from "./components/InputModal";
 import AppBar from "@material-ui/core/AppBar";
@@ -19,7 +19,7 @@ import Paper from "@material-ui/core/Paper";
 import TabContainer from "./components/TabContainer";
 import { Redirect } from "react-router-dom";
 
-import { updateUserInfo, getLogedUser } from "@endpoints/users";
+import { getLogedUser } from "@endpoints/users";
 import { getAllReservations } from "@endpoints/reservations";
 
 const useStyles = makeStyles(theme => ({
@@ -53,9 +53,16 @@ const UserProfile = ({ adminPanel }) => {
   const classes = useStyles();
 
   useEffect(() => {
+    // eslint-disable-next-line
+
     getUserData();
+    // eslint-disable-next-line
+
     getReservations();
+    // eslint-disable-next-line
+
     window.scrollTo(0, 0);
+    // eslint-disable-next-line
   }, []);
 
   async function getUserData() {

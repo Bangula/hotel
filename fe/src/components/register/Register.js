@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
@@ -6,10 +6,9 @@ import * as Yup from "yup";
 import { useSelector, useDispatch } from "react-redux";
 
 import { register } from "@actions/authActions";
-import { Button, TextField, Container, Snackbar } from "@material-ui/core";
+import { Button, TextField, Container } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
-import green from "@material-ui/core/colors/green";
 
 const useStyles = makeStyles(theme => ({
   submit: {
@@ -72,26 +71,7 @@ const Register = props => {
         return this.parent.password === value;
       })
   });
-  const [invalidEmail, setInvalidEmail] = useState("");
-  const [invalidFirstName, setInvalidFirstName] = useState("");
-  const [invalidLastName, setInvalidLastName] = useState("");
-  const [invalidPhone, setInvalidPhone] = useState("");
-  const [invalidCity, setInvalidCity] = useState("");
-  const [invalidAddress, setInvalidAddress] = useState("");
 
-  const [invalidPassword, setInvalidPassword] = useState("");
-  const [invalidPassword2, setInvalidPassword2] = useState("");
-
-  // useEffect(() => {
-  //   if (Object.keys(responseErrors).length) {
-  //     if (responseErrors.email) {
-  //       setInvalidEmail(responseErrors.email);
-  //     }
-  //     if (responseErrors.password) {
-  //       setInvalidPassword(responseErrors.password);
-  //     }
-  //   }
-  // }, [responseErrors]);
   useEffect(() => {
     document.title = "Quantox Hotel - Register";
   }, []);
@@ -138,18 +118,14 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.first_name}
                   error={
-                    (errors.first_name && touched.first_name) ||
-                    invalidFirstName
+                    (errors.first_name && touched.first_name) || ""
                       ? true
                       : false
                   }
                 />
 
-                {(errors.first_name && touched.first_name) ||
-                invalidFirstName ? (
-                  <span className="text-danger">
-                    {errors.first_name || invalidFirstName}
-                  </span>
+                {(errors.first_name && touched.first_name) || "" ? (
+                  <span className="text-danger">{errors.first_name || ""}</span>
                 ) : null}
 
                 <TextField
@@ -162,16 +138,12 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.last_name}
                   error={
-                    (errors.last_name && touched.last_name) || invalidLastName
-                      ? true
-                      : false
+                    (errors.last_name && touched.last_name) || "" ? true : false
                   }
                 />
 
-                {(errors.last_name && touched.last_name) || invalidLastName ? (
-                  <span className="text-danger">
-                    {errors.last_name || invalidLastName}
-                  </span>
+                {(errors.last_name && touched.last_name) || "" ? (
+                  <span className="text-danger">{errors.last_name || ""}</span>
                 ) : null}
 
                 <TextField
@@ -183,17 +155,11 @@ const Register = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
-                  error={
-                    (errors.email && touched.email) || invalidEmail
-                      ? true
-                      : false
-                  }
+                  error={(errors.email && touched.email) || "" ? true : false}
                 />
 
-                {(errors.email && touched.email) || invalidEmail ? (
-                  <span className="text-danger">
-                    {errors.email || invalidEmail}
-                  </span>
+                {(errors.email && touched.email) || "" ? (
+                  <span className="text-danger">{errors.email || ""}</span>
                 ) : null}
 
                 <TextField
@@ -206,17 +172,15 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.phone_number}
                   error={
-                    (errors.phone_number && touched.phone_number) ||
-                    invalidPhone
+                    (errors.phone_number && touched.phone_number) || ""
                       ? true
                       : false
                   }
                 />
 
-                {(errors.phone_number && touched.phone_number) ||
-                invalidPhone ? (
+                {(errors.phone_number && touched.phone_number) || "" ? (
                   <span className="text-danger">
-                    {errors.phone_number || invalidPhone}
+                    {errors.phone_number || ""}
                   </span>
                 ) : null}
 
@@ -229,15 +193,11 @@ const Register = props => {
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.city}
-                  error={
-                    (errors.city && touched.city) || invalidCity ? true : false
-                  }
+                  error={(errors.city && touched.city) || "" ? true : false}
                 />
 
-                {(errors.city && touched.city) || invalidCity ? (
-                  <span className="text-danger">
-                    {errors.city || invalidCity}
-                  </span>
+                {(errors.city && touched.city) || "" ? (
+                  <span className="text-danger">{errors.city || ""}</span>
                 ) : null}
 
                 <TextField
@@ -250,16 +210,12 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.address}
                   error={
-                    (errors.address && touched.address) || invalidAddress
-                      ? true
-                      : false
+                    (errors.address && touched.address) || "" ? true : false
                   }
                 />
 
-                {(errors.address && touched.address) || invalidAddress ? (
-                  <span className="text-danger">
-                    {errors.address || invalidAddress}
-                  </span>
+                {(errors.address && touched.address) || "" ? (
+                  <span className="text-danger">{errors.address || ""}</span>
                 ) : null}
 
                 <TextField
@@ -272,16 +228,12 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.password}
                   error={
-                    (errors.password && touched.password) || invalidPassword
-                      ? true
-                      : false
+                    (errors.password && touched.password) || "" ? true : false
                   }
                 />
 
-                {(errors.password && touched.password) || invalidPassword ? (
-                  <span className="text-danger">
-                    {errors.password || invalidPassword}
-                  </span>
+                {(errors.password && touched.password) || "" ? (
+                  <span className="text-danger">{errors.password || ""}</span>
                 ) : null}
 
                 <TextField
@@ -294,16 +246,12 @@ const Register = props => {
                   onBlur={handleBlur}
                   value={values.password2}
                   error={
-                    (errors.password2 && touched.password2) || invalidPassword2
-                      ? true
-                      : false
+                    (errors.password2 && touched.password2) || "" ? true : false
                   }
                 />
 
-                {(errors.password2 && touched.password2) || invalidPassword2 ? (
-                  <span className="text-danger">
-                    {errors.password2 || invalidPassword2}
-                  </span>
+                {(errors.password2 && touched.password2) || "" ? (
+                  <span className="text-danger">{errors.password2 || ""}</span>
                 ) : null}
 
                 <Button

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -18,7 +17,7 @@ import {
   List
 } from "@material-ui/core";
 
-import { getRoomTypes, deleteRoomType, createRoomType } from "@endpoints/rooms";
+import { getRoomTypes, deleteRoomType } from "@endpoints/rooms";
 
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
@@ -27,13 +26,8 @@ import { Pagination } from "@zendeskgarden/react-pagination";
 import Modal from "../Modal";
 import Alert from "react-s-alert";
 
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import EditRoomType from "./EditRoomType";
 
 const useStyles = makeStyles(theme => ({
@@ -93,12 +87,12 @@ function RoomTypes() {
   //Kada se menja strana paginacije
   useEffect(() => {
     if (types.length) getAllRoomTypes(currentPage);
-  }, [currentPage]);
+  }, [currentPage, types]);
 
   //Inicijalno ucitavanje
   useEffect(() => {
     if (!types.length) getAllRoomTypes(currentPage);
-  }, []);
+  }, [currentPage, types]);
 
   return (
     <div className="text-center" style={{ marginTop: "50px" }}>
