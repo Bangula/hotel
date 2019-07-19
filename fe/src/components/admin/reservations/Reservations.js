@@ -109,7 +109,9 @@ function Reservations() {
                 <TableHead>
                   <TableRow>
                     <TableCell align="left">Reservation created</TableCell>
-                    <TableCell align="left">Rooms</TableCell>
+                    <TableCell className="cell-sm" align="left">
+                      Rooms
+                    </TableCell>
                     <TableCell align="left">Client</TableCell>
                     <TableCell align="left">Phone</TableCell>
                     <TableCell align="right">Delete</TableCell>
