@@ -61,14 +61,21 @@ const data = [
 export default class DashboardNewsletter extends PureComponent {
   render() {
     return (
-      <Card className="md:w-2/6 w-full">
+      <Card className=" w-full">
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="h3">
             Stats for newsletter
           </Typography>
           {/* <Divider /> */}
         </CardContent>
-        <RadarChart cx="50%" cy="50%" width={500} height={300} data={data}>
+        <RadarChart
+          cx="50%"
+          cy="50%"
+          width={500}
+          height={300}
+          data={data}
+          className=" mx-auto shadow-md"
+        >
           <PolarGrid />
           <PolarAngleAxis dataKey="subject" />
           <PolarRadiusAxis />

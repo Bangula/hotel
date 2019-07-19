@@ -564,20 +564,23 @@ const Admin = props => {
                 </ListItem>
 
                 {windowWidth < 768 ? (
-                  <ListItem
-                    button
-                    onClick={() => {
-                      props.history.push("/");
-                    }}
-                  >
-                    <ListItemIcon>
-                      <Icon
-                        className={clsx(classes.icon, "fas fa-sign-out-alt")}
-                        color="action"
-                      />
-                    </ListItemIcon>
-                    <ListItemText primary="Close panel" />
-                  </ListItem>
+                  <>
+                    <ListItem
+                      button
+                      onClick={() => {
+                        props.history.push("/");
+                      }}
+                    >
+                      <ListItemIcon>
+                        <Icon
+                          className={clsx(classes.icon, "fas fa-outdent")}
+                          color="action"
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary="Close panel" />
+                    </ListItem>
+                    <p className="text-center ">v-1.0.3</p>
+                  </>
                 ) : null}
               </List>
               <Divider />

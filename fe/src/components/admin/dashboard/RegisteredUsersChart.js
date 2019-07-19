@@ -66,11 +66,8 @@ const data = [
 export default class Example extends PureComponent {
   render() {
     return (
-      <Card className="md:w-2/6 w-full">
+      <Card className=" w-full">
         <CardContent>
-          {/* <Typography gutterBottom variant="h5" component="h2">
-            New Users
-        </Typography> */}
           <Typography variant="body2" color="textSecondary" component="p">
             Stats for new users compared with last years results
           </Typography>
