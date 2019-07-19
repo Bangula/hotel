@@ -108,7 +108,7 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
             </div>
           </div>
           <h1 className="text-red-400 italic text-center mt-8">
-            Currently unavailable
+            Next version feature
           </h1>
           <div className="mt-4 p-8">
             <Button

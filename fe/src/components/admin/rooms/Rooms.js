@@ -114,7 +114,7 @@ function Rooms() {
 
       {rooms.length ? (
         <>
-          <Paper className={classes.root}>
+          <Paper className={`${classes.root} table-container`}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>

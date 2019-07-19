@@ -40,11 +40,11 @@ const Review = ({
   return (
     <Card className={`${classes.card} hover:shadow-2xl mb-6`}>
       <CardContent className="flex justify-between">
-        <Typography variant="h5" component="h2" align="left">
+        <Typography variant="h6" component="h2" align="left">
           {user ? user.data.first_name : "No name"}
         </Typography>
         <Typography
-          variant="h5"
+          variant="h6"
           color="textSecondary"
           component="h2"
           align="right"
@@ -58,7 +58,7 @@ const Review = ({
 
       <CardContent className="flex flex-col  justify-between">
         <div className="flex justify-between items-center">
-          <Typography variant="h5" component="h2" align="left">
+          <Typography variant="h6" component="h2" align="left">
             Hotel Rate
           </Typography>
           <meter
@@ -72,7 +72,7 @@ const Review = ({
           />
         </div>
         <div className="flex justify-between items-center">
-          <Typography variant="h5" component="h2" align="left">
+          <Typography variant="h6" component="h2" align="left">
             Room Rate
           </Typography>
           <meter
@@ -87,7 +87,7 @@ const Review = ({
         </div>
         <div className="flex justify-between items-center">
           <Typography
-            variant="h5"
+            variant="h6"
             component="h2"
             align="left"
             style={{ overflowWrap: "break-word" }}
@@ -110,7 +110,7 @@ const Review = ({
       <Divider variant="middle" />
 
       <CardContent className="flex flex-wrap justify-between">
-        <Typography variant="h5" component="h2" align="left">
+        <Typography variant="h6" component="h2" align="left">
           Comment :
         </Typography>
         <Typography
@@ -123,12 +123,6 @@ const Review = ({
         </Typography>
       </CardContent>
       <Divider variant="fullWidth" />
-
-      <CardActions className="flex justify-end pt-6">
-        <Button size="small" variant="outlined" color="primary">
-          More Details
-        </Button>
-      </CardActions>
     </Card>
   );
 };
