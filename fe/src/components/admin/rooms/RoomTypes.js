@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   makeStyles,
-  useTheme,
   Button,
   Table,
   TableBody,
@@ -17,23 +16,15 @@ import {
   ListItem,
   List
 } from "@material-ui/core";
-
 import { getRoomTypes, deleteRoomType, createRoomType } from "@endpoints/rooms";
-
 import "@zendeskgarden/react-pagination/dist/styles.css";
 import { ThemeProvider } from "@zendeskgarden/react-theming";
 import { Pagination } from "@zendeskgarden/react-pagination";
-
 import Modal from "../Modal";
 import Alert from "react-s-alert";
 
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
+import { ExpandMore, ExpandLess } from "@material-ui/icons";
+
 import EditRoomType from "./EditRoomType";
 
 const useStyles = makeStyles(theme => ({
@@ -43,7 +34,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 //DISABLE ON CLICK RIPPLE
-
 function RoomTypes() {
   const classes = useStyles();
 
@@ -63,7 +53,6 @@ function RoomTypes() {
   function handleCloseModal() {
     setOpenModal(false);
   }
-
   //Toggle list
   function handleClickList() {
     setOpenList(!openList);
@@ -101,7 +90,7 @@ function RoomTypes() {
   }, []);
 
   return (
-    <div className="text-center" style={{ marginTop: "50px" }}>
+    <div className="text-center" style={{ marginTop: "55px" }}>
       <Alert />
       <Modal
         open={openModal}
@@ -114,7 +103,7 @@ function RoomTypes() {
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
-        className="bg-gray-400 mb-4"
+        className="bg-gray-400 py-6"
       >
         <ListItem button onClick={handleClickList}>
           <ListItemIcon>{/* icon  */}</ListItemIcon>
@@ -139,14 +128,24 @@ function RoomTypes() {
               <TableHead>
                 <TableRow>
                   <TableCell>Type Name</TableCell>
-                  <TableCell align="left">Bed Count</TableCell>
-                  <TableCell align="left">Maximum Persons</TableCell>
-                  <TableCell align="left">Price Adult</TableCell>
-                  <TableCell align="left">Price Child</TableCell>
-                  <TableCell size="small" align="left">
-                    Edit Room Type
+                  <TableCell className="cell-xs" align="left">
+                    Beds
                   </TableCell>
-                  <TableCell align="left">Delete Type</TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Max <br /> Persons
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Price <br /> Adult
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Price <br /> Child
+                  </TableCell>
+                  <TableCell className="cell-sm" size="small" align="left">
+                    Edit <br /> Type
+                  </TableCell>
+                  <TableCell className="cell-sm" align="left">
+                    Delete <br /> Type
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -169,7 +168,7 @@ function RoomTypes() {
                           color="primary"
                           className={classes.button}
                         >
-                          Edit Room Type
+                          Edit
                         </Button>
                       </Link>
                     </TableCell>
@@ -182,7 +181,7 @@ function RoomTypes() {
                         color="secondary"
                         className={classes.button}
                       >
-                        Delete Room Type
+                        Delete
                       </Button>
                     </TableCell>
                   </TableRow>

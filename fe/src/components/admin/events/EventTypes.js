@@ -108,7 +108,7 @@ const EventsTypes = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root2} style={{ marginTop: "42px" }}>
+    <div className={classes.root2} style={{ marginTop: "55px" }}>
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>

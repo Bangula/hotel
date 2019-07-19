@@ -104,11 +104,17 @@ const DashboardPromotions = props => {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Promotion Name</TableCell>
+                    <TableCell className="cell-md">Promotion Name</TableCell>
 
-                    <TableCell align="left">Starting At</TableCell>
-                    <TableCell align="left">Ending At</TableCell>
-                    <TableCell align="left">Active</TableCell>
+                    <TableCell className="cell-sm" align="left">
+                      Starting At
+                    </TableCell>
+                    <TableCell className="cell-sm" align="left">
+                      Ending At
+                    </TableCell>
+                    <TableCell className="cell-xs" align="left">
+                      Active
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

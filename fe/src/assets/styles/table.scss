@@ -6,13 +6,34 @@
   padding: 10px;
   margin: 10px;
 }
+@media only screen and (max-width: 515px) {
+  .responsive {
+    padding: 4px !important;
+  }
+}
 
 tr {
   height: 40px !important;
 }
+.cell-xs {
+  max-width: 35px;
+  min-width: 35px;
+  padding: 0 !important;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center !important;
+}
 .cell-sm {
-  max-width: 50px;
-  min-width: 50px;
+  max-width: 50px !important;
+  min-width: 50px !important;
+  padding: 5px 0 !important;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: center !important;
+}
+.cell-md {
+  max-width: 70px !important;
+  min-width: 70px !important;
   padding: 0 !important;
   overflow-x: auto;
   white-space: nowrap;

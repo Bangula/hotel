@@ -116,11 +116,11 @@ function Facilities() {
         modalText={"Are you shure you want to delete this room facility?"}
       />
       {/* //////////////////// Add new room Type //////////////////////////// */}
-      <div style={{ marginTop: "50px" }} />
+      <div style={{ marginTop: "60px" }} />
       <List
         component="nav"
         aria-labelledby="nested-list-subheader"
-        className="bg-gray-400 mb-4"
+        className="bg-gray-400 my-6"
       >
         <ListItem button onClick={handleClickList}>
           <ListItemIcon>{/* icon  */}</ListItemIcon>
@@ -146,9 +146,12 @@ function Facilities() {
                 <TableRow>
                   <TableCell>Type Name</TableCell>
 
-                  <TableCell align="left">Price Child</TableCell>
+                  <TableCell align="left" className="cell-sm">
+                    Price <br />
+                    Child
+                  </TableCell>
                   <TableCell size="small" align="left">
-                    Edit Room Type
+                    Edit Type
                   </TableCell>
                   <TableCell align="left">Delete Type</TableCell>
                 </TableRow>
@@ -171,7 +174,7 @@ function Facilities() {
                           color="primary"
                           className={classes.button}
                         >
-                          Edit Room Facility
+                          Edit
                         </Button>
                       </Link>
                     </TableCell>
@@ -185,7 +188,7 @@ function Facilities() {
                         color="secondary"
                         className={classes.button}
                       >
-                        Delete Room Facility
+                        Delete
                       </Button>
                     </TableCell>
                   </TableRow>

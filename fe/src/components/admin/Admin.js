@@ -586,9 +586,9 @@ const Admin = props => {
               <Divider />
             </Drawer>
             <main
-              className={clsx(classes.content, {
+              className={`${clsx(classes.content, {
                 [classes.contentShift]: open
-              })}
+              })} responsive`}
             >
               <div
                 style={{

@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.paper
     },
     iconButton: {
-      padding: 10
+      padding: 5
     },
     divider: {
       width: 1,
@@ -110,7 +110,7 @@ const Events = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root2} style={{ marginTop: "42px" }}>
+    <div className={classes.root2} style={{ marginTop: "55px" }}>
       <Alert />
       <AppBar position="static">
         <Tabs variant="fullWidth" value={value} onChange={handleChange}>
@@ -137,8 +137,12 @@ const Events = () => {
                       <TableRow>
                         <TableCell>Title</TableCell>
 
-                        <TableCell align="right" />
-                        <TableCell align="right" />
+                        <TableCell align="right" className=" cell-sm">
+                          Edit
+                        </TableCell>
+                        <TableCell align="right" className="cell-sm">
+                          Delete
+                        </TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -150,7 +154,7 @@ const Events = () => {
                             </span>
                           </TableCell>
 
-                          <TableCell align="right">
+                          <TableCell align="right" className="cell-md">
                             <Button
                               onClick={() => handleEdit(event.id)}
                               variant="contained"
@@ -161,12 +165,12 @@ const Events = () => {
                             </Button>
                           </TableCell>
 
-                          <TableCell align="right">
+                          <TableCell align="right" className="cell-md">
                             <Button
                               onClick={() => handleClickOpenModal(event.id)}
                               variant="contained"
                               color="secondary"
-                              className={classes.button}
+                              className={`${classes.button}`}
                             >
                               DELETE
                             </Button>

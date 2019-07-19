@@ -231,7 +231,7 @@ const CreateEvent = ({ id, setValue, Alert }) => {
   return (
     <div>
       <div style={{ width: "100%", maxWidth: "600px" }} className="mx-auto">
-        <h1 className="text-center italic text-gray-600 mt-8">
+        <h1 className="text-center italic text-gray-600 mt-4">
           {Object.keys(eventData).length > 0
             ? "Edit event"
             : "Create new event"}
