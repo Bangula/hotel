@@ -224,7 +224,9 @@ const Room = ({ data, fullWidth, close }) => {
             <div className="mt-6">
               <p className="italic text-gray-600">
                 Guests number:
-                <span className="font-semibold">{` (Max. ${maxPersons})`}</span>
+                <span className="font-semibold">{` (Max. ${
+                  maxPersons ? maxPersons : " - "
+                })`}</span>
               </p>
               <div className="flex justify-around flex-col md:flex-row">
                 <TextField

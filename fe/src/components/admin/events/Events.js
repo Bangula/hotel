@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  getAllSongs,
-  createSong,
-  deleteSong,
-  updateSong,
-  getSongById
-} from "@endpoints/songs";
-
 import { getAllEvents, deleteEvent } from "@endpoints/events";
 
 import TextField from "@material-ui/core/TextField";
@@ -207,7 +199,7 @@ const Events = () => {
       )}
       {value === 1 && (
         <TabContainer>
-          <CreateEvent id={editId} setValue={() => setValue(0)} />
+          <CreateEvent Alert={Alert} id={editId} setValue={() => setValue(0)} />
         </TabContainer>
       )}
     </div>

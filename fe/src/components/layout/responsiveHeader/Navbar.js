@@ -30,7 +30,8 @@ const Navbar = ({ menuIsActive, setMenuIsActive }) => {
           transition: "all 0s",
           left: menuPosition,
           zIndex: "190",
-          background: "rgba(0,0,0,0.6)"
+          background: "rgba(0,0,0,0.6)",
+          overflow: "hidden"
         }}
         onClick={setMenuIsActive}
       />

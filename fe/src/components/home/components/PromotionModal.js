@@ -107,7 +107,10 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
               />
             </div>
           </div>
-          <div className="mt-8 p-8">
+          <h1 className="text-red-400 italic text-center mt-8">
+            Currently unavailable
+          </h1>
+          <div className="mt-4 p-8">
             <Button
               onClick={handleCloseModal}
               color="secondary"
@@ -116,7 +119,12 @@ const PromotionModal = ({ handleCloseModal, modalIsOpen, modalId, Alert }) => {
             >
               Close
             </Button>
-            <Button onClick={handleSubmit} color="primary" variant="contained">
+            <Button
+              onClick={handleSubmit}
+              color="primary"
+              variant="contained"
+              disabled
+            >
               Add to cart
             </Button>
           </div>

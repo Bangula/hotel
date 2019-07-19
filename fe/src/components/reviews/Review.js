@@ -41,7 +41,7 @@ const Review = ({
     <Card className={`${classes.card} hover:shadow-2xl mb-6`}>
       <CardContent className="flex justify-between">
         <Typography variant="h5" component="h2" align="left">
-          {user && user.data.first_name}
+          {user ? user.data.first_name : "No name"}
         </Typography>
         <Typography
           variant="h5"
@@ -86,7 +86,12 @@ const Review = ({
           />
         </div>
         <div className="flex justify-between items-center">
-          <Typography variant="h5" component="h2" align="left">
+          <Typography
+            variant="h5"
+            component="h2"
+            align="left"
+            style={{ overflowWrap: "break-word" }}
+          >
             Acomodation Rate
           </Typography>
 
