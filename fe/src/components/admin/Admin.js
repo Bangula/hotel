@@ -173,7 +173,7 @@ const Admin = props => {
                 [classes.appBarShift]: open
               })}
             >
-              <Toolbar>
+              <Toolbar className="flex justify-between">
                 <IconButton
                   color="inherit"
                   aria-label="Open drawer"
@@ -184,7 +184,7 @@ const Admin = props => {
                   <MenuIcon />
                 </IconButton>
 
-                <ListItem button>
+                <ListItem>
                   <ListItemIcon>
                     <Avatar className={classes.purpleAvatar}>
                       <i className="fas fa-user" />
@@ -195,18 +195,18 @@ const Admin = props => {
                 <div className="hidden md:block w-2/12">
                   <p
                     style={{ transition: "all 0.1s" }}
-                    className="mx-4 py-2 rounded-lg "
+                    className="mx-4 py-2 rounded-lg w-20"
                   >
-                    v 1.0.3
+                    v-1.0.3
                   </p>
                 </div>
                 <div className="hidden md:block w-2/12">
                   <Link
                     style={{ transition: "all 0.1s" }}
                     to="/"
-                    className="px-4 py-2 bg-red-600 rounded-lg hover:bg-red-400"
+                    className="flex px-2 flex-no-wrap items-center justify-center text-center py-2 bg-red-600 hover:bg-red-400"
                   >
-                    CLOSE PANEL
+                    <p className="">CLOSE PANEL</p>
                   </Link>
                 </div>
               </Toolbar>
