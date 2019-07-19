@@ -14,7 +14,7 @@ const Dashboard = () => {
         <div className="flex flex-wrap flex-col">
           <RegisteredUsersChart />
           <DailyUsers />
-          <NewsletterChart />
+          {/* <NewsletterChart /> */}
         </div>
         <div className="flex w-2/3 flex-col w-full pb-6">
           <NewUsers />
