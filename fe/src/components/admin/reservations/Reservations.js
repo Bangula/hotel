@@ -109,6 +109,7 @@ function Reservations() {
                 <TableHead>
                   <TableRow>
                     <TableCell align="left">Reservation created</TableCell>
+                    <TableCell align="left">Rooms</TableCell>
                     <TableCell align="left">Client</TableCell>
                     <TableCell align="left">Phone</TableCell>
                     <TableCell align="right">Delete</TableCell>
@@ -130,12 +131,18 @@ function Reservations() {
                         </Moment>
                       </TableCell>
                       <TableCell>
+                        {item.rooms
+                          ? item.rooms.data.map(room => {
+                              return <span> {room.room_number} </span>;
+                            })
+                          : null}
+                      </TableCell>
+                      <TableCell>
                         {item.user.data.first_name} {item.user.data.last_name}
                       </TableCell>
                       <TableCell>{item.user.data.phone_number}</TableCell>
 
                       <TableCell align="right">
-                        {" "}
                         <Button
                           onClick={() => handleClickOpenModal(item.id)}
                           variant="contained"

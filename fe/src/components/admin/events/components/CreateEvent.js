@@ -22,11 +22,14 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 
-const CreateEvent = ({ id, setValue }) => {
+const CreateEvent = ({ id, setValue, Alert }) => {
   const [locations, setLocations] = useState([]);
   const [eventTypes, setEventTypes] = useState([]);
   const [eventData, setEventData] = useState({});
   const [genres, setGenres] = useState([]);
+
+  const [startingAt, setStartingAt] = React.useState(new Date());
+  const [endingAt, setEndingAt] = React.useState(new Date());
 
   const [file, setFile] = useState(); //from dropzone
 
@@ -102,6 +105,8 @@ const CreateEvent = ({ id, setValue }) => {
       if (data) {
         console.log(data.data.data);
         setEventData(data.data.data);
+        setStartingAt(data.data.data.started_at);
+        setEndingAt(data.data.data.ended_at);
       } else if (error) {
         console.log(error.response);
       }
@@ -144,10 +149,6 @@ const CreateEvent = ({ id, setValue }) => {
     title: Object.keys(eventData).length > 0 ? eventData.title : "",
     description: Object.keys(eventData).length > 0 ? eventData.description : "",
     capacity: Object.keys(eventData).length > 0 ? eventData.capacity : "",
-    started_at:
-      Object.keys(eventData).length > 0 ? eventData.started_at : new Date(),
-    ended_at:
-      Object.keys(eventData).length > 0 ? eventData.ended_at : new Date(),
     location_id: locations.length ? locations[0].id : locationEdit,
     event_type_id: eventTypes.length ? eventTypes[0].id : eventTypeEdit,
     music: Object.keys(eventData).length > 0 ? eventData.music : 0,
@@ -166,8 +167,8 @@ const CreateEvent = ({ id, setValue }) => {
     fd.append("title", newEvent.title);
     fd.append("description", newEvent.description);
     fd.append("capacity", newEvent.capacity);
-    fd.append("started_at", moment(newEvent.started_at).format("YYYY-MM-DD"));
-    fd.append("ended_at", moment(newEvent.ended_at).format("YYYY-MM-DD"));
+    fd.append("started_at", moment(startingAt).format("YYYY-MM-DD"));
+    fd.append("ended_at", moment(endingAt).format("YYYY-MM-DD"));
     fd.append("location_id", newEvent.location_id);
     fd.append("event_type_id", newEvent.event_type_id);
     fd.append("music", newEvent.music);
@@ -180,21 +181,39 @@ const CreateEvent = ({ id, setValue }) => {
       const { data, error } = await createEvent(fd);
       if (data) {
         console.log(data.data);
+        Alert.success(<i className="fas fa-check" />, {
+          effect: "slide",
+          timeout: 2000,
+          position: "bottom-right"
+        });
         setValue();
       } else if (error) {
         console.log(error.response);
       }
     } else {
-      const { data, error } = await updateEvent(fd);
+      const { data, error } = await updateEvent(fd, eventData.id);
       console.log(values);
       if (data) {
         console.log(data.data);
+        Alert.success(<i className="fas fa-check" />, {
+          effect: "slide",
+          timeout: 2000,
+          position: "bottom-right"
+        });
         setValue();
       } else if (error) {
         console.log(error.response);
       }
     }
   };
+
+  function handleStartingAtChange(date) {
+    setStartingAt(date);
+  }
+
+  function handleEndingAtChange(date) {
+    setEndingAt(date);
+  }
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -300,19 +319,19 @@ const CreateEvent = ({ id, setValue }) => {
 
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <dir className="w-full flex justify-start p-0">
-                  <Field name="started_at">
-                    {({ field }) => (
-                      <DatePicker label="Starting at:" {...field} />
-                    )}
-                  </Field>
+                  <DatePicker
+                    label="Starting at:"
+                    value={startingAt}
+                    onChange={handleStartingAtChange}
+                  />
                 </dir>
 
                 <dir className="w-full flex justify-start p-0">
-                  <Field name="ended_at">
-                    {({ field }) => (
-                      <DatePicker label="Ending at:" {...field} />
-                    )}
-                  </Field>
+                  <DatePicker
+                    label="Ending at:"
+                    value={endingAt}
+                    onChange={handleEndingAtChange}
+                  />
                 </dir>
               </MuiPickersUtilsProvider>
 
