@@ -158,26 +158,34 @@ export default function Cart() {
 
   const roomsTable =
     rooms.length > 0 ? (
-      <Paper className={classes.root}>
+      <Paper>
         <h1 className="p-2 italic">Rooms</h1>
-        <Table className={classes.table}>
+        <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Room Type</TableCell>
-              <TableCell align="left">From Date</TableCell>
-              <TableCell align="left">To Date</TableCell>
-              <TableCell align="right">Remove From Cart</TableCell>
+              <TableCell className="cell-sm">Room Type</TableCell>
+              <TableCell className="cell-sm" align="left">
+                From Date
+              </TableCell>
+              <TableCell className="cell-sm" align="left">
+                To Date
+              </TableCell>
+              <TableCell className="cell-sm" align="right">
+                Remove From Cart
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {rooms
               ? rooms.map((item, index) => (
                   <TableRow key={index}>
-                    <TableCell align="left">Room type</TableCell>
-                    <TableCell align="left">
+                    <TableCell className="cell-sm" align="left">
+                      Room type
+                    </TableCell>
+                    <TableCell className="cell-sm" align="left">
                       <Moment format="YYYY/MM/DD">{item.started_at}</Moment>
                     </TableCell>
-                    <TableCell align="left">
+                    <TableCell className="cell-sm" align="left">
                       <Moment format="YYYY/MM/DD">{item.ended_at}</Moment>
                     </TableCell>
                     <TableCell align="right">

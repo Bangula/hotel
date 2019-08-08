@@ -17,17 +17,17 @@ const CheckBar = () => {
   };
   return (
     <div
-      className="bg-white absolute shadow-lg py-6 w-11/12 md:block md:w-2/3 text-center"
+      className="bg-white flex absolute shadow-lg py-6 w-11/12 md:block md:w-2/3 text-center"
       style={{
         height: windowWidth < 768 ? "auto" : "100px",
-        bottom: "-70px",
+        bottom: "-52px",
         zIndex: "100",
         left: "10px",
         right: "10px",
         margin: "0 auto"
       }}
     >
-      <form className="" onSubmit={handleSubmit}>
+      <form className="self-center" onSubmit={handleSubmit}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <div className="md:flex justify-around px-4">
             <DatePicker
